@@ -1,4 +1,4 @@
-﻿namespace StarsReloaded
+﻿namespace StarsReloaded.View.Windows
 {
     using System.Windows;
 

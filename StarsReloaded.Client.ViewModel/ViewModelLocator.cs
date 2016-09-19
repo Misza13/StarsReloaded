@@ -30,12 +30,6 @@ namespace StarsReloaded.Client.ViewModel
             SimpleIoc.Default.Register<MainWindowViewModel>();
         }
 
-        public MainWindowViewModel MainWindow
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainWindowViewModel>();
-            }
-        }
+        public static MainWindowViewModel MainWindow => ServiceLocator.Current.GetInstance<MainWindowViewModel>();
     }
 }
