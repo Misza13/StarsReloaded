@@ -129,6 +129,10 @@
       <Project>{99d75acd-d661-4c74-9a24-5aafd0b2fcb2}</Project>
       <Name>StarsReloaded.Client.ViewModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StarsReloaded.Shared.Model\StarsReloaded.Shared.Model.csproj">
+      <Project>{0FF69D23-8A50-4382-8153-82F01447964B}</Project>
+      <Name>StarsReloaded.Shared.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

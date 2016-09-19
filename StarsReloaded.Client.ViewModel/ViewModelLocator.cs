@@ -2,6 +2,8 @@ namespace StarsReloaded.Client.ViewModel
 {
     using GalaSoft.MvvmLight.Ioc;
     using Microsoft.Practices.ServiceLocation;
+    using StarsReloaded.Client.ViewModel.Controls.Panels;
+    using StarsReloaded.Client.ViewModel.Windows;
 
     /// <summary>
     /// This class contains static references to all the view models in the
@@ -28,8 +30,11 @@ namespace StarsReloaded.Client.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainWindowViewModel>();
+            SimpleIoc.Default.Register<MapPanelControlViewModel>();
         }
 
         public static MainWindowViewModel MainWindow => ServiceLocator.Current.GetInstance<MainWindowViewModel>();
+
+        public static MapPanelControlViewModel MapPanelControl => ServiceLocator.Current.GetInstance<MapPanelControlViewModel>();
     }
 }

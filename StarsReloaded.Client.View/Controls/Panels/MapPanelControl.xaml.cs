@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace StarsReloaded.View.Controls.Panels
+﻿namespace StarsReloaded.View.Controls.Panels
 {
-    /// <summary>
-    /// Interaction logic for MapPanelControl.xaml
-    /// </summary>
+    using System.Windows;
+    using System.Windows.Controls;
+    using StarsReloaded.Shared.Model;
+
     public partial class MapPanelControl : UserControl
     {
         public MapPanelControl()
         {
             InitializeComponent();
+
+            ////(this.DataContext as MapPanelControlViewModel).Galaxy = Galaxy;
+        }
+
+        public static readonly DependencyProperty GalaxyProperty = DependencyProperty.Register(
+            "Galaxy", typeof(Galaxy), typeof(MapPanelControl), new PropertyMetadata(default(Galaxy)));
+
+        public Galaxy Galaxy
+        {
+            get { return (Galaxy) GetValue(GalaxyProperty); }
+            set { SetValue(GalaxyProperty, value); }
         }
     }
 }

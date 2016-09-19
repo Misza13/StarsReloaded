@@ -1,10 +1,13 @@
-﻿<UserControl x:Class="StarsReloaded.View.Controls.Panels.MapPanelControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="400">
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    x:Class="StarsReloaded.View.Controls.Panels.MapPanelControl"
+    x:Name="MapPanel"
+    DataContext="{Binding Source={StaticResource Locator}, Path=MapPanelControl}"
+    mc:Ignorable="d" 
+    d:DesignHeight="400" d:DesignWidth="400">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -20,7 +23,21 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Canvas Grid.Row="0" Background="Black"></Canvas>
+            <Canvas Grid.Row="0" Background="Black">
+                <ItemsControl ItemsSource="{Binding Path=Galaxy.Planets, ElementName=MapPanel}">
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Foreground="White" Text="A"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Canvas>
             <Border
                 Grid.Row="1"
                 BorderThickness="0,0,1,1"
@@ -30,7 +47,7 @@
                     BorderThickness="1,1,0,0" 
                     BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
                     Padding="1">
-                    <TextBlock>Name</TextBlock>
+                    <TextBlock><Run Text="Name"/></TextBlock>
                 </Border>
             </Border>
             <Border
@@ -42,7 +59,7 @@
                     BorderThickness="1,1,0,0" 
                     BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
                     Padding="1">
-                    <TextBlock>Coords</TextBlock>
+                    <TextBlock><Run Text="Coords"/></TextBlock>
                 </Border>
             </Border>
         </Grid>
