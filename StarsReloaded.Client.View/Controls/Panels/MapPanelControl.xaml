@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="StarsReloaded.View.Controls.Panels.MapPanelControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="16"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="16"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Canvas Grid.Row="0" Background="Black"></Canvas>
+            <Border
+                Grid.Row="1"
+                BorderThickness="0,0,1,1"
+                Margin="4"
+                BorderBrush="{x:Static SystemColors.ControlLightLightBrush}">
+                <Border 
+                    BorderThickness="1,1,0,0" 
+                    BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
+                    Padding="1">
+                    <TextBlock>Name</TextBlock>
+                </Border>
+            </Border>
+            <Border
+                Grid.Row="2"
+                BorderThickness="0,0,1,1"
+                Margin="4"
+                BorderBrush="{x:Static SystemColors.ControlLightLightBrush}">
+                <Border 
+                    BorderThickness="1,1,0,0" 
+                    BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
+                    Padding="1">
+                    <TextBlock>Coords</TextBlock>
+                </Border>
+            </Border>
+        </Grid>
+        <ScrollBar Orientation="Vertical" Grid.Column="1" Grid.Row="0"/>
+        <ScrollBar Orientation="Horizontal" Grid.Column="0" Grid.Row="1"/>
+    </Grid>
+</UserControl>

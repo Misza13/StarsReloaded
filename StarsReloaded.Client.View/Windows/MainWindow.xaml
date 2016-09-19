@@ -3,14 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:panels="clr-namespace:StarsReloaded.View.Controls.Panels"
         DataContext="{Binding Source={StaticResource Locator}, Path=MainWindow}"
         mc:Ignorable="d"
         Title="Stars! Reloaded"
         Height="600"
         Width="800"
         WindowState="Normal">
-    <StackPanel>
-        <Menu>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
             <MenuItem Header="_File">
                 <MenuItem Header="_Open"/>
             </MenuItem>
@@ -20,7 +26,7 @@
             <MenuItem Header="_Report"></MenuItem>
             <MenuItem Header="_Help"></MenuItem>
         </Menu>
-        <ToolBarTray>
+        <ToolBarTray Grid.Row="1">
             <ToolBar x:Name="Planets">
                 <Button Height="32" Width="32">O</Button>
                 <Button Height="32" Width="32">S</Button>
@@ -30,9 +36,14 @@
                 <Button Height="32" Width="32">X</Button>
             </ToolBar>
         </ToolBarTray>
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Column="0">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                     <StackPanel Orientation="Vertical">
                         <TextBlock>Selected Object Panel</TextBlock>
                         <TextBlock>Minerals On Hand Panel</TextBlock>
@@ -44,12 +55,19 @@
                         <TextBlock>Starbase Panel</TextBlock>
                     </StackPanel>
                 </StackPanel>
-                <TextBlock>Messages Panel</TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <TextBlock>Map Panel</TextBlock>
-                <TextBlock>Summary Panel</TextBlock>
-            </StackPanel>
-        </StackPanel>
-    </StackPanel>
+                <Grid DockPanel.Dock="Bottom">
+                    <TextBlock>Messages Panel</TextBlock>
+                </Grid>
+            </DockPanel>
+            <GridSplitter Grid.Column="1" Width="8" IsEnabled="False"/>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <panels:MapPanelControl Grid.Row="0"/>
+                <TextBlock Grid.Row="1">Summary Panel</TextBlock>
+            </Grid>
+        </Grid>
+    </Grid>
 </Window>
