@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarsReloaded.View", "StarsReloaded.View\StarsReloaded.View.csproj", "{8DA1C96D-A334-4347-9213-84FE426529B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarsReloaded.Client.View", "StarsReloaded.Client.View\StarsReloaded.Client.View.csproj", "{8DA1C96D-A334-4347-9213-84FE426529B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarsReloaded.Client.ViewModel", "StarsReloaded.Client.ViewModel\StarsReloaded.Client.ViewModel.csproj", "{99D75ACD-D661-4C74-9A24-5AAFD0B2FCB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{222C1D5E-A413-4712-9C1A-2E45DB3376E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{4BE06EF5-3C73-4968-B68F-E9F2A9C745E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +21,16 @@ Global
 		{8DA1C96D-A334-4347-9213-84FE426529B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DA1C96D-A334-4347-9213-84FE426529B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DA1C96D-A334-4347-9213-84FE426529B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99D75ACD-D661-4C74-9A24-5AAFD0B2FCB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99D75ACD-D661-4C74-9A24-5AAFD0B2FCB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99D75ACD-D661-4C74-9A24-5AAFD0B2FCB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99D75ACD-D661-4C74-9A24-5AAFD0B2FCB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8DA1C96D-A334-4347-9213-84FE426529B9} = {222C1D5E-A413-4712-9C1A-2E45DB3376E7}
+		{99D75ACD-D661-4C74-9A24-5AAFD0B2FCB2} = {222C1D5E-A413-4712-9C1A-2E45DB3376E7}
 	EndGlobalSection
 EndGlobal
