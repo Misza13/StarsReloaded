@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         DataContext="{Binding Source={StaticResource Locator}, Path=MainWindow}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Stars! Reloaded"
+        Height="600"
+        Width="800"
+        WindowState="Normal">
     <StackPanel>
         <Menu>
             <MenuItem Header="_File">
@@ -17,6 +20,36 @@
             <MenuItem Header="_Report"></MenuItem>
             <MenuItem Header="_Help"></MenuItem>
         </Menu>
-        <TextBlock Text="{Binding Test}"/>
+        <ToolBarTray>
+            <ToolBar x:Name="Planets">
+                <Button Height="32" Width="32">O</Button>
+                <Button Height="32" Width="32">S</Button>
+                <Button Height="32" Width="32">C</Button>
+                <Button Height="32" Width="32">%</Button>
+                <Button Height="32" Width="32">|||</Button>
+                <Button Height="32" Width="32">X</Button>
+            </ToolBar>
+        </ToolBarTray>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock>Selected Object Panel</TextBlock>
+                        <TextBlock>Minerals On Hand Panel</TextBlock>
+                        <TextBlock>Status Panel</TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock>Fleets in Orbit Panel</TextBlock>
+                        <TextBlock>Production Panel</TextBlock>
+                        <TextBlock>Starbase Panel</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock>Messages Panel</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock>Map Panel</TextBlock>
+                <TextBlock>Summary Panel</TextBlock>
+            </StackPanel>
+        </StackPanel>
     </StackPanel>
 </Window>
