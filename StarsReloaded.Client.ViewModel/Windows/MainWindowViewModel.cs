@@ -12,13 +12,11 @@
             {
                 var worldGen = new GalaxyGenerator(400, 400);
                 Galaxy = worldGen.GenerateUniform(20);
-                RaisePropertyChanged(() => Galaxy);
             }
             else
             {
                 var worldGen = new GalaxyGenerator(400, 400);
-                Galaxy = worldGen.GenerateUniform(20);
-                RaisePropertyChanged(() => Galaxy);
+                Galaxy = worldGen.GenerateUniform(100);
             }
         }
 
