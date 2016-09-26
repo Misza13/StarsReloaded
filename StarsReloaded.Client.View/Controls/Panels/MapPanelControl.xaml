@@ -3,13 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:model="clr-namespace:StarsReloaded.Shared.Model;assembly=StarsReloaded.Shared.Model"
-    xmlns:windows="clr-namespace:StarsReloaded.Client.ViewModel.Windows;assembly=StarsReloaded.Client.ViewModel"
+    xmlns:controls="clr-namespace:StarsReloaded.Client.ViewModel.Controls;assembly=StarsReloaded.Client.ViewModel"
+    xmlns:modelWrap="clr-namespace:StarsReloaded.Client.ViewModel.ModelWrap;assembly=StarsReloaded.Client.ViewModel"
     x:Class="StarsReloaded.View.Controls.Panels.MapPanelControl"
     x:Name="MapPanel"
     mc:Ignorable="d" 
     d:DesignHeight="400" d:DesignWidth="400"
-    d:DataContext="{d:DesignInstance Type=windows:MainWindowViewModel, IsDesignTimeCreatable=True}">
+    d:DataContext="{d:DesignInstance Type=controls:MapPanelControlViewModel, IsDesignTimeCreatable=True}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -26,7 +26,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <ItemsControl ItemsSource="{Binding Path=Galaxy.Planets}">
+            <ItemsControl ItemsSource="{Binding Path=Planets}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas IsItemsHost="True" Background="Black"/>
@@ -34,11 +34,14 @@
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.Resources>
-                    <DataTemplate DataType="{x:Type model:Planet}">
+                    <DataTemplate DataType="{x:Type modelWrap:PlanetViewModel}">
                         <Rectangle Stroke="Beige" Fill="Beige" Width="3" Height="3">
                             <Rectangle.RenderTransform>
-                                <TranslateTransform X="{Binding X}" Y="{Binding Y}"/>
+                                <TranslateTransform X="{Binding Left}" Y="{Binding Right}"/>
                             </Rectangle.RenderTransform>
+                            <Rectangle.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding SelectPlanetCommand}" CommandParameter="{Binding .}"/>
+                            </Rectangle.InputBindings>
                         </Rectangle>
                     </DataTemplate>
                 </ItemsControl.Resources>
@@ -53,7 +56,7 @@
                     BorderThickness="1,1,0,0" 
                     BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
                     Padding="1">
-                    <TextBlock><Run Text="Name"/></TextBlock>
+                    <TextBlock><Run Text="{Binding SelectedObjectName, Mode=OneWay}"/></TextBlock>
                 </Border>
             </Border>
             <Border
@@ -65,7 +68,7 @@
                     BorderThickness="1,1,0,0" 
                     BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
                     Padding="1">
-                    <TextBlock><Run Text="Coords"/></TextBlock>
+                    <TextBlock><Run Text="{Binding SelectedObjectCoords, Mode=OneWay}"/></TextBlock>
                 </Border>
             </Border>
         </Grid>

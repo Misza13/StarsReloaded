@@ -1,8 +1,7 @@
 ﻿namespace StarsReloaded.Client.ViewModel.Windows
 {
     using GalaSoft.MvvmLight;
-    using StarsReloaded.Shared.Model;
-    using StarsReloaded.Shared.WorldGen;
+    using StarsReloaded.Client.ViewModel.Controls;
 
     public sealed class MainWindowViewModel : ViewModelBase
     {
@@ -10,16 +9,15 @@
         {
             if (IsInDesignMode)
             {
-                var worldGen = new GalaxyGenerator(400, 400);
-                Galaxy = worldGen.GenerateUniform(20);
+                MapPanelControlViewModel = new MapPanelControlViewModel();
             }
             else
             {
-                var worldGen = new GalaxyGenerator(400, 400);
-                Galaxy = worldGen.GenerateUniform(100);
+                ////TODO: Actual logic
+                MapPanelControlViewModel = new MapPanelControlViewModel();
             }
         }
 
-        public Galaxy Galaxy { get; private set; }
+        public MapPanelControlViewModel MapPanelControlViewModel { get; private set; }
     }
 }

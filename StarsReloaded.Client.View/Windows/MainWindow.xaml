@@ -65,7 +65,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <panels:MapPanelControl Grid.Row="0" />
+                <panels:MapPanelControl Grid.Row="0" DataContext="{Binding MapPanelControlViewModel}" />
                 <TextBlock Grid.Row="1">Summary Panel</TextBlock>
             </Grid>
         </Grid>

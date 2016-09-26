@@ -61,7 +61,7 @@
             var x = _rng.Next(width);
             var y = _rng.Next(height);
 
-            return new Planet(x, y);
+            return new Planet(x, y, Guid.NewGuid().ToString());
         }
     }
 }

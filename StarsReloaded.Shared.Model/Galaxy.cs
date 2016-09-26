@@ -1,14 +1,14 @@
 ﻿namespace StarsReloaded.Shared.Model
 {
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
 
     public class Galaxy
     {
         public Galaxy()
         {
-            Planets = new ObservableCollection<Planet>();
+            Planets = new List<Planet>();
         }
 
-        public ObservableCollection<Planet> Planets { get; private set; }
+        public List<Planet> Planets { get; private set; }
     }
 }
