@@ -2,6 +2,7 @@ namespace StarsReloaded.Client.ViewModel
 {
     using GalaSoft.MvvmLight.Ioc;
     using Microsoft.Practices.ServiceLocation;
+    using StarsReloaded.Client.ViewModel.Controls;
     using StarsReloaded.Client.ViewModel.Windows;
 
     /// <summary>
@@ -29,8 +30,15 @@ namespace StarsReloaded.Client.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainWindowViewModel>();
+            SimpleIoc.Default.Register<StartupWindowViewModel>();
+
+            SimpleIoc.Default.Register<MapPanelControlViewModel>();
         }
 
         public static MainWindowViewModel MainWindow => ServiceLocator.Current.GetInstance<MainWindowViewModel>();
+
+        public static StartupWindowViewModel StartupWindow => ServiceLocator.Current.GetInstance<StartupWindowViewModel>();
+
+        public static MapPanelControlViewModel MapPanelControl => ServiceLocator.Current.GetInstance<MapPanelControlViewModel>();
     }
 }

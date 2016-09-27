@@ -76,6 +76,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Windows\StartupWindow.xaml.cs">
+      <DependentUpon>StartupWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\Panels\MapPanelControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +98,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\StartupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -132,6 +139,10 @@
     <ProjectReference Include="..\StarsReloaded.Shared.Model\StarsReloaded.Shared.Model.csproj">
       <Project>{0FF69D23-8A50-4382-8153-82F01447964B}</Project>
       <Name>StarsReloaded.Shared.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StarsReloaded.Shared.WorldGen\StarsReloaded.Shared.WorldGen.csproj">
+      <Project>{A4760AFB-98A7-4D4A-9083-3FBEC3E0D7DC}</Project>
+      <Name>StarsReloaded.Shared.WorldGen</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

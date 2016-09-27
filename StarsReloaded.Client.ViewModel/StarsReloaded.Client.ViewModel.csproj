@@ -62,10 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\MapPanelControlViewModel.cs" />
+    <Compile Include="Messages\ShowMainWindowMessage.cs" />
     <Compile Include="ModelWrap\PlanetViewModel.cs" />
     <Compile Include="Windows\MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="Windows\StartupWindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,0 +1,22 @@
+﻿<Window x:Class="StarsReloaded.View.Windows.StartupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        DataContext="{Binding Source={StaticResource Locator}, Path=StartupWindow}"
+        DataContextChanged="StartupWindow_OnDataContextChanged"
+        mc:Ignorable="d"
+        Title="Stars! Reloaded" Height="400" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Margin="20" Command="{Binding NewGameCommand}"><TextBlock Text="New game..."/></Button>
+        <Button Grid.Row="1" Margin="20"><TextBlock Text="Open game..."/></Button>
+        <Button Grid.Row="2" Margin="20"><TextBlock Text="Continue game"/></Button>
+        <Button Grid.Row="3" Margin="20" Command="{Binding ExitCommand}"><TextBlock Text="Exit Stars! Reloaded"/></Button>
+    </Grid>
+</Window>
