@@ -49,7 +49,7 @@
                     BorderThickness="1,1,0,0" 
                     BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
                     Padding="1">
-                <TextBlock><Run Text="{Binding SelectedObjectName, Mode=OneWay}"/></TextBlock>
+                <TextBlock FontFamily="Arial" FontWeight="Bold"><Run Text="{Binding SelectedObjectName, Mode=OneWay}"/></TextBlock>
             </Border>
         </Border>
         <Border
@@ -61,7 +61,7 @@
                     BorderThickness="1,1,0,0" 
                     BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
                     Padding="1">
-                <TextBlock><Run Text="{Binding SelectedObjectCoords, Mode=OneWay}"/></TextBlock>
+                <TextBlock FontFamily="Arial" FontWeight="Bold"><Run Text="{Binding SelectedObjectCoords, Mode=OneWay}"/></TextBlock>
             </Border>
         </Border>
     </Grid>
