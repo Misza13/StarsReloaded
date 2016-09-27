@@ -6,33 +6,28 @@
 
     public class GalaxyGenerator
     {
-        private readonly int _width;
-        private readonly int _height;
         private readonly Random _rng;
-        private Galaxy _galaxy;
+        private readonly Galaxy _galaxy;
 
         private const int GALAXY_MARGIN = 8;
         private const int PLANET_MIN_DISTANCE = 10;
 
         public GalaxyGenerator(int width, int height)
         {
-            _width = width;
-            _height = height;
             _rng = new Random();
+            _galaxy = new Galaxy(width, height);
         }
 
         public Galaxy GenerateUniform(int numPlanets)
         {
-            _galaxy = new Galaxy();
-
             for (var i = 0; i < numPlanets; i++)
             {
                 var fit = false;
                 Planet candidate = null;
                 while (!fit)
                 {
-                    candidate = GeneratePlanetUniform(_width, _height);
-                    fit = PlanetFits(_width, _height, candidate);
+                    candidate = GeneratePlanetUniform(_galaxy.Width, _galaxy.Height);
+                    fit = PlanetFits(_galaxy.Width, _galaxy.Height, candidate);
                     ////TODO: exit strategy if looped
                 }
 

@@ -11,25 +11,17 @@
     d:DesignHeight="400" d:DesignWidth="400"
     d:DataContext="{d:DesignInstance Type=controls:MapPanelControlViewModel, IsDesignTimeCreatable=True}">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="16"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="16"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
 
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Path=Planets}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas IsItemsHost="True" Background="Black"/>
+                        <Canvas Width="{Binding GalaxyWidth}" Height="{Binding GalaxyWidth}" IsItemsHost="True" Background="Black"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
@@ -46,33 +38,31 @@
                     </DataTemplate>
                 </ItemsControl.Resources>
             </ItemsControl>
+        </ScrollViewer>
 
-            <Border
+        <Border
                 Grid.Row="1"
                 BorderThickness="0,0,1,1"
                 Margin="4"
                 BorderBrush="{x:Static SystemColors.ControlLightLightBrush}">
-                <Border 
+            <Border 
                     BorderThickness="1,1,0,0" 
                     BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
                     Padding="1">
-                    <TextBlock><Run Text="{Binding SelectedObjectName, Mode=OneWay}"/></TextBlock>
-                </Border>
+                <TextBlock><Run Text="{Binding SelectedObjectName, Mode=OneWay}"/></TextBlock>
             </Border>
-            <Border
+        </Border>
+        <Border
                 Grid.Row="2"
                 BorderThickness="0,0,1,1"
                 Margin="4"
                 BorderBrush="{x:Static SystemColors.ControlLightLightBrush}">
-                <Border 
+            <Border 
                     BorderThickness="1,1,0,0" 
                     BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
                     Padding="1">
-                    <TextBlock><Run Text="{Binding SelectedObjectCoords, Mode=OneWay}"/></TextBlock>
-                </Border>
+                <TextBlock><Run Text="{Binding SelectedObjectCoords, Mode=OneWay}"/></TextBlock>
             </Border>
-        </Grid>
-        <ScrollBar Orientation="Vertical" Grid.Column="1" Grid.Row="0"/>
-        <ScrollBar Orientation="Horizontal" Grid.Column="0" Grid.Row="1"/>
+        </Border>
     </Grid>
 </UserControl>
