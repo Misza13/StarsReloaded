@@ -21,7 +21,7 @@
             <ItemsControl ItemsSource="{Binding Path=Planets}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas Width="{Binding GalaxyWidth}" Height="{Binding GalaxyWidth}" IsItemsHost="True" Background="Black"/>
+                        <Canvas Width="{Binding GalaxyWidth}" Height="{Binding GalaxyHeight}" IsItemsHost="True" Background="Black"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
