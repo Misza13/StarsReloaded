@@ -7,6 +7,7 @@
     using StarsReloaded.Client.ViewModel.ModelWrap;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.WorldGen;
+    using StarsReloaded.Shared.WorldGen.Services;
 
     public class MapPanelControlViewModel : ViewModelBase
     {
@@ -15,12 +16,11 @@
 
         public ObservableCollection<PlanetViewModel> Planets { get; set; }
 
-        public MapPanelControlViewModel()
+        public MapPanelControlViewModel(IGalaxyGeneratorService galaxyGeneratorService)
         {
             if (IsInDesignMode)
             {
-                var worldGen = new GalaxyGenerator(800, 800);
-                this.Galaxy = worldGen.GenerateUniform(100);
+                this.Galaxy = galaxyGeneratorService.GenerateUniform(800, 800, 100);
             }
         }
 

@@ -1,53 +1,53 @@
-﻿namespace StarsReloaded.Shared.WorldGen
+﻿namespace StarsReloaded.Shared.WorldGen.Services
 {
     using System;
     using System.Linq;
     using StarsReloaded.Shared.Model;
 
-    public class GalaxyGenerator
+    public class GalaxyGeneratorService : IGalaxyGeneratorService
     {
         private readonly Random _rng;
-        private readonly Galaxy _galaxy;
 
         private const int GALAXY_MARGIN = 8;
         private const int PLANET_MIN_DISTANCE = 10;
 
-        public GalaxyGenerator(int width, int height)
+        public GalaxyGeneratorService()
         {
             _rng = new Random();
-            _galaxy = new Galaxy(width, height);
         }
 
-        public Galaxy GenerateUniform(int numPlanets)
+        public Galaxy GenerateUniform(int width, int height, int numPlanets)
         {
+            var galaxy = new Galaxy(width, height);
+
             for (var i = 0; i < numPlanets; i++)
             {
                 var fit = false;
                 Planet candidate = null;
                 while (!fit)
                 {
-                    candidate = GeneratePlanetUniform(_galaxy.Width, _galaxy.Height);
-                    fit = PlanetFits(_galaxy.Width, _galaxy.Height, candidate);
-                    ////TODO: exit strategy if looped
+                    candidate = GeneratePlanetUniform(galaxy.Width, galaxy.Height);
+                    fit = PlanetFits(galaxy, candidate);
+                    ////TODO: some way to abort if looped
                 }
 
-                _galaxy.Planets.Add(candidate);
+                galaxy.Planets.Add(candidate);
             }
 
-            return _galaxy;
+            return galaxy;
         }
 
-        private bool PlanetFits(int width, int height, Planet candidate)
+        private static bool PlanetFits(Galaxy galaxy, Planet candidate)
         {
             if (candidate.X < GALAXY_MARGIN ||
-                candidate.X > width - GALAXY_MARGIN ||
+                candidate.X > galaxy.Width - GALAXY_MARGIN ||
                 candidate.Y < GALAXY_MARGIN ||
-                candidate.Y > height - GALAXY_MARGIN)
+                candidate.Y > galaxy.Height - GALAXY_MARGIN)
             {
                 return false;
             }
 
-            return _galaxy.Planets.All(p => Math.Pow(candidate.X - p.X, 2) + Math.Pow(candidate.Y - p.Y, 2) >=
+            return galaxy.Planets.All(p => Math.Pow(candidate.X - p.X, 2) + Math.Pow(candidate.Y - p.Y, 2) >=
                                             PLANET_MIN_DISTANCE*PLANET_MIN_DISTANCE);
         }
 
@@ -56,6 +56,9 @@
             var x = _rng.Next(width);
             var y = _rng.Next(height);
 
+            //TODO: name generation
+            //TODO: hab values
+            //TODO: mineral concentration
             return new Planet(x, y, Guid.NewGuid().ToString());
         }
     }

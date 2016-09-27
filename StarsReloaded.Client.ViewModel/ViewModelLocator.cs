@@ -4,6 +4,7 @@ namespace StarsReloaded.Client.ViewModel
     using Microsoft.Practices.ServiceLocation;
     using StarsReloaded.Client.ViewModel.Controls;
     using StarsReloaded.Client.ViewModel.Windows;
+    using StarsReloaded.Shared.WorldGen.Services;
 
     /// <summary>
     /// This class contains static references to all the view models in the
@@ -28,10 +29,15 @@ namespace StarsReloaded.Client.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
+            
+            ////Services
+            SimpleIoc.Default.Register<IGalaxyGeneratorService, GalaxyGeneratorService>();
 
+            ////Windows
             SimpleIoc.Default.Register<MainWindowViewModel>();
             SimpleIoc.Default.Register<StartupWindowViewModel>();
 
+            ////Controls
             SimpleIoc.Default.Register<MapPanelControlViewModel>();
         }
 

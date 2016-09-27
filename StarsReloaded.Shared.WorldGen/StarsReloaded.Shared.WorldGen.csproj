@@ -40,8 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GalaxyGenerator.cs" />
+    <Compile Include="Services\GalaxyGeneratorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IGalaxyGeneratorService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StarsReloaded.Shared.Model\StarsReloaded.Shared.Model.csproj">
