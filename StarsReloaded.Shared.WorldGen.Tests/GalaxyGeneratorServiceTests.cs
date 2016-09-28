@@ -1,5 +1,6 @@
 ﻿namespace StarsReloaded.Shared.WorldGen.Tests
 {
+    using System;
     using NUnit.Framework;
     using StarsReloaded.Shared.WorldGen.Helpers;
     using StarsReloaded.Shared.WorldGen.Meta;
@@ -39,6 +40,13 @@
                 Assert.That(planet.X, Is.InRange(0, edge));
                 Assert.That(planet.Y, Is.InRange(0, edge));
             }
+        }
+
+        [Test]
+        public void GenerateUniform_ShouldThrow_IfGalaxyIsTooPacked()
+        {
+            ////Act && Assert
+            Assert.Throws<Exception>(() => _galaxyGeneratorService.GenerateUniform(100, 100, 10000));
         }
     }
 }
