@@ -5,7 +5,7 @@
     using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
     using StarsReloaded.Client.ViewModel.Messages;
-    using StarsReloaded.Shared.WorldGen;
+    using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
 
     public class StartupWindowViewModel : ViewModelBase
@@ -33,7 +33,8 @@
         private void NewGame()
         {
             ////TODO: Game init logic here
-            var galaxy = _galaxyGeneratorService.GenerateUniform(800, 800, 100);
+            //var galaxy = _galaxyGeneratorService.GenerateUniform(800, 800, 100);
+            var galaxy = _galaxyGeneratorService.GenerateUniform(GalaxySize.Medium, GalaxyDensity.Normal);
 
             Messenger.Default.Send(new ShowMainWindowMessage() {Galaxy = galaxy});
             CloseAction?.Invoke();

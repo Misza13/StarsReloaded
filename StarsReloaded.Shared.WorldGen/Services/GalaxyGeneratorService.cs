@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
     using StarsReloaded.Shared.Model;
+    using StarsReloaded.Shared.WorldGen.Helpers;
+    using StarsReloaded.Shared.WorldGen.Meta;
 
     public class GalaxyGeneratorService : IGalaxyGeneratorService
     {
@@ -10,10 +12,19 @@
 
         private const int GALAXY_MARGIN = 8;
         private const int PLANET_MIN_DISTANCE = 10;
+        private const int MAX_FAILED_FITS = 10;
 
         public GalaxyGeneratorService()
         {
             _rng = new Random();
+        }
+
+        public Galaxy GenerateUniform(GalaxySize size, GalaxyDensity density)
+        {
+            var edge = size.GetAttributeOfType<GalaxyEdgeAttribute>().Edge;
+            var num = density.GetAttributeOfType<BasePlanetCountAttribute>().Num;
+
+            return GenerateUniform(edge, edge, num * edge * edge / 160000);
         }
 
         public Galaxy GenerateUniform(int width, int height, int numPlanets)
@@ -22,13 +33,24 @@
 
             for (var i = 0; i < numPlanets; i++)
             {
-                var fit = false;
+                var failedFits = 0;
                 Planet candidate = null;
-                while (!fit)
+                while (failedFits < MAX_FAILED_FITS)
                 {
                     candidate = GeneratePlanetUniform(galaxy.Width, galaxy.Height);
-                    fit = PlanetFits(galaxy, candidate);
-                    ////TODO: some way to abort if looped
+                    if (!PlanetFits(galaxy, candidate))
+                    {
+                        failedFits++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                if (failedFits == MAX_FAILED_FITS)
+                {
+                    throw new Exception("Too many failed attempts at fitting a planet.");
                 }
 
                 galaxy.Planets.Add(candidate);

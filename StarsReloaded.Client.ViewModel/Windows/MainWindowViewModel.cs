@@ -4,6 +4,7 @@
     using StarsReloaded.Client.ViewModel.Controls;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.WorldGen;
+    using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
 
     public sealed class MainWindowViewModel : ViewModelBase
@@ -14,7 +15,8 @@
         {
             if (IsInDesignMode)
             {
-                var galaxy = galaxyGeneratorService.GenerateUniform(800, 800, 100);
+                //var galaxy = galaxyGeneratorService.GenerateUniform(800, 800, 100);
+                var galaxy = galaxyGeneratorService.GenerateUniform(GalaxySize.Medium, GalaxyDensity.Packed);
                 Initialize(galaxy);
             }
         }
