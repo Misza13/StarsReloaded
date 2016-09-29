@@ -1,11 +1,11 @@
 ﻿namespace StarsReloaded.View
 {
+    using System;
     using System.Windows;
     using GalaSoft.MvvmLight.Messaging;
-    using StarsReloaded.Client.ViewModel;
+
     using StarsReloaded.Client.ViewModel.Messages;
     using StarsReloaded.Client.ViewModel.Windows;
-    using StarsReloaded.Shared.WorldGen;
     using StarsReloaded.View.Windows;
 
     public partial class App : Application
@@ -19,9 +19,16 @@
         {
             var mainWindow = new MainWindow();
 
-            mainWindow.DataContext = ViewModelLocator.MainWindow;
-            ////TODO: test for null and throw
-            (mainWindow.DataContext as MainWindowViewModel).Galaxy = message.Galaxy;
+            var vm = mainWindow.DataContext as MainWindowViewModel;
+            if (vm != null)
+            {
+                vm.Galaxy = message.Galaxy;
+            }
+            else
+            {
+                throw new Exception("DataContext not initialized on MainWindow.");
+            }
+
             mainWindow.Show();
         }
     }
