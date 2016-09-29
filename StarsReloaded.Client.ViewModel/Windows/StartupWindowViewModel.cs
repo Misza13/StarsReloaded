@@ -33,8 +33,7 @@
         private void NewGame()
         {
             // TODO: Game init logic here
-            ////var galaxy = _galaxyGeneratorService.GenerateUniform(800, 800, 100);
-            var galaxy = this.galaxyGeneratorService.GenerateUniform(GalaxySize.Medium, GalaxyDensity.Normal);
+            var galaxy = this.galaxyGeneratorService.Generate(GalaxySize.Medium, GalaxyDensity.Normal, PlanetDistribution.UniformClumping);
 
             Messenger.Default.Send(new ShowMainWindowMessage() { Galaxy = galaxy });
             this.CloseAction?.Invoke();

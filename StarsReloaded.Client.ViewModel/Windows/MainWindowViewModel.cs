@@ -14,8 +14,7 @@
         {
             if (this.IsInDesignMode)
             {
-                ////var galaxy = galaxyGeneratorService.GenerateUniform(800, 800, 100);
-                this.galaxy = galaxyGeneratorService.GenerateUniform(GalaxySize.Medium, GalaxyDensity.Packed);
+                this.galaxy = galaxyGeneratorService.Generate(GalaxySize.Medium, GalaxyDensity.Packed, PlanetDistribution.UniformClumping);
                 this.Initialize(this.galaxy);
             }
         }

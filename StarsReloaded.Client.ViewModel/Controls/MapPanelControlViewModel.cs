@@ -6,6 +6,7 @@
     using GalaSoft.MvvmLight.CommandWpf;
     using StarsReloaded.Client.ViewModel.ModelWrap;
     using StarsReloaded.Shared.Model;
+    using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
 
     public class MapPanelControlViewModel : ViewModelBase
@@ -17,7 +18,7 @@
         {
             if (this.IsInDesignMode)
             {
-                this.Galaxy = galaxyGeneratorService.GenerateUniform(800, 800, 100);
+                this.Galaxy = galaxyGeneratorService.Generate(GalaxySize.Medium, GalaxyDensity.Dense, PlanetDistribution.UniformClumping);
             }
         }
 

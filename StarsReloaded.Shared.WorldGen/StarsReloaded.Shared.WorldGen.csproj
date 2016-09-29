@@ -45,6 +45,7 @@
     <Compile Include="Meta\GalaxyDensity.cs" />
     <Compile Include="Meta\GalaxyEdgeAttribute.cs" />
     <Compile Include="Meta\GalaxySize.cs" />
+    <Compile Include="Meta\PlanetDistribution.cs" />
     <Compile Include="Services\GalaxyGeneratorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IGalaxyGeneratorService.cs" />
