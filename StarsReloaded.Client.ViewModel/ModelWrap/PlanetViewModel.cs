@@ -1,6 +1,5 @@
 ﻿namespace StarsReloaded.Client.ViewModel.ModelWrap
 {
-    using GalaSoft.MvvmLight.CommandWpf;
     using StarsReloaded.Shared.Model;
 
     public class PlanetViewModel
@@ -9,13 +8,10 @@
 
         private readonly Planet planet;
 
-        public PlanetViewModel(Planet planet, RelayCommand<PlanetViewModel> selectPlanetCommand)
+        public PlanetViewModel(Planet planet)
         {
-            this.SelectPlanetCommand = selectPlanetCommand;
             this.planet = planet;
         }
-
-        public RelayCommand<PlanetViewModel> SelectPlanetCommand { get; set; }
 
         public int X => this.planet.X;
 

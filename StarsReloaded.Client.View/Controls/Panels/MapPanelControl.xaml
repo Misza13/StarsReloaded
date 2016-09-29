@@ -20,7 +20,12 @@
             <ItemsControl ItemsSource="{Binding Path=Planets}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas Width="{Binding GalaxyWidth}" Height="{Binding GalaxyHeight}" IsItemsHost="True" Background="Black"/>
+                        <Canvas
+                            Width="{Binding GalaxyWidth}"
+                            Height="{Binding GalaxyHeight}"
+                            IsItemsHost="True"
+                            Background="Black"
+                            MouseDown="Canvas_OnMouseDown" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
@@ -30,9 +35,6 @@
                             <Rectangle.RenderTransform>
                                 <TranslateTransform X="{Binding Left}" Y="{Binding Right}"/>
                             </Rectangle.RenderTransform>
-                            <Rectangle.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" Command="{Binding SelectPlanetCommand}" CommandParameter="{Binding .}"/>
-                            </Rectangle.InputBindings>
                         </Rectangle>
                     </DataTemplate>
                 </ItemsControl.Resources>
@@ -65,3 +67,10 @@
         </Border>
     </Grid>
 </UserControl>
+
+
+
+
+
+
+
