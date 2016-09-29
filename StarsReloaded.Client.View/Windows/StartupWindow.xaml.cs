@@ -1,14 +1,13 @@
-﻿using System.Windows;
-
-namespace StarsReloaded.View.Windows
+﻿namespace StarsReloaded.View.Windows
 {
+    using System.Windows;
     using StarsReloaded.Client.ViewModel.Windows;
 
     public partial class StartupWindow : Window
     {
         public StartupWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void StartupWindow_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

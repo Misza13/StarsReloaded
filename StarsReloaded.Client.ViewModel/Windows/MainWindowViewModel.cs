@@ -3,21 +3,20 @@
     using GalaSoft.MvvmLight;
     using StarsReloaded.Client.ViewModel.Controls;
     using StarsReloaded.Shared.Model;
-    using StarsReloaded.Shared.WorldGen;
     using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
 
     public sealed class MainWindowViewModel : ViewModelBase
     {
-        private Galaxy _galaxy;
+        private Galaxy galaxy;
 
         public MainWindowViewModel(IGalaxyGeneratorService galaxyGeneratorService)
         {
-            if (IsInDesignMode)
+            if (this.IsInDesignMode)
             {
-                //var galaxy = galaxyGeneratorService.GenerateUniform(800, 800, 100);
-                var galaxy = galaxyGeneratorService.GenerateUniform(GalaxySize.Medium, GalaxyDensity.Packed);
-                Initialize(galaxy);
+                ////var galaxy = galaxyGeneratorService.GenerateUniform(800, 800, 100);
+                this.galaxy = galaxyGeneratorService.GenerateUniform(GalaxySize.Medium, GalaxyDensity.Packed);
+                this.Initialize(this.galaxy);
             }
         }
 
@@ -25,11 +24,11 @@
         {
             set
             {
-                if (value != _galaxy)
+                if (value != this.galaxy)
                 {
-                    _galaxy = value;
-                    Initialize(_galaxy);
-                    RaisePropertyChanged(nameof(MapPanelControlViewModel));
+                    this.galaxy = value;
+                    this.Initialize(this.galaxy);
+                    this.RaisePropertyChanged(nameof(this.MapPanelControlViewModel));
                 }
             }
         }
@@ -38,8 +37,8 @@
 
         private void Initialize(Galaxy galaxy)
         {
-            MapPanelControlViewModel = ViewModelLocator.MapPanelControl;
-            MapPanelControlViewModel.Galaxy = galaxy;
+            this.MapPanelControlViewModel = ViewModelLocator.MapPanelControl;
+            this.MapPanelControlViewModel.Galaxy = galaxy;
         }
     }
 }

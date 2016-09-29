@@ -6,7 +6,7 @@
     {
         public MapPanelControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

@@ -10,17 +10,17 @@
     public class GalaxyGeneratorServiceTests
     {
         ////System Under Test
-        private IGalaxyGeneratorService _galaxyGeneratorService;
+        private IGalaxyGeneratorService galaxyGeneratorService;
 
         [SetUp]
         public void Setup()
         {
-            _galaxyGeneratorService = new GalaxyGeneratorService();
+            this.galaxyGeneratorService = new GalaxyGeneratorService();
         }
 
         [Test]
         [Combinatorial]
-        public void GenerateUniformEnums_ShouldCreateCorrectGalaxy(
+        public void GenerateUniformEnumsShouldCreateCorrectGalaxy(
             [Values(GalaxySize.Tiny, GalaxySize.Small, GalaxySize.Medium, GalaxySize.Large, GalaxySize.Huge)] GalaxySize size,
             [Values(GalaxyDensity.Sparse, GalaxyDensity.Normal, GalaxyDensity.Dense, GalaxyDensity.Packed)] GalaxyDensity density)
         {
@@ -29,7 +29,7 @@
             var num = density.GetAttributeOfType<BasePlanetCountAttribute>().Num * edge * edge / 160000;
 
             ////Act
-            var galaxy = _galaxyGeneratorService.GenerateUniform(size, density);
+            var galaxy = this.galaxyGeneratorService.GenerateUniform(size, density);
 
             ////Assert
             Assert.That(galaxy.Width, Is.EqualTo(edge));
@@ -43,10 +43,10 @@
         }
 
         [Test]
-        public void GenerateUniform_ShouldThrow_IfGalaxyIsTooPacked()
+        public void GenerateUniformShouldThrowIfGalaxyIsTooPacked()
         {
             ////Act && Assert
-            Assert.Throws<Exception>(() => _galaxyGeneratorService.GenerateUniform(100, 100, 10000));
+            Assert.Throws<Exception>(() => this.galaxyGeneratorService.GenerateUniform(100, 100, 10000));
         }
     }
 }

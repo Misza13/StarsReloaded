@@ -4,9 +4,9 @@
     {
         public Planet(int x, int y, string name)
         {
-            X = x;
-            Y = y;
-            Name = name;
+            this.X = x;
+            this.Y = y;
+            this.Name = name;
         }
 
         public int X { get; private set; }

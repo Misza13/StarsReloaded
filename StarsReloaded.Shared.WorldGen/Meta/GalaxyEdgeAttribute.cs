@@ -4,11 +4,11 @@
 
     public class GalaxyEdgeAttribute : Attribute
     {
-        public int Edge { get; }
-
         public GalaxyEdgeAttribute(int edge)
         {
             this.Edge = edge;
         }
+
+        public int Edge { get; }
     }
 }

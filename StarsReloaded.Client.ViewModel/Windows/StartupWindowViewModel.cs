@@ -10,13 +10,13 @@
 
     public class StartupWindowViewModel : ViewModelBase
     {
-        private readonly IGalaxyGeneratorService _galaxyGeneratorService;
+        private readonly IGalaxyGeneratorService galaxyGeneratorService;
 
         public StartupWindowViewModel(IGalaxyGeneratorService galaxyGeneratorService)
         {
-            _galaxyGeneratorService = galaxyGeneratorService;
+            this.galaxyGeneratorService = galaxyGeneratorService;
 
-            this.NewGameCommand = new RelayCommand(NewGame);
+            this.NewGameCommand = new RelayCommand(this.NewGame);
             this.ExitCommand = new RelayCommand(this.Exit);
         }
 
@@ -32,17 +32,17 @@
 
         private void NewGame()
         {
-            ////TODO: Game init logic here
-            //var galaxy = _galaxyGeneratorService.GenerateUniform(800, 800, 100);
-            var galaxy = _galaxyGeneratorService.GenerateUniform(GalaxySize.Medium, GalaxyDensity.Normal);
+            // TODO: Game init logic here
+            ////var galaxy = _galaxyGeneratorService.GenerateUniform(800, 800, 100);
+            var galaxy = this.galaxyGeneratorService.GenerateUniform(GalaxySize.Medium, GalaxyDensity.Normal);
 
-            Messenger.Default.Send(new ShowMainWindowMessage() {Galaxy = galaxy});
-            CloseAction?.Invoke();
+            Messenger.Default.Send(new ShowMainWindowMessage() { Galaxy = galaxy });
+            this.CloseAction?.Invoke();
         }
 
         private void Exit()
         {
-            CloseAction?.Invoke();
+            this.CloseAction?.Invoke();
         }
     }
 }

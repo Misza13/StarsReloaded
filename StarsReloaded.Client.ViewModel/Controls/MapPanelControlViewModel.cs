@@ -6,62 +6,61 @@
     using GalaSoft.MvvmLight.CommandWpf;
     using StarsReloaded.Client.ViewModel.ModelWrap;
     using StarsReloaded.Shared.Model;
-    using StarsReloaded.Shared.WorldGen;
     using StarsReloaded.Shared.WorldGen.Services;
 
     public class MapPanelControlViewModel : ViewModelBase
     {
-        private Galaxy _galaxy;
-        private PlanetViewModel _selectedPlanet;
-
-        public ObservableCollection<PlanetViewModel> Planets { get; set; }
+        private Galaxy galaxy;
+        private PlanetViewModel selectedPlanet;
 
         public MapPanelControlViewModel(IGalaxyGeneratorService galaxyGeneratorService)
         {
-            if (IsInDesignMode)
+            if (this.IsInDesignMode)
             {
                 this.Galaxy = galaxyGeneratorService.GenerateUniform(800, 800, 100);
             }
         }
 
+        public ObservableCollection<PlanetViewModel> Planets { get; set; }
+
         public Galaxy Galaxy
         {
             set
             {
-                if (value != _galaxy)
+                if (value != this.galaxy)
                 {
-                    Initialize(value);
-                    RaisePropertyChanged(nameof(Planets));
-                    RaisePropertyChanged(nameof(GalaxyWidth));
-                    RaisePropertyChanged(nameof(GalaxyHeight));
-                    SelectPlanet(null);
+                    this.Initialize(value);
+                    this.RaisePropertyChanged(nameof(this.Planets));
+                    this.RaisePropertyChanged(nameof(this.GalaxyWidth));
+                    this.RaisePropertyChanged(nameof(this.GalaxyHeight));
+                    this.SelectPlanet(null);
                 }
             }
         }
 
-        public string SelectedObjectName => _selectedPlanet == null ? string.Empty : _selectedPlanet.Name;
+        public string SelectedObjectName => this.selectedPlanet == null ? string.Empty : this.selectedPlanet.Name;
 
-        public string SelectedObjectCoords => _selectedPlanet == null ? string.Empty : $"[{_selectedPlanet.X},{_selectedPlanet.Y}]";
+        public string SelectedObjectCoords => this.selectedPlanet == null ? string.Empty : $"[{this.selectedPlanet.X},{this.selectedPlanet.Y}]";
 
-        public int GalaxyWidth => this._galaxy.Width;
+        public int GalaxyWidth => this.galaxy.Width;
 
-        public int GalaxyHeight => this._galaxy.Height;
+        public int GalaxyHeight => this.galaxy.Height;
 
-        private void Initialize(Galaxy galaxy)
+        private void Initialize(Galaxy fromGalaxy)
         {
-            this._galaxy = galaxy;
+            this.galaxy = fromGalaxy;
 
             var selectPlanetCommand = new RelayCommand<PlanetViewModel>(this.SelectPlanet);
 
             this.Planets = new ObservableCollection<PlanetViewModel>(
-                this._galaxy.Planets.Select(p => new PlanetViewModel(p, selectPlanetCommand)));
+                this.galaxy.Planets.Select(p => new PlanetViewModel(p, selectPlanetCommand)));
         }
 
         private void SelectPlanet(PlanetViewModel planet)
         {
-            this._selectedPlanet = planet;
-            RaisePropertyChanged(nameof(SelectedObjectName));
-            RaisePropertyChanged(nameof(SelectedObjectCoords));
+            this.selectedPlanet = planet;
+            this.RaisePropertyChanged(nameof(this.SelectedObjectName));
+            this.RaisePropertyChanged(nameof(this.SelectedObjectCoords));
         }
     }
 }

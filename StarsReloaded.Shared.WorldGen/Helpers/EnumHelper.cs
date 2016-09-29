@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace StarsReloaded.Shared.WorldGen.Helpers
+﻿namespace StarsReloaded.Shared.WorldGen.Helpers
 {
+    using System;
+
     public static class EnumHelper
     {
         /// <summary>

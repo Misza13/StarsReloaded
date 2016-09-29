@@ -6,9 +6,9 @@
     {
         public Galaxy(int width, int height)
         {
-            Width = width;
-            Height = height;
-            Planets = new List<Planet>();
+            this.Width = width;
+            this.Height = height;
+            this.Planets = new List<Planet>();
         }
 
         public int Width { get; private set; }

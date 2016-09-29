@@ -4,11 +4,11 @@
 
     public class BasePlanetCountAttribute : Attribute
     {
-        public int Num { get; set; }
-
         public BasePlanetCountAttribute(int num)
         {
-            Num = num;
+            this.Num = num;
         }
+
+        public int Num { get; }
     }
 }

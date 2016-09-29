@@ -5,26 +5,26 @@
 
     public class PlanetViewModel
     {
-        public RelayCommand<PlanetViewModel> SelectPlanetCommand { get; set; }
-
-        private readonly Planet _planet;
-
         private const int Radius = 1;
+
+        private readonly Planet planet;
 
         public PlanetViewModel(Planet planet, RelayCommand<PlanetViewModel> selectPlanetCommand)
         {
-            SelectPlanetCommand = selectPlanetCommand;
-            _planet = planet;
+            this.SelectPlanetCommand = selectPlanetCommand;
+            this.planet = planet;
         }
 
-        public int X => this._planet.X;
+        public RelayCommand<PlanetViewModel> SelectPlanetCommand { get; set; }
 
-        public int Y => this._planet.Y;
+        public int X => this.planet.X;
 
-        public string Name => this._planet.Name;
+        public int Y => this.planet.Y;
 
-        public int Left => this._planet.X - Radius;
+        public string Name => this.planet.Name;
 
-        public int Right => this._planet.Y - Radius;
+        public int Left => this.planet.X - Radius;
+
+        public int Right => this.planet.Y - Radius;
     }
 }
