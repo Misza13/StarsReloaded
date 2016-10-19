@@ -16,6 +16,9 @@
         public PlanetViewModel(Planet planet)
         {
             this.planet = planet;
+            this.GravityViewModel = new GravityViewModel(planet.Gravity);
+            this.TemperatureViewModel = new TemperatureViewModel(planet.Radiation);
+            this.RadiationViewModel = new RadiationViewModel(planet.Temperature);
         }
 
         #endregion
@@ -31,6 +34,12 @@
         public int Left => this.planet.X - Radius;
 
         public int Right => this.planet.Y - Radius;
+
+        public GravityViewModel GravityViewModel { get; private set; }
+
+        public TemperatureViewModel TemperatureViewModel { get; private set; }
+
+        public RadiationViewModel RadiationViewModel { get; private set; }
 
         #endregion
     }

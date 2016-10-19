@@ -160,7 +160,7 @@
 
                 if (PlanetFits(galaxy, x, y, PlanetMinDistance))
                 {
-                    return new Planet(x, y, Guid.NewGuid().ToString());
+                    return this.MakePlanet(x, y);
                 }
 
                 failedFits++;
@@ -188,7 +188,7 @@
 
                 if (PlanetFits(galaxy, x, y, PlanetMinDistance))
                 {
-                    return new Planet(x, y, Guid.NewGuid().ToString());
+                    return this.MakePlanet(x, y);
                 }
 
                 failedFits++;
@@ -208,7 +208,7 @@
 
                 if (PlanetFits(galaxy, x, y, 40))
                 {
-                    return new Planet(x, y, Guid.NewGuid().ToString());
+                    return this.MakePlanet(x, y);
                 }
 
                 failedFits++;
@@ -217,5 +217,15 @@
             throw new Exception("Too many failed attempts at fitting a planet.");
         }
 
+        private Planet MakePlanet(int x, int y)
+        {
+            var planet = new Planet(x, y);
+            planet.Name = Guid.NewGuid().ToString();
+            planet.Gravity = new HabitationParameter(this.rng.Next(100));
+            planet.Temperature = new HabitationParameter(this.rng.Next(100));
+            planet.Radiation = new HabitationParameter(this.rng.Next(100));
+
+            return planet;
+        }
     }
 }
