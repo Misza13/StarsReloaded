@@ -1,14 +1,13 @@
 ﻿namespace StarsReloaded.Client.ViewModel.Windows
 {
     using System;
-    using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
     using StarsReloaded.Client.ViewModel.Messages;
     using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
 
-    public class StartupWindowViewModel : ViewModelBase
+    public class StartupWindowViewModel : BaseViewModel
     {
         private readonly IGalaxyGeneratorService galaxyGeneratorService;
 

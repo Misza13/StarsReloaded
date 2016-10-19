@@ -2,7 +2,7 @@
 {
     using StarsReloaded.Shared.Model;
 
-    public class PlanetViewModel
+    public class PlanetViewModel : BaseViewModel
     {
         private const int Radius = 1;
 

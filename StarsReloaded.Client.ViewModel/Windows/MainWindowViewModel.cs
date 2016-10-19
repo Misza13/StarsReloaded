@@ -1,12 +1,12 @@
 ﻿namespace StarsReloaded.Client.ViewModel.Windows
 {
-    using GalaSoft.MvvmLight;
+    using StarsReloaded.Client.ViewModel.Attributes;
     using StarsReloaded.Client.ViewModel.Controls;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
 
-    public sealed class MainWindowViewModel : ViewModelBase
+    public sealed class MainWindowViewModel : BaseViewModel
     {
         private Galaxy galaxy;
 
@@ -27,11 +27,12 @@
                 {
                     this.galaxy = value;
                     this.Initialize(this.galaxy);
-                    this.RaisePropertyChanged(nameof(this.MapPanelControlViewModel));
+                    this.RaisePropertyChanged(nameof(this.Galaxy));
                 }
             }
         }
 
+        [DependsUpon(nameof(Galaxy))]
         public MapPanelControlViewModel MapPanelControlViewModel { get; private set; }
 
         private void Initialize(Galaxy galaxy)

@@ -5,14 +5,15 @@
     using System.Linq;
     using System.Windows;
 
-    using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.CommandWpf;
+
+    using StarsReloaded.Client.ViewModel.Attributes;
     using StarsReloaded.Client.ViewModel.ModelWrap;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
 
-    public class MapPanelControlViewModel : ViewModelBase
+    public class MapPanelControlViewModel : BaseViewModel
     {
         private Galaxy galaxy;
         private PlanetViewModel selectedPlanet;
@@ -27,6 +28,7 @@
             this.MapClickCommand = new RelayCommand<Point>(this.MapClick);
         }
 
+        [DependsUpon(nameof(Galaxy))]
         public ObservableCollection<PlanetViewModel> Planets { get; set; }
 
         public Galaxy Galaxy
@@ -36,9 +38,7 @@
                 if (value != this.galaxy)
                 {
                     this.Initialize(value);
-                    this.RaisePropertyChanged(nameof(this.Planets));
-                    this.RaisePropertyChanged(nameof(this.GalaxyWidth));
-                    this.RaisePropertyChanged(nameof(this.GalaxyHeight));
+                    this.RaisePropertyChanged(nameof(this.Galaxy));
                     this.SelectPlanet(null);
                 }
             }
@@ -48,8 +48,10 @@
 
         public string SelectedObjectCoords => this.selectedPlanet == null ? string.Empty : $"[{this.selectedPlanet.X},{this.selectedPlanet.Y}]";
 
+        [DependsUpon(nameof(Galaxy))]
         public int GalaxyWidth => this.galaxy.Width;
 
+        [DependsUpon(nameof(Galaxy))]
         public int GalaxyHeight => this.galaxy.Height;
 
         public RelayCommand<Point> MapClickCommand { get; }

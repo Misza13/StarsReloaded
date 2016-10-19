@@ -63,6 +63,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\DependsUponAttribute.cs" />
+    <Compile Include="BaseViewModel.cs" />
     <Compile Include="Controls\MapPanelControlViewModel.cs" />
     <Compile Include="Messages\ShowMainWindowMessage.cs" />
     <Compile Include="ModelWrap\PlanetViewModel.cs" />
