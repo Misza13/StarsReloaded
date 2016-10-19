@@ -8,7 +8,13 @@
 
     public sealed class MainWindowViewModel : BaseViewModel
     {
+        #region Private fields
+
         private Galaxy galaxy;
+
+        #endregion
+
+        #region Constructors
 
         public MainWindowViewModel(IGalaxyGeneratorService galaxyGeneratorService)
         {
@@ -19,6 +25,10 @@
             }
         }
 
+        #endregion
+
+        #region Public properties
+
         public Galaxy Galaxy
         {
             set
@@ -26,7 +36,7 @@
                 if (value != this.galaxy)
                 {
                     this.galaxy = value;
-                    this.Initialize(this.galaxy);
+                    this.Initialize(value);
                     this.RaisePropertyChanged(nameof(this.Galaxy));
                 }
             }
@@ -35,10 +45,16 @@
         [DependsUpon(nameof(Galaxy))]
         public MapPanelControlViewModel MapPanelControlViewModel { get; private set; }
 
-        private void Initialize(Galaxy galaxy)
+        #endregion
+
+        #region Private methods
+
+        private void Initialize(Galaxy newGalaxy)
         {
             this.MapPanelControlViewModel = ViewModelLocator.MapPanelControl;
-            this.MapPanelControlViewModel.Galaxy = galaxy;
+            this.MapPanelControlViewModel.Galaxy = newGalaxy;
         }
+
+        #endregion
     }
 }

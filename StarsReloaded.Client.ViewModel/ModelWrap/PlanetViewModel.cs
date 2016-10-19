@@ -4,14 +4,23 @@
 
     public class PlanetViewModel : BaseViewModel
     {
-        private const int Radius = 1;
+        #region Private fields
 
+        private const int Radius = 1;
         private readonly Planet planet;
+
+        #endregion
+
+        #region Constructors
 
         public PlanetViewModel(Planet planet)
         {
             this.planet = planet;
         }
+
+        #endregion
+
+        #region Public properties
 
         public int X => this.planet.X;
 
@@ -22,5 +31,7 @@
         public int Left => this.planet.X - Radius;
 
         public int Right => this.planet.Y - Radius;
+
+        #endregion
     }
 }

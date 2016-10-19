@@ -9,7 +9,13 @@
 
     public class StartupWindowViewModel : BaseViewModel
     {
+        #region Private fields
+
         private readonly IGalaxyGeneratorService galaxyGeneratorService;
+
+        #endregion
+
+        #region Constructors
 
         public StartupWindowViewModel(IGalaxyGeneratorService galaxyGeneratorService)
         {
@@ -19,6 +25,10 @@
             this.ExitCommand = new RelayCommand(this.Exit);
         }
 
+        #endregion
+
+        #region Commands
+
         public RelayCommand NewGameCommand { get; set; }
 
         public RelayCommand OpenGameCommand { get; set; }
@@ -27,7 +37,15 @@
 
         public RelayCommand ExitCommand { get; set; }
 
+        #endregion
+
+        #region Actions
+
         public Action CloseAction { private get; set; }
+
+        #endregion
+
+        #region Private methods
 
         private void NewGame()
         {
@@ -42,5 +60,7 @@
         {
             this.CloseAction?.Invoke();
         }
+
+        #endregion
     }
 }

@@ -15,8 +15,14 @@
 
     public class MapPanelControlViewModel : BaseViewModel
     {
+        #region Private fields
+
         private Galaxy galaxy;
         private PlanetViewModel selectedPlanet;
+
+        #endregion
+
+        #region Constructors
 
         public MapPanelControlViewModel(IGalaxyGeneratorService galaxyGeneratorService)
         {
@@ -27,6 +33,10 @@
 
             this.MapClickCommand = new RelayCommand<Point>(this.MapClick);
         }
+
+        #endregion
+
+        #region Public properties
 
         [DependsUpon(nameof(Galaxy))]
         public ObservableCollection<PlanetViewModel> Planets { get; set; }
@@ -54,8 +64,15 @@
         [DependsUpon(nameof(Galaxy))]
         public int GalaxyHeight => this.galaxy.Height;
 
+        #endregion
+
+        #region Commands
+
         public RelayCommand<Point> MapClickCommand { get; }
 
+        #endregion
+
+        #region Private methods
         private void Initialize(Galaxy fromGalaxy)
         {
             this.galaxy = fromGalaxy;
@@ -91,5 +108,7 @@
 
             this.SelectPlanet(closest);
         }
+
+        #endregion
     }
 }
