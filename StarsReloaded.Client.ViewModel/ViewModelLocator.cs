@@ -39,6 +39,7 @@ namespace StarsReloaded.Client.ViewModel
 
             ////Controls
             SimpleIoc.Default.Register<MapPanelControlViewModel>();
+            SimpleIoc.Default.Register<SummaryPanelControlViewModel>();
         }
 
         public static MainWindowViewModel MainWindow => ServiceLocator.Current.GetInstance<MainWindowViewModel>();
@@ -46,5 +47,7 @@ namespace StarsReloaded.Client.ViewModel
         public static StartupWindowViewModel StartupWindow => ServiceLocator.Current.GetInstance<StartupWindowViewModel>();
 
         public static MapPanelControlViewModel MapPanelControl => ServiceLocator.Current.GetInstance<MapPanelControlViewModel>();
+
+        public static SummaryPanelControlViewModel SummaryPanelControl => ServiceLocator.Current.GetInstance<SummaryPanelControlViewModel>();
     }
 }

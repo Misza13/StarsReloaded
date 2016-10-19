@@ -37,13 +37,15 @@
                 {
                     this.galaxy = value;
                     this.Initialize(value);
-                    this.RaisePropertyChanged(nameof(this.Galaxy));
+                    this.RaisePropertyChanged();
                 }
             }
         }
 
         [DependsUpon(nameof(Galaxy))]
         public MapPanelControlViewModel MapPanelControlViewModel { get; private set; }
+
+        public SummaryPanelControlViewModel SummaryPanelControlViewModel { get; private set; }
 
         #endregion
 
@@ -53,6 +55,10 @@
         {
             this.MapPanelControlViewModel = ViewModelLocator.MapPanelControl;
             this.MapPanelControlViewModel.Galaxy = newGalaxy;
+            this.RaisePropertyChanged(nameof(this.MapPanelControlViewModel));
+
+            this.SummaryPanelControlViewModel = ViewModelLocator.SummaryPanelControl;
+            this.RaisePropertyChanged(nameof(this.SummaryPanelControlViewModel));
         }
 
         #endregion

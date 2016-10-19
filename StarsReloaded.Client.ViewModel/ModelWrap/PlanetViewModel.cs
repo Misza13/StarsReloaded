@@ -17,8 +17,8 @@
         {
             this.planet = planet;
             this.GravityViewModel = new GravityViewModel(planet.Gravity);
-            this.TemperatureViewModel = new TemperatureViewModel(planet.Radiation);
-            this.RadiationViewModel = new RadiationViewModel(planet.Temperature);
+            this.TemperatureViewModel = new TemperatureViewModel(planet.Temperature);
+            this.RadiationViewModel = new RadiationViewModel(planet.Radiation);
         }
 
         #endregion

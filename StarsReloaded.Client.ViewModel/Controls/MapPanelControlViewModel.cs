@@ -6,8 +6,10 @@
     using System.Windows;
 
     using GalaSoft.MvvmLight.CommandWpf;
+    using GalaSoft.MvvmLight.Messaging;
 
     using StarsReloaded.Client.ViewModel.Attributes;
+    using StarsReloaded.Client.ViewModel.Messages;
     using StarsReloaded.Client.ViewModel.ModelWrap;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.WorldGen.Meta;
@@ -86,6 +88,8 @@
             this.selectedPlanet = planet;
             this.RaisePropertyChanged(nameof(this.SelectedObjectName));
             this.RaisePropertyChanged(nameof(this.SelectedObjectCoords));
+
+            Messenger.Default.Send(new PlanetSelectedMessage(planet));
         }
 
         private void MapClick(Point p)
