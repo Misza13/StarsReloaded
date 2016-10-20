@@ -21,6 +21,8 @@
 
         #region Public properties
 
+        public HabitationParameter Value => this.habitationParameter;
+
         public int Clicks => this.habitationParameter.Clicks;
 
         public abstract string DisplayValue { get; }

@@ -67,6 +67,7 @@
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="Controls\MapPanelControlViewModel.cs" />
     <Compile Include="Controls\SummaryPanelControlViewModel.cs" />
+    <Compile Include="Fragments\HabitationBarControlViewModel.cs" />
     <Compile Include="Messages\PlanetSelectedMessage.cs" />
     <Compile Include="Messages\ShowMainWindowMessage.cs" />
     <Compile Include="ModelWrap\GravityViewModel.cs" />

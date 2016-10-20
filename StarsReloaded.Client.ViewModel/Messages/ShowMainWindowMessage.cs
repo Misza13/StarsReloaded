@@ -6,5 +6,7 @@
     public class ShowMainWindowMessage : MessageBase
     {
         public Galaxy Galaxy { get; set; }
+
+        public Race Race { get; set; }
     }
 }

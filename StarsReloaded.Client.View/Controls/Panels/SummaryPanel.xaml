@@ -2,25 +2,39 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:fragments="clr-namespace:StarsReloaded.View.Controls.Fragments"
              DataContext="{Binding Source={StaticResource Locator}, Path=SummaryPanelControl}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid Visibility="{Binding PlanetSummaryVisibility}"
+          Margin="4"
+          Width="Auto" Height="Auto">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="4"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Gravity"/>
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding GravityDisplayValue, Mode=OneWay}"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Temperature"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding TemperatureDisplayValue, Mode=OneWay}"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Radiation"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding RadiationDisplayValue, Mode=OneWay}"/>
+        <fragments:HabitationBarControl Grid.Row="0" Grid.Column="2" DataContext="{Binding GravityBarViewModel}"/>
+        <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding GravityDisplayValue}"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Temperature"/>
+        <fragments:HabitationBarControl Grid.Row="2" Grid.Column="2" DataContext="{Binding TemperatureBarViewModel}" />
+        <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding TemperatureDisplayValue}"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Radiation"/>
+        <fragments:HabitationBarControl Grid.Row="4" Grid.Column="2" DataContext="{Binding RadiationBarViewModel}"/>
+        <TextBlock Grid.Row="4" Grid.Column="4" Text="{Binding RadiationDisplayValue}"/>
     </Grid>
 </UserControl>

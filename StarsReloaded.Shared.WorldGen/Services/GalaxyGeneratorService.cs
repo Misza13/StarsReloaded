@@ -219,11 +219,13 @@
 
         private Planet MakePlanet(int x, int y)
         {
-            var planet = new Planet(x, y);
-            planet.Name = Guid.NewGuid().ToString();
-            planet.Gravity = new HabitationParameter(this.rng.Next(100));
-            planet.Temperature = new HabitationParameter(this.rng.Next(100));
-            planet.Radiation = new HabitationParameter(this.rng.Next(100));
+            var planet = new Planet(x, y)
+                {
+                    Name = Guid.NewGuid().ToString(),
+                    Gravity = new HabitationParameter(this.rng.Next(-50, 51)),
+                    Temperature = new HabitationParameter(this.rng.Next(-50, 51)),
+                    Radiation = new HabitationParameter(this.rng.Next(-50, 51))
+                };
 
             return planet;
         }

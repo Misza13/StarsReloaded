@@ -22,7 +22,7 @@
             var vm = mainWindow.DataContext as MainWindowViewModel;
             if (vm != null)
             {
-                vm.Galaxy = message.Galaxy;
+                vm.Initialize(message.Galaxy, message.Race);
             }
             else
             {

@@ -4,6 +4,7 @@
     using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
     using StarsReloaded.Client.ViewModel.Messages;
+    using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
 
@@ -52,7 +53,14 @@
             // TODO: Game init logic here
             var galaxy = this.galaxyGeneratorService.Generate(GalaxySize.Medium, GalaxyDensity.Normal, PlanetDistribution.UniformClumping);
 
-            Messenger.Default.Send(new ShowMainWindowMessage() { Galaxy = galaxy });
+            var race = new Race()
+                {
+                    GravityTolerance = new HabitationRange(-30, +12),
+                    TemperatureTolerance = new HabitationRange(+10, +50),
+                    RadiationTolerance = new HabitationRange(-15, +35)
+                };
+
+            Messenger.Default.Send(new ShowMainWindowMessage() { Galaxy = galaxy, Race = race });
             this.CloseAction?.Invoke();
         }
 

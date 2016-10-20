@@ -20,7 +20,7 @@
                     var dependentUpon = (baseProp as DependsUponAttribute)?.PropertyName;
                     if (dependentUpon == propertyName)
                     {
-                        base.RaisePropertyChanged(property.Name);
+                        this.RaisePropertyChanged(property.Name);
                     }
                 }
             }

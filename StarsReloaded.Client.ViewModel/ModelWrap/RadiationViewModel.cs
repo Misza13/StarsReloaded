@@ -9,6 +9,6 @@
         {
         }
 
-        public override string DisplayValue => this.Clicks.ToString() + "r"; ////TODO
+        public override string DisplayValue => $"{this.Clicks + 50}mR";
     }
 }

@@ -45,13 +45,18 @@
 
         public Galaxy Galaxy
         {
+            get
+            {
+                return this.galaxy;
+            }
+
             set
             {
                 if (value != this.galaxy)
                 {
                     this.Initialize(value);
-                    this.RaisePropertyChanged(nameof(this.Galaxy));
                     this.SelectPlanet(null);
+                    this.RaisePropertyChanged(nameof(this.Galaxy));
                 }
             }
         }
@@ -61,10 +66,10 @@
         public string SelectedObjectCoords => this.selectedPlanet == null ? string.Empty : $"[{this.selectedPlanet.X},{this.selectedPlanet.Y}]";
 
         [DependsUpon(nameof(Galaxy))]
-        public int GalaxyWidth => this.galaxy.Width;
+        public int GalaxyWidth => this.Galaxy.Width;
 
         [DependsUpon(nameof(Galaxy))]
-        public int GalaxyHeight => this.galaxy.Height;
+        public int GalaxyHeight => this.Galaxy.Height;
 
         #endregion
 

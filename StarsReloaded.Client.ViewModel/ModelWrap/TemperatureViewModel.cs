@@ -9,6 +9,6 @@
         {
         }
 
-        public override string DisplayValue => this.Clicks.ToString() + "C"; ////TODO
+        public override string DisplayValue => $"{this.Clicks * 4}°C";
     }
 }
