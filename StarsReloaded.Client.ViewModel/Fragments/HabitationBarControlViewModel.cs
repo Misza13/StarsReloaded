@@ -7,7 +7,13 @@
 
     public class HabitationBarControlViewModel : BaseViewModel
     {
+        #region Private fields
+
         private HabitationRange range;
+
+        #endregion
+
+        #region Constructors
 
         public HabitationBarControlViewModel()
         {
@@ -19,6 +25,10 @@
                 this.OriginalValue = new HabitationParameter(+45);
             }
         }
+
+        #endregion
+
+        #region Public properties
 
         public HabitationParameterType ParameterType { get; set; }
 
@@ -67,6 +77,10 @@
         [DependsUpon(nameof(ParameterType))]
         public string FillColor => this.GetFillColor();
 
+        #endregion
+
+        #region Private methods
+
         private string GetFillColor()
         {
             switch (this.ParameterType)
@@ -81,5 +95,7 @@
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        #endregion
     }
 }

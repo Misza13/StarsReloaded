@@ -13,7 +13,13 @@
 
     public class SummaryPanelControlViewModel : BaseViewModel
     {
+        #region Private fields
+
         private PlanetViewModel selectedPlanet;
+
+        #endregion
+
+        #region Constructors
 
         public SummaryPanelControlViewModel()
         {
@@ -53,6 +59,10 @@
             Messenger.Default.Register<PlanetSelectedMessage>(this, this.PlanetSelected);
         }
 
+        #endregion
+
+        #region Public properties
+
         [DependsUpon(nameof(SelectedPlanet))]
         public Visibility PlanetSummaryVisibility => this.SelectedPlanet != null ? Visibility.Visible : Visibility.Hidden;
 
@@ -74,6 +84,10 @@
         [DependsUpon(nameof(SelectedPlanet))]
         public HabitationBarControlViewModel RadiationBarViewModel { get; set; }
 
+        #endregion
+
+        #region Private properties
+
         private PlanetViewModel SelectedPlanet
         {
             get
@@ -91,9 +105,15 @@
             }
         }
 
+        #endregion
+
+        #region Private methods
+
         private void PlanetSelected(PlanetSelectedMessage message)
         {
             this.SelectedPlanet = message.Planet;
         }
+
+        #endregion
     }
 }
