@@ -17,28 +17,38 @@
         </Grid.RowDefinitions>
 
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding Path=Planets}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas
-                            Width="{Binding GalaxyWidth}"
-                            Height="{Binding GalaxyHeight}"
-                            IsItemsHost="True"
-                            Background="Black"
-                            MouseDown="Canvas_OnMouseDown" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
+            <Canvas
+                Width="{Binding GalaxyWidth}"
+                Height="{Binding GalaxyHeight}"
+                Background="Black"
+                MouseDown="Canvas_OnMouseDown">
+                <Polygon
+                    Visibility="{Binding SelectionArrowVisibility}"
+                    Fill="Yellow"
+                    Points="0,5 5,14 4,15 0,12 -4,15 -5,14 0,5">
+                    <Polygon.RenderTransform>
+                        <TranslateTransform X="{Binding SelectedObjectX}" Y="{Binding SelectedObjectY}"/>
+                    </Polygon.RenderTransform>
+                </Polygon>
+                
+                <ItemsControl ItemsSource="{Binding Path=Planets}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
 
-                <ItemsControl.Resources>
-                    <DataTemplate DataType="{x:Type modelWrap:PlanetViewModel}">
-                        <Rectangle Stroke="Gray" Fill="LightGray" Width="3" Height="3">
-                            <Rectangle.RenderTransform>
-                                <TranslateTransform X="{Binding Left}" Y="{Binding Right}"/>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                    </DataTemplate>
-                </ItemsControl.Resources>
-            </ItemsControl>
+                    <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type modelWrap:PlanetViewModel}">
+                            <Rectangle Stroke="Gray" Fill="LightGray" Width="3" Height="3">
+                                <Rectangle.RenderTransform>
+                                    <TranslateTransform X="{Binding Left}" Y="{Binding Right}"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                </ItemsControl>
+            </Canvas>
         </ScrollViewer>
 
         <Border
@@ -67,6 +77,14 @@
         </Border>
     </Grid>
 </UserControl>
+
+
+
+
+
+
+
+
 
 
 

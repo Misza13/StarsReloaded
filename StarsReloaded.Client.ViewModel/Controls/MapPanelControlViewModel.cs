@@ -31,6 +31,7 @@
             if (this.IsInDesignMode)
             {
                 this.Galaxy = galaxyGeneratorService.Generate(GalaxySize.Medium, GalaxyDensity.Dense, PlanetDistribution.UniformClumping);
+                this.MapClick(new Point() { X = 50, Y = 50 });
             }
 
             this.MapClickCommand = new RelayCommand<Point>(this.MapClick);
@@ -45,7 +46,7 @@
 
         public Galaxy Galaxy
         {
-            get
+            private get
             {
                 return this.galaxy;
             }
@@ -55,21 +56,51 @@
                 if (value != this.galaxy)
                 {
                     this.Initialize(value);
-                    this.SelectPlanet(null);
-                    this.RaisePropertyChanged(nameof(this.Galaxy));
+                    this.SelectedPlanet = null;
+                    this.RaisePropertyChanged();
                 }
             }
         }
 
-        public string SelectedObjectName => this.selectedPlanet == null ? string.Empty : this.selectedPlanet.Name;
+        public PlanetViewModel SelectedPlanet
+        {
+            private get
+            {
+                return this.selectedPlanet;
+            }
 
-        public string SelectedObjectCoords => this.selectedPlanet == null ? string.Empty : $"[{this.selectedPlanet.X},{this.selectedPlanet.Y}]";
+            set
+            {
+                if (value != this.selectedPlanet)
+                {
+                    this.selectedPlanet = value;
+                    this.RaisePropertyChanged();
+
+                    Messenger.Default.Send(new PlanetSelectedMessage(value));
+                }
+            }
+        }
+
+        [DependsUpon(nameof(SelectedPlanet))]
+        public string SelectedObjectName => this.SelectedPlanet == null ? string.Empty : this.SelectedPlanet.Name;
+
+        [DependsUpon(nameof(SelectedPlanet))]
+        public string SelectedObjectCoords => this.SelectedPlanet == null ? string.Empty : $"[{this.SelectedPlanet.X},{this.SelectedPlanet.Y}]";
+
+        [DependsUpon(nameof(SelectedPlanet))]
+        public int SelectedObjectX => this.SelectedPlanet?.X ?? 0;
+
+        [DependsUpon(nameof(SelectedPlanet))]
+        public int SelectedObjectY => this.SelectedPlanet?.Y ?? 0;
+
+        [DependsUpon(nameof(SelectedPlanet))]
+        public Visibility SelectionArrowVisibility => this.SelectedPlanet != null ? Visibility.Visible : Visibility.Hidden;
 
         [DependsUpon(nameof(Galaxy))]
-        public int GalaxyWidth => this.Galaxy.Width;
+        public int GalaxyWidth => this.Galaxy?.Width ?? 0;
 
         [DependsUpon(nameof(Galaxy))]
-        public int GalaxyHeight => this.Galaxy.Height;
+        public int GalaxyHeight => this.Galaxy?.Height ?? 0;
 
         #endregion
 
@@ -86,15 +117,6 @@
 
             this.Planets = new ObservableCollection<PlanetViewModel>(
                 this.galaxy.Planets.Select(p => new PlanetViewModel(p)));
-        }
-
-        private void SelectPlanet(PlanetViewModel planet)
-        {
-            this.selectedPlanet = planet;
-            this.RaisePropertyChanged(nameof(this.SelectedObjectName));
-            this.RaisePropertyChanged(nameof(this.SelectedObjectCoords));
-
-            Messenger.Default.Send(new PlanetSelectedMessage(planet));
         }
 
         private void MapClick(Point p)
@@ -115,7 +137,7 @@
                         return curClosest;
                     });
 
-            this.SelectPlanet(closest);
+            this.SelectedPlanet = closest;
         }
 
         #endregion
