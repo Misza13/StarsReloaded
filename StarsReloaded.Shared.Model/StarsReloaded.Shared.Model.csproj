@@ -41,12 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Galaxy.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="HabitationParameter.cs" />
     <Compile Include="HabitationParameterType.cs" />
     <Compile Include="HabitationRange.cs" />
     <Compile Include="Planet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Race.cs" />
+    <Compile Include="PlayerRace.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

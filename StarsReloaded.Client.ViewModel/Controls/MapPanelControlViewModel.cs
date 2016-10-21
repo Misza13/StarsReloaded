@@ -20,6 +20,7 @@
         #region Private fields
 
         private Galaxy galaxy;
+        private ObservableCollection<PlanetWrapper> planets;
         private PlanetWrapper selectedPlanet;
 
         #endregion
@@ -35,6 +36,7 @@
             }
 
             this.MapClickCommand = new RelayCommand<Point>(this.MapClick);
+            Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
         }
 
         #endregion
@@ -42,23 +44,31 @@
         #region Public properties
 
         [DependsUpon(nameof(Galaxy))]
-        public ObservableCollection<PlanetWrapper> Planets { get; set; }
+        public ObservableCollection<PlanetWrapper> Planets
+        {
+            get
+            {
+                return this.planets;
+            }
+
+            set
+            {
+                this.Set(() => this.Planets, ref this.planets, value);
+            }
+        }
 
         public Galaxy Galaxy
         {
-            private get
+            get
             {
                 return this.galaxy;
             }
 
             set
             {
-                if (value != this.galaxy)
-                {
-                    this.Initialize(value);
-                    this.SelectedPlanet = null;
-                    this.RaisePropertyChanged();
-                }
+                this.Set(() => this.Galaxy, ref this.galaxy, value);
+                this.Planets = new ObservableCollection<PlanetWrapper>(this.galaxy.Planets.Select(p => new PlanetWrapper(p)));
+                this.SelectedPlanet = null;
             }
         }
 
@@ -71,13 +81,8 @@
 
             set
             {
-                if (value != this.selectedPlanet)
-                {
-                    this.selectedPlanet = value;
-                    this.RaisePropertyChanged();
-
-                    Messenger.Default.Send(new PlanetSelectedMessage(value));
-                }
+                this.Set(() => this.SelectedPlanet, ref this.selectedPlanet, value);
+                Messenger.Default.Send(new PlanetSelectedMessage(value));
             }
         }
 
@@ -111,13 +116,6 @@
         #endregion
 
         #region Private methods
-        private void Initialize(Galaxy fromGalaxy)
-        {
-            this.galaxy = fromGalaxy;
-
-            this.Planets = new ObservableCollection<PlanetWrapper>(
-                this.galaxy.Planets.Select(p => new PlanetWrapper(p)));
-        }
 
         private void MapClick(Point p)
         {
@@ -138,6 +136,11 @@
                     });
 
             this.SelectedPlanet = closest;
+        }
+
+        private void OnGameStateLoaded(GameStateLoadedMessage message)
+        {
+            this.Galaxy = message.GameState.Galaxy;
         }
 
         #endregion

@@ -1,8 +1,11 @@
 ﻿namespace StarsReloaded.Client.ViewModel.Windows
 {
+    using GalaSoft.MvvmLight.Messaging;
+
     using StarsReloaded.Client.ViewModel.Attributes;
     using StarsReloaded.Client.ViewModel.Controls;
     using StarsReloaded.Client.ViewModel.Fragments;
+    using StarsReloaded.Client.ViewModel.Messages;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
@@ -11,8 +14,8 @@
     {
         #region Private fields
 
-        private Galaxy galaxy;
-        private Race playerRace;
+        private MapPanelControlViewModel mapPanelControlViewModel;
+        private SummaryPanelControlViewModel summaryPanelControlViewModel;
 
         #endregion
 
@@ -24,61 +27,50 @@
             {
                 var galaxy = galaxyGeneratorService.Generate(GalaxySize.Medium, GalaxyDensity.Packed, PlanetDistribution.UniformClumping);
 
-                var race = new Race()
+                var race = new PlayerRace()
                     {
                         GravityTolerance = new HabitationRange(-30, +20),
                         TemperatureTolerance = new HabitationRange(-50, +10),
                         RadiationTolerance = new HabitationRange(-20, +25)
                     };
 
-                this.Initialize(galaxy, race);
+                this.GameState = new GameState { Galaxy = galaxy, CurrentPlayerNum = 0, PlayerRaces = new[] { race } };
             }
+
+            this.MapPanelControlViewModel = ViewModelLocator.MapPanelControl;
+            this.SummaryPanelControlViewModel = ViewModelLocator.SummaryPanelControl;
         }
 
         #endregion
 
         #region Public properties
 
-        public Galaxy Galaxy => this.galaxy;
+        public GameState GameState { get; set; }
 
-        public Race PlayerRace => this.playerRace;
-
-        [DependsUpon(nameof(Galaxy))]
-        public MapPanelControlViewModel MapPanelControlViewModel { get; private set; }
-        
-        [DependsUpon(nameof(PlayerRace))]
-        public SummaryPanelControlViewModel SummaryPanelControlViewModel { get; private set; }
-
-        #endregion
-
-        #region Public methods
-
-        public void Initialize(Galaxy newGalaxy, Race newPlayerRace)
+        public MapPanelControlViewModel MapPanelControlViewModel
         {
-            this.galaxy = newGalaxy;
-            this.playerRace = newPlayerRace;
+            get
+            {
+                return this.mapPanelControlViewModel;
+            }
 
-            this.MapPanelControlViewModel = ViewModelLocator.MapPanelControl;
-            this.MapPanelControlViewModel.Galaxy = this.galaxy;
-            this.RaisePropertyChanged(nameof(this.MapPanelControlViewModel));
+            private set
+            {
+                this.Set(() => this.MapPanelControlViewModel, ref this.mapPanelControlViewModel, value);
+            }
+        }
 
-            this.SummaryPanelControlViewModel = ViewModelLocator.SummaryPanelControl;
-            this.SummaryPanelControlViewModel.GravityBarViewModel = new HabitationBarControlViewModel()
-                {
-                    ParameterType = HabitationParameterType.Gravity,
-                    Range = this.playerRace.GravityTolerance
-                };
-            this.SummaryPanelControlViewModel.TemperatureBarViewModel = new HabitationBarControlViewModel()
-                {
-                    ParameterType = HabitationParameterType.Temperature,
-                    Range = this.playerRace.TemperatureTolerance
-                };
-            this.SummaryPanelControlViewModel.RadiationBarViewModel = new HabitationBarControlViewModel()
-                {
-                    ParameterType = HabitationParameterType.Radiation,
-                    Range = this.playerRace.RadiationTolerance
-                };
-            this.RaisePropertyChanged(nameof(this.SummaryPanelControlViewModel));
+        public SummaryPanelControlViewModel SummaryPanelControlViewModel
+        {
+            get
+            {
+                return this.summaryPanelControlViewModel;
+            }
+
+            private set
+            {
+                this.Set(() => this.SummaryPanelControlViewModel, ref this.summaryPanelControlViewModel, value);
+            }
         }
 
         #endregion

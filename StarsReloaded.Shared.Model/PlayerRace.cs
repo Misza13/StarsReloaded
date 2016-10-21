@@ -1,6 +1,6 @@
 ﻿namespace StarsReloaded.Shared.Model
 {
-    public class Race
+    public class PlayerRace
     {
         public HabitationRange GravityTolerance { get; set; }
 

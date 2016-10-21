@@ -53,14 +53,16 @@
             // TODO: Game init logic here
             var galaxy = this.galaxyGeneratorService.Generate(GalaxySize.Medium, GalaxyDensity.Normal, PlanetDistribution.UniformClumping);
 
-            var race = new Race()
+            var race = new PlayerRace()
                 {
                     GravityTolerance = new HabitationRange(-30, +12),
                     TemperatureTolerance = new HabitationRange(+10, +50),
                     RadiationTolerance = new HabitationRange(-15, +35)
                 };
 
-            Messenger.Default.Send(new ShowMainWindowMessage() { Galaxy = galaxy, Race = race });
+            var gameState = new GameState() { Galaxy = galaxy, CurrentPlayerNum = 0, PlayerRaces = new[] { race } };
+
+            Messenger.Default.Send(new ShowMainWindowMessage(gameState));
             this.CloseAction?.Invoke();
         }
 

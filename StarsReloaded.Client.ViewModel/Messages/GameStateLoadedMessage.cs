@@ -1,11 +1,10 @@
 ﻿namespace StarsReloaded.Client.ViewModel.Messages
 {
-    using GalaSoft.MvvmLight.Messaging;
     using StarsReloaded.Shared.Model;
 
-    public class ShowMainWindowMessage : MessageBase
+    public class GameStateLoadedMessage
     {
-        public ShowMainWindowMessage(GameState gameState)
+        public GameStateLoadedMessage(GameState gameState)
         {
             this.GameState = gameState;
         }

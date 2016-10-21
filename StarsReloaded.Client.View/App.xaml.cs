@@ -22,7 +22,8 @@
             var vm = mainWindow.DataContext as MainWindowViewModel;
             if (vm != null)
             {
-                vm.Initialize(message.Galaxy, message.Race);
+                ////vm.Initialize(message.GameState);
+                Messenger.Default.Send(new GameStateLoadedMessage(message.GameState));
             }
             else
             {
