@@ -70,6 +70,7 @@
     <Compile Include="Fragments\HabitationBarControlViewModel.cs" />
     <Compile Include="Messages\PlanetSelectedMessage.cs" />
     <Compile Include="Messages\ShowMainWindowMessage.cs" />
+    <Compile Include="ModelWrappers\BaseWrapper.cs" />
     <Compile Include="ModelWrappers\GravityWrapper.cs" />
     <Compile Include="ModelWrappers\HabitationParameterWrapper.cs" />
     <Compile Include="ModelWrappers\PlanetWrapper.cs" />

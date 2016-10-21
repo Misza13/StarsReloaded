@@ -4,8 +4,7 @@
 
     public class RadiationWrapper : HabitationParameterWrapper
     {
-        public RadiationWrapper(HabitationParameter habitationParameter)
-            : base(habitationParameter)
+        public RadiationWrapper(HabitationParameter habitationParameter) : base(habitationParameter)
         {
         }
 

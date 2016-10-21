@@ -2,45 +2,31 @@
 {
     using StarsReloaded.Shared.Model;
 
-    public class PlanetWrapper : BaseViewModel
+    public class PlanetWrapper : BaseWrapper<Planet>
     {
-        #region Private fields
-
         private const int Radius = 1;
-        private readonly Planet planet;
 
-        #endregion
-
-        #region Constructors
-
-        public PlanetWrapper(Planet planet)
+        public PlanetWrapper(Planet planet) : base(planet)
         {
-            this.planet = planet;
             this.Gravity = new GravityWrapper(planet.Gravity);
             this.Temperature = new TemperatureWrapper(planet.Temperature);
             this.Radiation = new RadiationWrapper(planet.Radiation);
         }
 
-        #endregion
+        public int X => this.Model.X;
 
-        #region Public properties
+        public int Y => this.Model.Y;
 
-        public int X => this.planet.X;
+        public string Name => this.Model.Name;
 
-        public int Y => this.planet.Y;
+        public int Left => this.Model.X - Radius;
 
-        public string Name => this.planet.Name;
-
-        public int Left => this.planet.X - Radius;
-
-        public int Right => this.planet.Y - Radius;
+        public int Right => this.Model.Y - Radius;
 
         public GravityWrapper Gravity { get; private set; }
 
         public TemperatureWrapper Temperature { get; private set; }
 
         public RadiationWrapper Radiation { get; private set; }
-
-        #endregion
     }
 }

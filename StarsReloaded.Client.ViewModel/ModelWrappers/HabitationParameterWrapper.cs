@@ -2,29 +2,14 @@
 {
     using StarsReloaded.Shared.Model;
 
-    public abstract class HabitationParameterWrapper
+    public abstract class HabitationParameterWrapper : BaseWrapper<HabitationParameter>
     {
-        #region Private fields
-
-        private readonly HabitationParameter habitationParameter;
-
-        #endregion
-
-        #region Constructors
-
-        protected HabitationParameterWrapper(HabitationParameter habitationParameter)
+        protected HabitationParameterWrapper(HabitationParameter habitationParameter) : base(habitationParameter)
         {
-            this.habitationParameter = habitationParameter;
         }
-
-        #endregion
-
-        #region Public properties
-
-        public int Clicks => this.habitationParameter.Clicks;
 
         public abstract string DisplayValue { get; }
 
-        #endregion
+        protected int Clicks => this.Model.Clicks;
     }
 }

@@ -13,8 +13,7 @@
                 0.71m, 0.73m, 0.75m, 0.78m, 0.80m, 0.83m, 0.86m, 0.89m, 0.92m, 0.96m
             };
 
-        public GravityWrapper(HabitationParameter habitationParameter)
-            : base(habitationParameter)
+        public GravityWrapper(HabitationParameter habitationParameter) : base(habitationParameter)
         {
         }
 

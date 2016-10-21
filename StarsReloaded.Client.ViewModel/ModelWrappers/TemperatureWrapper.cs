@@ -4,8 +4,7 @@
 
     public class TemperatureWrapper : HabitationParameterWrapper
     {
-        public TemperatureWrapper(HabitationParameter habitationParameter)
-            : base(habitationParameter)
+        public TemperatureWrapper(HabitationParameter habitationParameter) : base(habitationParameter)
         {
         }
 
