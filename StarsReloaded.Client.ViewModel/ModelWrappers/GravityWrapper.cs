@@ -1,8 +1,8 @@
-﻿namespace StarsReloaded.Client.ViewModel.ModelWrap
+﻿namespace StarsReloaded.Client.ViewModel.ModelWrappers
 {
     using StarsReloaded.Shared.Model;
 
-    public class GravityViewModel : HabitationParameterViewModel
+    public class GravityWrapper : HabitationParameterWrapper
     {
         private readonly decimal[] lowValues =
             {
@@ -13,7 +13,7 @@
                 0.71m, 0.73m, 0.75m, 0.78m, 0.80m, 0.83m, 0.86m, 0.89m, 0.92m, 0.96m
             };
 
-        public GravityViewModel(HabitationParameter habitationParameter)
+        public GravityWrapper(HabitationParameter habitationParameter)
             : base(habitationParameter)
         {
         }

@@ -10,7 +10,7 @@
 
     using StarsReloaded.Client.ViewModel.Attributes;
     using StarsReloaded.Client.ViewModel.Messages;
-    using StarsReloaded.Client.ViewModel.ModelWrap;
+    using StarsReloaded.Client.ViewModel.ModelWrappers;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
@@ -20,7 +20,7 @@
         #region Private fields
 
         private Galaxy galaxy;
-        private PlanetViewModel selectedPlanet;
+        private PlanetWrapper selectedPlanet;
 
         #endregion
 
@@ -42,7 +42,7 @@
         #region Public properties
 
         [DependsUpon(nameof(Galaxy))]
-        public ObservableCollection<PlanetViewModel> Planets { get; set; }
+        public ObservableCollection<PlanetWrapper> Planets { get; set; }
 
         public Galaxy Galaxy
         {
@@ -62,7 +62,7 @@
             }
         }
 
-        public PlanetViewModel SelectedPlanet
+        public PlanetWrapper SelectedPlanet
         {
             private get
             {
@@ -115,8 +115,8 @@
         {
             this.galaxy = fromGalaxy;
 
-            this.Planets = new ObservableCollection<PlanetViewModel>(
-                this.galaxy.Planets.Select(p => new PlanetViewModel(p)));
+            this.Planets = new ObservableCollection<PlanetWrapper>(
+                this.galaxy.Planets.Select(p => new PlanetWrapper(p)));
         }
 
         private void MapClick(Point p)

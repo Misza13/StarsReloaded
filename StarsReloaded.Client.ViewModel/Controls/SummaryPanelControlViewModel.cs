@@ -8,14 +8,14 @@
     using StarsReloaded.Client.ViewModel.Attributes;
     using StarsReloaded.Client.ViewModel.Fragments;
     using StarsReloaded.Client.ViewModel.Messages;
-    using StarsReloaded.Client.ViewModel.ModelWrap;
+    using StarsReloaded.Client.ViewModel.ModelWrappers;
     using StarsReloaded.Shared.Model;
 
     public class SummaryPanelControlViewModel : BaseViewModel
     {
         #region Private fields
 
-        private PlanetViewModel selectedPlanet;
+        private PlanetWrapper selectedPlanet;
 
         #endregion
 
@@ -25,7 +25,7 @@
         {
             if (this.IsInDesignMode)
             {
-                this.SelectedPlanet = new PlanetViewModel(new Planet(13, 37)
+                this.SelectedPlanet = new PlanetWrapper(new Planet(13, 37)
                     {
                         Name = Guid.NewGuid().ToString(),
                         Gravity = new HabitationParameter(27),
@@ -67,13 +67,13 @@
         public Visibility PlanetSummaryVisibility => this.SelectedPlanet != null ? Visibility.Visible : Visibility.Hidden;
 
         [DependsUpon(nameof(SelectedPlanet))]
-        public string GravityDisplayValue => this.SelectedPlanet?.GravityViewModel.DisplayValue ?? string.Empty;
+        public string GravityDisplayValue => this.SelectedPlanet?.Gravity.DisplayValue ?? string.Empty;
 
         [DependsUpon(nameof(SelectedPlanet))]
-        public string TemperatureDisplayValue => this.SelectedPlanet?.TemperatureViewModel.DisplayValue ?? string.Empty;
+        public string TemperatureDisplayValue => this.SelectedPlanet?.Temperature.DisplayValue ?? string.Empty;
 
         [DependsUpon(nameof(SelectedPlanet))]
-        public string RadiationDisplayValue => this.SelectedPlanet?.RadiationViewModel.DisplayValue ?? string.Empty;
+        public string RadiationDisplayValue => this.SelectedPlanet?.Radiation.DisplayValue ?? string.Empty;
 
         [DependsUpon(nameof(SelectedPlanet))]
         public HabitationBarControlViewModel GravityBarViewModel { get; set; }
@@ -88,7 +88,7 @@
 
         #region Private properties
 
-        private PlanetViewModel SelectedPlanet
+        private PlanetWrapper SelectedPlanet
         {
             get
             {

@@ -1,8 +1,8 @@
-﻿namespace StarsReloaded.Client.ViewModel.ModelWrap
+﻿namespace StarsReloaded.Client.ViewModel.ModelWrappers
 {
     using StarsReloaded.Shared.Model;
 
-    public abstract class HabitationParameterViewModel
+    public abstract class HabitationParameterWrapper
     {
         #region Private fields
 
@@ -12,7 +12,7 @@
 
         #region Constructors
 
-        protected HabitationParameterViewModel(HabitationParameter habitationParameter)
+        protected HabitationParameterWrapper(HabitationParameter habitationParameter)
         {
             this.habitationParameter = habitationParameter;
         }

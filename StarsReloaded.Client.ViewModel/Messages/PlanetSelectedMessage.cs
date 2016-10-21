@@ -2,15 +2,15 @@
 {
     using GalaSoft.MvvmLight.Messaging;
 
-    using StarsReloaded.Client.ViewModel.ModelWrap;
+    using StarsReloaded.Client.ViewModel.ModelWrappers;
 
     public class PlanetSelectedMessage : MessageBase
     {
-        public PlanetSelectedMessage(PlanetViewModel planet)
+        public PlanetSelectedMessage(PlanetWrapper planet)
         {
             this.Planet = planet;
         }
 
-        public PlanetViewModel Planet { get; private set; }
+        public PlanetWrapper Planet { get; private set; }
     }
 }
