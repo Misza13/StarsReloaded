@@ -2,6 +2,7 @@
 {
     using System;
 
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
     public class DependsUponAttribute : Attribute
     {
         public DependsUponAttribute(string propertyName)

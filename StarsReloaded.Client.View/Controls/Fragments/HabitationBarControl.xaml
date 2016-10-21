@@ -5,14 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              DataContext="{Binding Source={StaticResource Locator}, Path=HabitationBarControl}"
              mc:Ignorable="d" 
-             d:DesignHeight="16" d:DesignWidth="300">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{Binding LeftMarginWidth}"/>
-            <ColumnDefinition Width="{Binding BarWidth}"/>
-            <ColumnDefinition Width="{Binding RightMarginWidth}"/>
-        </Grid.ColumnDefinitions>
-        <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Fill="Black" StrokeThickness="0"/>
-        <Rectangle Grid.Column="1" Fill="{Binding FillColor}" StrokeThickness="0"/>
-    </Grid>
+             d:DesignHeight="24" d:DesignWidth="400">
+    <Canvas x:Name="BarCanvas"
+        Height="24"
+        Width="Auto"
+        Background="Black"
+        SizeChanged="Canvas_SizeChanged">
+        <Rectangle
+            Visibility="{Binding HabBarVisibility}"
+            Height="{Binding ActualHeight, ElementName=BarCanvas, Mode=OneWay}"
+            Width="{Binding HabBarWidth}"
+            Fill="{Binding FillColor}">
+            <Rectangle.RenderTransform>
+                <TranslateTransform X="{Binding HabBarLeft}" Y="0"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+    </Canvas>
 </UserControl>
