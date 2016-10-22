@@ -58,6 +58,9 @@
         public Visibility PlanetSummaryVisibility => this.SelectedPlanet != null ? Visibility.Visible : Visibility.Hidden;
 
         [DependsUpon(nameof(SelectedPlanet))]
+        public string PlanetName => this.SelectedPlanet?.Name ?? string.Empty;
+
+        [DependsUpon(nameof(SelectedPlanet))]
         public string GravityDisplayValue => this.SelectedPlanet?.Gravity.DisplayValue ?? string.Empty;
 
         [DependsUpon(nameof(SelectedPlanet))]
