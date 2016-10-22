@@ -1,5 +1,6 @@
 ﻿namespace StarsReloaded.Client.ViewModel
 {
+    using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
@@ -20,6 +21,9 @@
                     var dependentUpon = (baseProp as DependsUponAttribute)?.PropertyName;
                     if (dependentUpon == propertyName)
                     {
+#if DEBUG
+                        Console.WriteLine($"{propertyName} -> {property.Name}");
+#endif
                         this.RaisePropertyChanged(property.Name);
                     }
                 }

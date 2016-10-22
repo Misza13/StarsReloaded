@@ -11,6 +11,10 @@
             this.Gravity = new GravityWrapper(planet.Gravity);
             this.Temperature = new TemperatureWrapper(planet.Temperature);
             this.Radiation = new RadiationWrapper(planet.Radiation);
+
+            this.OriginalGravity = new GravityWrapper(planet.OriginalGravity);
+            this.OriginalTemperature = new TemperatureWrapper(planet.OriginalTemperature);
+            this.OriginalRadiation = new RadiationWrapper(planet.OriginalRadiation);
         }
 
         public int X => this.Model.X;
@@ -28,5 +32,11 @@
         public TemperatureWrapper Temperature { get; private set; }
 
         public RadiationWrapper Radiation { get; private set; }
+
+        public GravityWrapper OriginalGravity { get; private set; }
+
+        public TemperatureWrapper OriginalTemperature { get; private set; }
+
+        public RadiationWrapper OriginalRadiation { get; private set; }
     }
 }

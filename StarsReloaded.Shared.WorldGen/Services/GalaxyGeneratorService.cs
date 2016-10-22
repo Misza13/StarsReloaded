@@ -224,8 +224,11 @@
                     Name = Guid.NewGuid().ToString(),
                     Gravity = new HabitationParameter(this.rng.Next(-50, 51)),
                     Temperature = new HabitationParameter(this.rng.Next(-50, 51)),
-                    Radiation = new HabitationParameter(this.rng.Next(-50, 51))
-                };
+                    Radiation = new HabitationParameter(this.rng.Next(-50, 51)),
+                    OriginalGravity = new HabitationParameter(this.rng.Next(-50, 51)),
+                    OriginalTemperature = new HabitationParameter(this.rng.Next(-50, 51)),
+                    OriginalRadiation = new HabitationParameter(this.rng.Next(-50, 51))
+            };
 
             return planet;
         }

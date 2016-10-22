@@ -33,13 +33,14 @@
                         Name = Guid.NewGuid().ToString(),
                         Gravity = new HabitationParameter(27),
                         Temperature = new HabitationParameter(46),
-                        Radiation = new HabitationParameter(95)
+                        Radiation = new HabitationParameter(95),
                     });
 
                 this.GravityBarViewModel = new HabitationBarControlViewModel()
                     {
                         ParameterType = HabitationParameterType.Gravity,
                         Range = HabitationRange.Immunity,
+                        MaxTerraformTech = 20,
                         CurrentValue = new HabitationParameter(40),
                         OriginalValue = new HabitationParameter(40)
                     };
@@ -47,6 +48,7 @@
                     {
                         ParameterType = HabitationParameterType.Temperature,
                         Range = new HabitationRange(-35, +5),
+                        MaxTerraformTech = 20,
                         CurrentValue = new HabitationParameter(0),
                         OriginalValue = new HabitationParameter(+15)
                     };
@@ -54,6 +56,7 @@
                     {
                         ParameterType = HabitationParameterType.Radiation,
                         Range = new HabitationRange(-20, +30),
+                        MaxTerraformTech = 20,
                         CurrentValue = new HabitationParameter(+5),
                         OriginalValue = new HabitationParameter(-15)
                     };
@@ -147,23 +150,36 @@
             this.GravityBarViewModel = new HabitationBarControlViewModel()
             {
                 ParameterType = HabitationParameterType.Gravity,
-                Range = message.GameState.CurrentPlayerRace.GravityTolerance
+                Range = message.GameState.CurrentPlayerRace.GravityTolerance,
+                MaxTerraformTech = message.GameState.CurrentPlayerRace.GetMaxTerraformTech(HabitationParameterType.Gravity)
             };
             this.TemperatureBarViewModel = new HabitationBarControlViewModel()
             {
                 ParameterType = HabitationParameterType.Temperature,
-                Range = message.GameState.CurrentPlayerRace.TemperatureTolerance
+                Range = message.GameState.CurrentPlayerRace.TemperatureTolerance,
+                MaxTerraformTech = message.GameState.CurrentPlayerRace.GetMaxTerraformTech(HabitationParameterType.Temperature)
             };
             this.RadiationBarViewModel = new HabitationBarControlViewModel()
             {
                 ParameterType = HabitationParameterType.Radiation,
-                Range = message.GameState.CurrentPlayerRace.RadiationTolerance
+                Range = message.GameState.CurrentPlayerRace.RadiationTolerance,
+                MaxTerraformTech = message.GameState.CurrentPlayerRace.GetMaxTerraformTech(HabitationParameterType.Radiation)
             };
         }
 
         private void PlanetSelected(PlanetSelectedMessage message)
         {
             this.SelectedPlanet = message.Planet;
+            if (message.Planet != null)
+            {
+                this.GravityBarViewModel.CurrentValue = message.Planet.Gravity.Model;
+                this.TemperatureBarViewModel.CurrentValue = message.Planet.Temperature.Model;
+                this.RadiationBarViewModel.CurrentValue = message.Planet.Radiation.Model;
+
+                this.GravityBarViewModel.OriginalValue = message.Planet.OriginalGravity.Model;
+                this.TemperatureBarViewModel.OriginalValue = message.Planet.OriginalTemperature.Model;
+                this.RadiationBarViewModel.OriginalValue = message.Planet.OriginalRadiation.Model;
+            }
         }
 
         #endregion

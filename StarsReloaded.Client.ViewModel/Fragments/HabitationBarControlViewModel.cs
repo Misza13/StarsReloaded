@@ -14,6 +14,11 @@
 
         private HabitationRange range;
         private double barWidth;
+        private int maxTerraformTech;
+
+        private HabitationParameter currentValue;
+
+        private HabitationParameter originalValue;
 
         #endregion
 
@@ -26,8 +31,9 @@
                 this.ParameterType = HabitationParameterType.Radiation;
                 this.BarWidth = 400;
                 this.Range = new HabitationRange(-20, +30);
-                this.CurrentValue = new HabitationParameter(+15);
-                this.OriginalValue = new HabitationParameter(+45);
+                this.MaxTerraformTech = 20;
+                this.CurrentValue = new HabitationParameter(+25);
+                this.OriginalValue = new HabitationParameter(+40);
             }
             else
             {
@@ -39,7 +45,7 @@
 
         #region Public properties
 
-        public HabitationParameterType ParameterType { get; set; }
+        public HabitationParameterType ParameterType { private get; set; }
 
         public HabitationRange Range
         {
@@ -50,17 +56,48 @@
 
             set
             {
-                if (value != this.range)
-                {
-                    this.range = value;
-                    this.RaisePropertyChanged();
-                }
+                this.Set(() => this.Range, ref this.range, value);
             }
         }
 
-        public HabitationParameter CurrentValue { get; set; }
+        public int MaxTerraformTech
+        {
+            private get
+            {
+                return this.maxTerraformTech;
+            }
 
-        public HabitationParameter OriginalValue { get; set; }
+            set
+            {
+                this.Set(() => this.MaxTerraformTech, ref this.maxTerraformTech, value);
+            }
+        }
+
+        public HabitationParameter CurrentValue
+        {
+            get
+            {
+                return this.currentValue;
+            }
+
+            set
+            {
+                this.Set(() => this.CurrentValue, ref this.currentValue, value);
+            }
+        }
+
+        public HabitationParameter OriginalValue
+        {
+            get
+            {
+                return this.originalValue;
+            }
+
+            set
+            {
+                this.Set(() => this.OriginalValue, ref this.originalValue, value);
+            }
+        }
 
         public double BarWidth
         {
@@ -71,19 +108,15 @@
 
             set
             {
-                if (value != this.barWidth)
-                {
-                    this.barWidth = value;
-                    this.RaisePropertyChanged();
-                }
+                this.Set(() => this.BarWidth, ref this.barWidth, value);
             }
         }
 
         [DependsUpon(nameof(CurrentValue))]
-        public int CurrentValueClicks => this.CurrentValue.Clicks;
+        public int CurrentValueClicks => this.CurrentValue?.Clicks ?? 0;
 
         [DependsUpon(nameof(OriginalValue))]
-        public int OriginalValueClicks => this.OriginalValue.Clicks;
+        public int OriginalValueClicks => this.OriginalValue?.Clicks ?? 0;
 
         [DependsUpon(nameof(Range))]
         public Visibility HabBarVisibility => (this.Range?.IsImmune ?? true) ? Visibility.Hidden : Visibility.Visible;
@@ -92,7 +125,7 @@
         [DependsUpon(nameof(BarWidth))]
         public double HabBarLeft => (this.Range?.IsImmune ?? true)
             ? 0
-            : this.BarWidth * (this.Range.MinValue.Clicks + 50d) / 100;
+            : this.BarWidth * (this.Range.MinValue.Clicks + 50) / 100;
 
         [DependsUpon(nameof(Range))]
         [DependsUpon(nameof(BarWidth))]
@@ -101,7 +134,32 @@
             : this.BarWidth * (this.Range.MaxValue.Clicks - this.Range.MinValue.Clicks) / 100;
 
         [DependsUpon(nameof(ParameterType))]
-        public string FillColor => this.GetFillColor();
+        public string BarFillColor => this.GetBarFillColor();
+
+        [DependsUpon(nameof(CurrentValue))]
+        public Visibility CurrentValueVisibility => (this.CurrentValue == null) ? Visibility.Hidden : Visibility.Visible;
+
+        [DependsUpon(nameof(BarWidth))]
+        [DependsUpon(nameof(CurrentValueClicks))]
+        public double CurrentValuePos => this.BarWidth * (this.CurrentValueClicks + 50) / 100;
+
+        [DependsUpon(nameof(OriginalValue))]
+        public Visibility OriginalValueVisibility => (this.OriginalValue == null) ? Visibility.Hidden : Visibility.Visible;
+
+        [DependsUpon(nameof(BarWidth))]
+        [DependsUpon(nameof(OriginalValueClicks))]
+        public double OriginalValuePos => this.BarWidth * (this.OriginalValueClicks + 50) / 100;
+
+        [DependsUpon(nameof(BarWidth))]
+        [DependsUpon(nameof(Range))]
+        [DependsUpon(nameof(OriginalValueClicks))]
+        [DependsUpon(nameof(MaxTerraformTech))]
+        public double AfterTerraformPos
+            =>
+            this.BarWidth * (GetBestTerraformClicks(this.Range, this.OriginalValueClicks, this.MaxTerraformTech) + 50) / 100;
+
+        [DependsUpon(nameof(ParameterType))]
+        public string GraphStrokeColor => this.GetGraphStrokeColor();
 
         #endregion
 
@@ -113,7 +171,25 @@
 
         #region Private methods
 
-        private string GetFillColor()
+        private static int GetBestTerraformClicks(HabitationRange range, int original, int maxTech)
+        {
+            if (range?.IsImmune ?? true)
+            {
+                return original;
+            }
+
+            var midpoint = (range.MinValue.Clicks + range.MaxValue.Clicks) / 2;
+            if (original > midpoint)
+            {
+                return Math.Max(original - maxTech, midpoint);
+            }
+            else
+            {
+                return Math.Min(original + maxTech, midpoint);
+            }
+        }
+
+        private string GetBarFillColor()
         {
             switch (this.ParameterType)
             {
@@ -123,6 +199,21 @@
                     return "DarkRed";
                 case HabitationParameterType.Radiation:
                     return "DarkGreen";
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private string GetGraphStrokeColor()
+        {
+            switch (this.ParameterType)
+            {
+                case HabitationParameterType.Gravity:
+                    return "Blue";
+                case HabitationParameterType.Temperature:
+                    return "Red";
+                case HabitationParameterType.Radiation:
+                    return "LightGreen";
                 default:
                     throw new ArgumentOutOfRangeException();
             }

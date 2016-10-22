@@ -19,5 +19,11 @@
         public HabitationParameter Temperature { get; set; }
 
         public HabitationParameter Radiation { get; set; }
+
+        public HabitationParameter OriginalGravity { get; set; }
+
+        public HabitationParameter OriginalTemperature { get; set; }
+
+        public HabitationParameter OriginalRadiation { get; set; }
     }
 }

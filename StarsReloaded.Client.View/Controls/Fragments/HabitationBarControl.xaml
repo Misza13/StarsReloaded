@@ -11,14 +11,50 @@
         Width="Auto"
         Background="Black"
         SizeChanged="Canvas_SizeChanged">
+        
         <Rectangle
             Visibility="{Binding HabBarVisibility}"
             Height="{Binding ActualHeight, ElementName=BarCanvas, Mode=OneWay}"
             Width="{Binding HabBarWidth}"
-            Fill="{Binding FillColor}">
+            Fill="{Binding BarFillColor}">
             <Rectangle.RenderTransform>
                 <TranslateTransform X="{Binding HabBarLeft}" Y="0"/>
             </Rectangle.RenderTransform>
         </Rectangle>
+        
+        <Line
+            Visibility="{Binding OriginalValueVisibility}"
+            X1="0" Y1="8"
+            X2="0" Y2="16"
+            Stroke="{Binding GraphStrokeColor}">
+            <Line.RenderTransform>
+                <TranslateTransform X="{Binding OriginalValuePos}"/>
+            </Line.RenderTransform>
+        </Line>
+
+        <Line
+            Visibility="{Binding OriginalValueVisibility}"
+            X1="-4" Y1="12"
+            X2="4" Y2="12"
+            Stroke="{Binding GraphStrokeColor}">
+            <Line.RenderTransform>
+                <TranslateTransform X="{Binding OriginalValuePos}"/>
+            </Line.RenderTransform>
+        </Line>
+
+        <Line
+            Visibility="{Binding OriginalValueVisibility}"
+            X1="{Binding OriginalValuePos}" Y1="12"
+            X2="{Binding AfterTerraformPos}" Y2="12"
+            Stroke="{Binding GraphStrokeColor}"/>
+
+        <Polygon
+            Visibility="{Binding CurrentValueVisibility}"
+            Points="0,6 6,12 0,18 -6,12"
+            Stroke="{Binding GraphStrokeColor}">
+            <Polygon.RenderTransform>
+                <TranslateTransform X="{Binding CurrentValuePos}" Y="0"/>
+            </Polygon.RenderTransform>
+        </Polygon>
     </Canvas>
 </UserControl>
