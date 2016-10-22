@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarsReloaded.Shared.WorldG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarsReloaded.Shared.Services", "StarsReloaded.Shared.Services\StarsReloaded.Shared.Services.csproj", "{DE955BD7-D460-4F47-A7EF-0E784ADED7BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarsReloaded.Shared.Tests", "StarsReloaded.Shared.Tests\StarsReloaded.Shared.Tests.csproj", "{FBBC1B65-3544-4681-9B99-61A7B4834505}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{DE955BD7-D460-4F47-A7EF-0E784ADED7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE955BD7-D460-4F47-A7EF-0E784ADED7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE955BD7-D460-4F47-A7EF-0E784ADED7BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBBC1B65-3544-4681-9B99-61A7B4834505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBBC1B65-3544-4681-9B99-61A7B4834505}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBBC1B65-3544-4681-9B99-61A7B4834505}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBBC1B65-3544-4681-9B99-61A7B4834505}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,5 +68,6 @@ Global
 		{0FF69D23-8A50-4382-8153-82F01447964B} = {62E06C4F-A4A4-4843-8335-F80492900A69}
 		{B91DABAF-625B-4EB7-B729-2633F54D104E} = {62E06C4F-A4A4-4843-8335-F80492900A69}
 		{DE955BD7-D460-4F47-A7EF-0E784ADED7BB} = {62E06C4F-A4A4-4843-8335-F80492900A69}
+		{FBBC1B65-3544-4681-9B99-61A7B4834505} = {62E06C4F-A4A4-4843-8335-F80492900A69}
 	EndGlobalSection
 EndGlobal

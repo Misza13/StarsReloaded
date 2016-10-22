@@ -25,5 +25,11 @@
         public HabitationParameter OriginalTemperature { get; set; }
 
         public HabitationParameter OriginalRadiation { get; set; }
+
+        public MineralConcentration IroniumConcentration { get; set; }
+
+        public MineralConcentration BoraniumConcentration { get; set; }
+
+        public MineralConcentration GermaniumConcentration { get; set; }
     }
 }
