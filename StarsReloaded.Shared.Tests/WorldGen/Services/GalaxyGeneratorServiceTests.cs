@@ -1,4 +1,4 @@
-﻿namespace StarsReloaded.Shared.WorldGen.Tests
+﻿namespace StarsReloaded.Shared.Tests.WorldGen.Services
 {
     using NUnit.Framework;
 
