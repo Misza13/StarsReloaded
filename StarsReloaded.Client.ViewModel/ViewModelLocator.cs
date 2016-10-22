@@ -5,6 +5,7 @@ namespace StarsReloaded.Client.ViewModel
     using StarsReloaded.Client.ViewModel.Controls;
     using StarsReloaded.Client.ViewModel.Fragments;
     using StarsReloaded.Client.ViewModel.Windows;
+    using StarsReloaded.Shared.Services;
     using StarsReloaded.Shared.WorldGen.Services;
 
     /// <summary>
@@ -32,6 +33,7 @@ namespace StarsReloaded.Client.ViewModel
             ////}
             
             ////Services
+            SimpleIoc.Default.Register<IRngService, RngService>();
             SimpleIoc.Default.Register<IGalaxyGeneratorService, GalaxyGeneratorService>();
 
             ////Windows
