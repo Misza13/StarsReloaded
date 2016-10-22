@@ -29,19 +29,32 @@
             var num = density.GetAttributeOfType<BasePlanetCountAttribute>().Num;
             num = num * edge * edge / 160000;
 
+            Galaxy galaxy;
+
             // TODO: Many of these can randomly fail, even though the chance is low There should be a global catch/retry mechanism.
             switch (planetDistribution)
             {
                 case PlanetDistribution.Uniform:
-                    return this.GenerateUniformInternal(edge, edge, num);
+                    galaxy = this.GenerateUniformInternal(edge, edge, num);
+                    break;
                 case PlanetDistribution.FreeClumping:
-                    return this.GenerateFreeClumpingInternal(edge, edge, num);
+                    galaxy = this.GenerateFreeClumpingInternal(edge, edge, num);
+                    break;
                 case PlanetDistribution.UniformClumping:
-                    return this.GenerateUniformClumpingInternal(edge, edge, num);
+                    galaxy = this.GenerateUniformClumpingInternal(edge, edge, num);
+                    break;
                 default:
                     // We really shouldn't get here // TODO: maybe throw an exception?
-                    return new Galaxy(edge, edge);
+                    galaxy = new Galaxy(edge, edge);
+                    break;
             }
+
+            foreach (var planet in galaxy.Planets)
+            {
+                this.GeneratePlanetStats(planet);
+            }
+
+            return galaxy;
         }
 
         private static bool PlanetFits(Galaxy galaxy, int x, int y, int minDistance)
@@ -161,7 +174,7 @@
 
                 if (PlanetFits(galaxy, x, y, PlanetMinDistance))
                 {
-                    return this.MakePlanet(x, y);
+                    return new Planet(x, y);
                 }
 
                 failedFits++;
@@ -189,7 +202,7 @@
 
                 if (PlanetFits(galaxy, x, y, PlanetMinDistance))
                 {
-                    return this.MakePlanet(x, y);
+                    return new Planet(x, y);
                 }
 
                 failedFits++;
@@ -209,7 +222,7 @@
 
                 if (PlanetFits(galaxy, x, y, 40))
                 {
-                    return this.MakePlanet(x, y);
+                    return new Planet(x, y);
                 }
 
                 failedFits++;
@@ -218,20 +231,15 @@
             throw new Exception("Too many failed attempts at fitting a planet.");
         }
 
-        private Planet MakePlanet(int x, int y)
+        private void GeneratePlanetStats(Planet planet)
         {
-            var planet = new Planet(x, y)
-                {
-                    Name = Guid.NewGuid().ToString(),
-                    Gravity = new HabitationParameter(this.rngService.Next(-50, 51)),
-                    Temperature = new HabitationParameter(this.rngService.Next(-50, 51)),
-                    Radiation = new HabitationParameter(this.rngService.Next(-50, 51)),
-                    OriginalGravity = new HabitationParameter(this.rngService.Next(-50, 51)),
-                    OriginalTemperature = new HabitationParameter(this.rngService.Next(-50, 51)),
-                    OriginalRadiation = new HabitationParameter(this.rngService.Next(-50, 51))
-            };
-
-            return planet;
+            planet.Name = Guid.NewGuid().ToString();
+            planet.Gravity = new HabitationParameter(this.rngService.Next(-50, 51));
+            planet.Temperature = new HabitationParameter(this.rngService.Next(-50, 51));
+            planet.Radiation = new HabitationParameter(this.rngService.Next(-50, 51));
+            planet.OriginalGravity = new HabitationParameter(this.rngService.Next(-50, 51));
+            planet.OriginalTemperature = new HabitationParameter(this.rngService.Next(-50, 51));
+            planet.OriginalRadiation = new HabitationParameter(this.rngService.Next(-50, 51));
         }
     }
 }

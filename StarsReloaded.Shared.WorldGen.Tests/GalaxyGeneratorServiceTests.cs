@@ -42,6 +42,16 @@
             {
                 Assert.That(planet.X, Is.InRange(0, edge));
                 Assert.That(planet.Y, Is.InRange(0, edge));
+
+                Assert.That(planet.Name, Is.Not.Empty);
+
+                Assert.That(planet.Gravity.Clicks, Is.InRange(-50, 50));
+                Assert.That(planet.Temperature.Clicks, Is.InRange(-50, 50));
+                Assert.That(planet.Radiation.Clicks, Is.InRange(-50, 50));
+
+                Assert.That(planet.OriginalGravity.Clicks, Is.InRange(-50, 50));
+                Assert.That(planet.OriginalTemperature.Clicks, Is.InRange(-50, 50));
+                Assert.That(planet.OriginalRadiation.Clicks, Is.InRange(-50, 50));
             }
         }
     }
