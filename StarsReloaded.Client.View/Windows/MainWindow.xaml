@@ -9,14 +9,18 @@
         Title="Stars! Reloaded"
         Height="600"
         Width="800"
-        WindowState="Normal">
+        WindowState="Normal"
+        Background="{x:Static SystemColors.AppWorkspaceBrush}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0">
+        
+        <Menu
+            Grid.Row="0"
+            Background="{x:Static SystemColors.AppWorkspaceBrush}">
             <MenuItem Header="_File">
                 <MenuItem Header="_Open"/>
             </MenuItem>
@@ -26,8 +30,50 @@
             <MenuItem Header="_Report"></MenuItem>
             <MenuItem Header="_Help"></MenuItem>
         </Menu>
-        <ToolBarTray Grid.Row="1">
-            <ToolBar x:Name="Planets">
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <!--TODO: extract the sizes, margin and background into a common style-->
+            <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
+                         Height="32" Width="32"
+                         Margin="2"
+                         Background="{x:Static SystemColors.AppWorkspaceBrush}"
+                         GroupName="PlanetView">O</RadioButton>
+            <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
+                         Height="32" Width="32"
+                         Margin="2"
+                         Background="{x:Static SystemColors.AppWorkspaceBrush}"
+                         GroupName="PlanetView">S</RadioButton>
+            <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
+                         Height="32" Width="32"
+                         Margin="2"
+                         Background="{x:Static SystemColors.AppWorkspaceBrush}"
+                         GroupName="PlanetView">C</RadioButton>
+            <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
+                         Height="32" Width="32"
+                         Margin="2"
+                         Background="{x:Static SystemColors.AppWorkspaceBrush}"
+                         GroupName="PlanetView">%</RadioButton>
+            <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
+                         Height="32" Width="32"
+                         Margin="2"
+                         Background="{x:Static SystemColors.AppWorkspaceBrush}"
+                         GroupName="PlanetView">|||</RadioButton>
+            <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
+                         Height="32" Width="32"
+                         Margin="2"
+                         Background="{x:Static SystemColors.AppWorkspaceBrush}"
+                         GroupName="PlanetView">X</RadioButton>
+        </StackPanel>
+        
+        <!--<ToolBarTray
+            Grid.Row="1"
+            IsLocked="True"
+            Background="{x:Static SystemColors.AppWorkspaceBrush}">
+            <ToolBar
+                x:Name="Planets"
+                OverflowMode="Never"
+                IsOverflowOpen="False"
+                Background="{x:Static SystemColors.AppWorkspaceBrush}">
                 <Button Height="32" Width="32">O</Button>
                 <Button Height="32" Width="32">S</Button>
                 <Button Height="32" Width="32">C</Button>
@@ -35,7 +81,8 @@
                 <Button Height="32" Width="32">|||</Button>
                 <Button Height="32" Width="32">X</Button>
             </ToolBar>
-        </ToolBarTray>
+        </ToolBarTray>-->
+        
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -59,7 +106,13 @@
                     <TextBlock>Messages Panel</TextBlock>
                 </Grid>
             </DockPanel>
-            <GridSplitter Grid.Column="1" Width="8" IsEnabled="False"/>
+            
+            <GridSplitter
+                Grid.Column="1"
+                Width="8"
+                Background="{x:Static SystemColors.AppWorkspaceBrush}"
+                IsEnabled="False"/>
+            
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

@@ -6,7 +6,9 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=StartupWindow}"
         DataContextChanged="StartupWindow_OnDataContextChanged"
         mc:Ignorable="d"
-        Title="Stars! Reloaded" Height="400" Width="300">
+        Title="Stars! Reloaded"
+        Height="400" Width="300"
+        Background="{x:Static SystemColors.AppWorkspaceBrush}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

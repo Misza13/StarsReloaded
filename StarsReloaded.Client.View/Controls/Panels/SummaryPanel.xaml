@@ -6,10 +6,10 @@
              xmlns:fragments="clr-namespace:StarsReloaded.View.Controls.Fragments"
              DataContext="{Binding Source={StaticResource Locator}, Path=SummaryPanelControl}"
              mc:Ignorable="d"
+             Background="{x:Static SystemColors.AppWorkspaceBrush}"
              d:DesignWidth="500">
     <Grid Visibility="{Binding PlanetSummaryVisibility}"
           Margin="4"
-          Background="{x:Static SystemColors.AppWorkspaceBrush}"
           Width="Auto" Height="Auto">
         <Grid.RowDefinitions>
             <RowDefinition/>
