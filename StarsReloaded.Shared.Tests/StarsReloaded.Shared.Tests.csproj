@@ -50,6 +50,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Model\HabitationParameterTests.cs" />
     <Compile Include="Model\MineralConcentrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorldGen\Services\GalaxyGeneratorServiceTests.cs" />
