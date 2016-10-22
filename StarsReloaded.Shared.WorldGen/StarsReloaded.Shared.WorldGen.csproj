@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StarsReloaded.Shared.WorldGen</RootNamespace>
     <AssemblyName>StarsReloaded.Shared.WorldGen</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +55,10 @@
     <ProjectReference Include="..\StarsReloaded.Shared.Model\StarsReloaded.Shared.Model.csproj">
       <Project>{0FF69D23-8A50-4382-8153-82F01447964B}</Project>
       <Name>StarsReloaded.Shared.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StarsReloaded.Shared.Services\StarsReloaded.Shared.Services.csproj">
+      <Project>{de955bd7-d460-4f47-a7ef-0e784aded7bb}</Project>
+      <Name>StarsReloaded.Shared.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

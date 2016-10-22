@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using StarsReloaded.Shared.Model;
+    using StarsReloaded.Shared.Services;
     using StarsReloaded.Shared.WorldGen.Helpers;
     using StarsReloaded.Shared.WorldGen.Meta;
 
@@ -15,11 +16,11 @@
         private const int MaxFailedFitsUniform = 10;
         private const int MaxFailedFitsClump = 20;
 
-        private readonly Random rng;
+        private readonly IRngService rngService;
 
-        public GalaxyGeneratorService()
+        public GalaxyGeneratorService(IRngService rngService)
         {
-            this.rng = new Random();
+            this.rngService = rngService;
         }
 
         public Galaxy Generate(GalaxySize size, GalaxyDensity density, PlanetDistribution planetDistribution)
@@ -123,7 +124,7 @@
                     // First 5/6th: clusters
                     var generated = this.GeneratePlanetFillSpace(galaxy);
                     var cluster = new List<Planet>() { generated };
-                    var clusterSize = this.rng.Next(MaxClusterSize + 1);
+                    var clusterSize = this.rngService.Next(MaxClusterSize + 1);
 
                     try
                     {
@@ -155,8 +156,8 @@
 
             while (failedFits < MaxFailedFitsUniform)
             {
-                var x = this.rng.Next(galaxy.Width);
-                var y = this.rng.Next(galaxy.Height);
+                var x = this.rngService.Next(galaxy.Width);
+                var y = this.rngService.Next(galaxy.Height);
 
                 if (PlanetFits(galaxy, x, y, PlanetMinDistance))
                 {
@@ -180,9 +181,9 @@
 
             while (failedFits < MaxFailedFitsClump)
             {
-                var neighbour = neighbours[this.rng.Next(neighbours.Count)];
-                var dist = this.rng.Next(9, 16);
-                var angle = this.rng.NextDouble() * 2.0 * Math.PI;
+                var neighbour = neighbours[this.rngService.Next(neighbours.Count)];
+                var dist = this.rngService.Next(9, 16);
+                var angle = this.rngService.NextDouble() * 2.0 * Math.PI;
                 var x = neighbour.X + (int)(dist * Math.Sin(angle));
                 var y = neighbour.Y + (int)(dist * Math.Cos(angle));
 
@@ -203,8 +204,8 @@
 
             while (failedFits < MaxFailedFitsUniform * 10)
             {
-                var x = this.rng.Next(galaxy.Width);
-                var y = this.rng.Next(galaxy.Height);
+                var x = this.rngService.Next(galaxy.Width);
+                var y = this.rngService.Next(galaxy.Height);
 
                 if (PlanetFits(galaxy, x, y, 40))
                 {
@@ -222,12 +223,12 @@
             var planet = new Planet(x, y)
                 {
                     Name = Guid.NewGuid().ToString(),
-                    Gravity = new HabitationParameter(this.rng.Next(-50, 51)),
-                    Temperature = new HabitationParameter(this.rng.Next(-50, 51)),
-                    Radiation = new HabitationParameter(this.rng.Next(-50, 51)),
-                    OriginalGravity = new HabitationParameter(this.rng.Next(-50, 51)),
-                    OriginalTemperature = new HabitationParameter(this.rng.Next(-50, 51)),
-                    OriginalRadiation = new HabitationParameter(this.rng.Next(-50, 51))
+                    Gravity = new HabitationParameter(this.rngService.Next(-50, 51)),
+                    Temperature = new HabitationParameter(this.rngService.Next(-50, 51)),
+                    Radiation = new HabitationParameter(this.rngService.Next(-50, 51)),
+                    OriginalGravity = new HabitationParameter(this.rngService.Next(-50, 51)),
+                    OriginalTemperature = new HabitationParameter(this.rngService.Next(-50, 51)),
+                    OriginalRadiation = new HabitationParameter(this.rngService.Next(-50, 51))
             };
 
             return planet;

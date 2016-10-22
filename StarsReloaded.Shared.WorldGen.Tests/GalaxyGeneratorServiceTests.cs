@@ -1,7 +1,8 @@
 ﻿namespace StarsReloaded.Shared.WorldGen.Tests
 {
-    using System;
     using NUnit.Framework;
+
+    using StarsReloaded.Shared.Services;
     using StarsReloaded.Shared.WorldGen.Helpers;
     using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
@@ -15,7 +16,7 @@
         [SetUp]
         public void Setup()
         {
-            this.galaxyGeneratorService = new GalaxyGeneratorService();
+            this.galaxyGeneratorService = new GalaxyGeneratorService(new RngService());
         }
 
         [Test]

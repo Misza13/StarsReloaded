@@ -69,6 +69,10 @@
       <Project>{0FF69D23-8A50-4382-8153-82F01447964B}</Project>
       <Name>StarsReloaded.Shared.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StarsReloaded.Shared.Services\StarsReloaded.Shared.Services.csproj">
+      <Project>{DE955BD7-D460-4F47-A7EF-0E784ADED7BB}</Project>
+      <Name>StarsReloaded.Shared.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StarsReloaded.Shared.WorldGen\StarsReloaded.Shared.WorldGen.csproj">
       <Project>{a4760afb-98a7-4d4a-9083-3fbec3e0d7dc}</Project>
       <Name>StarsReloaded.Shared.WorldGen</Name>
