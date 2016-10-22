@@ -20,7 +20,6 @@
         #region Private fields
 
         private Galaxy galaxy;
-        private ObservableCollection<PlanetWrapper> planets;
         private PlanetWrapper selectedPlanet;
 
         #endregion
@@ -29,6 +28,8 @@
 
         public MapPanelControlViewModel(IGalaxyGeneratorService galaxyGeneratorService)
         {
+            Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
+
             if (this.IsInDesignMode)
             {
                 this.Galaxy = galaxyGeneratorService.Generate(GalaxySize.Medium, GalaxyDensity.Dense, PlanetDistribution.UniformClumping);
@@ -36,7 +37,6 @@
             }
 
             this.MapClickCommand = new RelayCommand<Point>(this.MapClick);
-            Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
         }
 
         #endregion
@@ -45,17 +45,9 @@
 
         [DependsUpon(nameof(Galaxy))]
         public ObservableCollection<PlanetWrapper> Planets
-        {
-            get
-            {
-                return this.planets;
-            }
-
-            set
-            {
-                this.Set(() => this.Planets, ref this.planets, value);
-            }
-        }
+            => this.Galaxy == null
+            ? new ObservableCollection<PlanetWrapper>()
+            : new ObservableCollection<PlanetWrapper>(this.Galaxy.Planets.Select(p => new PlanetWrapper(p)));
 
         public Galaxy Galaxy
         {
@@ -67,7 +59,6 @@
             set
             {
                 this.Set(() => this.Galaxy, ref this.galaxy, value);
-                this.Planets = new ObservableCollection<PlanetWrapper>(this.galaxy.Planets.Select(p => new PlanetWrapper(p)));
                 this.SelectedPlanet = null;
             }
         }
@@ -119,7 +110,7 @@
 
         private void MapClick(Point p)
         {
-            var closest = this.Planets.Aggregate(
+            var closest = this.Galaxy.Planets.Aggregate(
                 (curClosest, pl) =>
                     {
                         if (curClosest == null)
@@ -135,7 +126,7 @@
                         return curClosest;
                     });
 
-            this.SelectedPlanet = closest;
+            this.SelectedPlanet = new PlanetWrapper(closest);
         }
 
         private void OnGameStateLoaded(GameStateLoadedMessage message)

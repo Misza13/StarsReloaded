@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fragments="clr-namespace:StarsReloaded.View.Controls.Fragments"
              DataContext="{Binding Source={StaticResource Locator}, Path=SummaryPanelControl}"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d"
+             d:DesignWidth="500">
     <Grid Visibility="{Binding PlanetSummaryVisibility}"
           Margin="4"
           Width="Auto" Height="Auto">
@@ -18,23 +18,23 @@
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="1"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="1"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Gravity"/>
-        <fragments:HabitationBarControl Grid.Row="0" Grid.Column="2" DataContext="{Binding GravityBarViewModel}"/>
+        <fragments:HabitationBarControl Grid.Row="0" Grid.Column="2" HabitationParameterType="Gravity"/>
         <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding GravityDisplayValue}"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Temperature"/>
-        <fragments:HabitationBarControl Grid.Row="2" Grid.Column="2" DataContext="{Binding TemperatureBarViewModel}" />
+        <fragments:HabitationBarControl Grid.Row="2" Grid.Column="2" HabitationParameterType="Temperature"/>
         <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding TemperatureDisplayValue}"/>
 
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Radiation"/>
-        <fragments:HabitationBarControl Grid.Row="4" Grid.Column="2" DataContext="{Binding RadiationBarViewModel}"/>
+        <fragments:HabitationBarControl Grid.Row="4" Grid.Column="2" HabitationParameterType="Radiation"/>
         <TextBlock Grid.Row="4" Grid.Column="4" Text="{Binding RadiationDisplayValue}"/>
     </Grid>
 </UserControl>

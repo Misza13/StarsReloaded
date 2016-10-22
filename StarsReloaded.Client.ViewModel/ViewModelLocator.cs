@@ -54,6 +54,6 @@ namespace StarsReloaded.Client.ViewModel
 
         public static SummaryPanelControlViewModel SummaryPanelControl => ServiceLocator.Current.GetInstance<SummaryPanelControlViewModel>();
 
-        public static HabitationBarControlViewModel HabitationBarControl => ServiceLocator.Current.GetInstance<HabitationBarControlViewModel>();
+        public static HabitationBarControlViewModel HabitationBarControl => new HabitationBarControlViewModel();
     }
 }

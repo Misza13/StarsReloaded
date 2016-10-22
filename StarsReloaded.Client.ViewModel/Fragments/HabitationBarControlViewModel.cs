@@ -4,21 +4,22 @@
     using System.Windows;
 
     using GalaSoft.MvvmLight.Command;
+    using GalaSoft.MvvmLight.Messaging;
 
     using StarsReloaded.Client.ViewModel.Attributes;
+    using StarsReloaded.Client.ViewModel.Messages;
     using StarsReloaded.Shared.Model;
 
     public class HabitationBarControlViewModel : BaseViewModel
     {
         #region Private fields
 
+        private HabitationParameterType parameterType;
         private HabitationRange range;
-        private double barWidth;
         private int maxTerraformTech;
-
         private HabitationParameter currentValue;
-
         private HabitationParameter originalValue;
+        private double barWidth;
 
         #endregion
 
@@ -26,6 +27,9 @@
 
         public HabitationBarControlViewModel()
         {
+            Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
+            Messenger.Default.Register<PlanetSelectedMessage>(this, this.OnPlanetSelected);
+
             if (this.IsInDesignMode)
             {
                 this.ParameterType = HabitationParameterType.Radiation;
@@ -37,7 +41,7 @@
             }
             else
             {
-                this.SizeChangedCommand = new RelayCommand<Size>(this.SizeChanged);
+                this.SizeChangedCommand = new RelayCommand<Size>(this.OnSizeChanged);
             }
         }
 
@@ -45,7 +49,18 @@
 
         #region Public properties
 
-        public HabitationParameterType ParameterType { private get; set; }
+        public HabitationParameterType ParameterType
+        {
+            private get
+            {
+                return this.parameterType;
+            }
+
+            set
+            {
+                this.Set(() => this.ParameterType, ref this.parameterType, value);
+            }
+        }
 
         public HabitationRange Range
         {
@@ -134,7 +149,7 @@
             : this.BarWidth * (this.Range.MaxValue.Clicks - this.Range.MinValue.Clicks) / 100;
 
         [DependsUpon(nameof(ParameterType))]
-        public string BarFillColor => this.GetBarFillColor();
+        public string BarFillColor => GetBarFillColor(this.ParameterType);
 
         [DependsUpon(nameof(CurrentValue))]
         public Visibility CurrentValueVisibility => (this.CurrentValue == null) ? Visibility.Hidden : Visibility.Visible;
@@ -159,7 +174,7 @@
             this.BarWidth * (GetBestTerraformClicks(this.Range, this.OriginalValueClicks, this.MaxTerraformTech) + 50) / 100;
 
         [DependsUpon(nameof(ParameterType))]
-        public string GraphStrokeColor => this.GetGraphStrokeColor();
+        public string GraphStrokeColor => GetGraphStrokeColor(this.ParameterType);
 
         #endregion
 
@@ -189,9 +204,9 @@
             }
         }
 
-        private string GetBarFillColor()
+        private static string GetBarFillColor(HabitationParameterType parameterType)
         {
-            switch (this.ParameterType)
+            switch (parameterType)
             {
                 case HabitationParameterType.Gravity:
                     return "DarkBlue";
@@ -204,9 +219,9 @@
             }
         }
 
-        private string GetGraphStrokeColor()
+        private static string GetGraphStrokeColor(HabitationParameterType parameterType)
         {
-            switch (this.ParameterType)
+            switch (parameterType)
             {
                 case HabitationParameterType.Gravity:
                     return "Blue";
@@ -219,9 +234,63 @@
             }
         }
 
-        private void SizeChanged(Size newSize)
+        private void OnSizeChanged(Size newSize)
         {
             this.BarWidth = newSize.Width;
+        }
+
+        private void OnGameStateLoaded(GameStateLoadedMessage message)
+        {
+            if (message.GameState == null)
+            {
+                return;
+            }
+
+            var race = message.GameState.CurrentPlayerRace;
+
+            switch (this.ParameterType)
+            {
+                case HabitationParameterType.Gravity:
+                    this.Range = race.GravityTolerance;
+                    this.MaxTerraformTech = race.GetMaxTerraformTech(HabitationParameterType.Gravity);
+                    break;
+                case HabitationParameterType.Temperature:
+                    this.Range = race.TemperatureTolerance;
+                    this.MaxTerraformTech = race.GetMaxTerraformTech(HabitationParameterType.Temperature);
+                    break;
+                case HabitationParameterType.Radiation:
+                    this.Range = race.RadiationTolerance;
+                    this.MaxTerraformTech = race.GetMaxTerraformTech(HabitationParameterType.Radiation);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void OnPlanetSelected(PlanetSelectedMessage message)
+        {
+            if (message.Planet == null)
+            {
+                return;
+            }
+
+            switch (this.ParameterType)
+            {
+                case HabitationParameterType.Gravity:
+                    this.CurrentValue = message.Planet.Gravity.Model;
+                    this.OriginalValue = message.Planet.OriginalGravity.Model;
+                    break;
+                case HabitationParameterType.Temperature:
+                    this.CurrentValue = message.Planet.Temperature.Model;
+                    this.OriginalValue = message.Planet.OriginalTemperature.Model;
+                    break;
+                case HabitationParameterType.Radiation:
+                    this.CurrentValue = message.Planet.Radiation.Model;
+                    this.OriginalValue = message.Planet.OriginalRadiation.Model;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         #endregion

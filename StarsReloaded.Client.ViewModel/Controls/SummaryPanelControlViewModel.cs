@@ -6,7 +6,6 @@
     using GalaSoft.MvvmLight.Messaging;
 
     using StarsReloaded.Client.ViewModel.Attributes;
-    using StarsReloaded.Client.ViewModel.Fragments;
     using StarsReloaded.Client.ViewModel.Messages;
     using StarsReloaded.Client.ViewModel.ModelWrappers;
     using StarsReloaded.Shared.Model;
@@ -16,9 +15,6 @@
         #region Private fields
 
         private PlanetWrapper selectedPlanet;
-        private HabitationBarControlViewModel gravityBarViewModel;
-        private HabitationBarControlViewModel temperatureBarViewModel;
-        private HabitationBarControlViewModel radiationBarViewModel;
 
         #endregion
 
@@ -26,44 +22,32 @@
 
         public SummaryPanelControlViewModel()
         {
+            Messenger.Default.Register<PlanetSelectedMessage>(this, this.PlanetSelected);
+
             if (this.IsInDesignMode)
             {
-                this.SelectedPlanet = new PlanetWrapper(new Planet(13, 37)
-                    {
-                        Name = Guid.NewGuid().ToString(),
-                        Gravity = new HabitationParameter(27),
-                        Temperature = new HabitationParameter(46),
-                        Radiation = new HabitationParameter(95),
-                    });
+                var race = new PlayerRace()
+                {
+                    GravityTolerance = HabitationRange.Immunity,
+                    TemperatureTolerance = new HabitationRange(-35, +5),
+                    RadiationTolerance = new HabitationRange(-20, +30)
+                };
+                Messenger.Default.Send(new GameStateLoadedMessage(new GameState { CurrentPlayerNum = 0, PlayerRaces = new[] { race } }));
 
-                this.GravityBarViewModel = new HabitationBarControlViewModel()
-                    {
-                        ParameterType = HabitationParameterType.Gravity,
-                        Range = HabitationRange.Immunity,
-                        MaxTerraformTech = 20,
-                        CurrentValue = new HabitationParameter(40),
-                        OriginalValue = new HabitationParameter(40)
-                    };
-                this.TemperatureBarViewModel = new HabitationBarControlViewModel()
-                    {
-                        ParameterType = HabitationParameterType.Temperature,
-                        Range = new HabitationRange(-35, +5),
-                        MaxTerraformTech = 20,
-                        CurrentValue = new HabitationParameter(0),
-                        OriginalValue = new HabitationParameter(+15)
-                    };
-                this.RadiationBarViewModel = new HabitationBarControlViewModel()
-                    {
-                        ParameterType = HabitationParameterType.Radiation,
-                        Range = new HabitationRange(-20, +30),
-                        MaxTerraformTech = 20,
-                        CurrentValue = new HabitationParameter(+5),
-                        OriginalValue = new HabitationParameter(-15)
-                    };
+                var planet =
+                    new PlanetWrapper(
+                        new Planet(13, 37)
+                            {
+                                Name = Guid.NewGuid().ToString(),
+                                Gravity = new HabitationParameter(27),
+                                Temperature = new HabitationParameter(46),
+                                Radiation = new HabitationParameter(95),
+                                OriginalGravity = new HabitationParameter(35),
+                                OriginalTemperature = new HabitationParameter(12),
+                                OriginalRadiation = new HabitationParameter(70)
+                            });
+                Messenger.Default.Send(new PlanetSelectedMessage(planet));
             }
-
-            Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
-            Messenger.Default.Register<PlanetSelectedMessage>(this, this.PlanetSelected);
         }
 
         #endregion
@@ -82,52 +66,6 @@
         [DependsUpon(nameof(SelectedPlanet))]
         public string RadiationDisplayValue => this.SelectedPlanet?.Radiation.DisplayValue ?? string.Empty;
 
-        [DependsUpon(nameof(SelectedPlanet))]
-        public HabitationBarControlViewModel GravityBarViewModel
-        {
-            get
-            {
-                return this.gravityBarViewModel;
-            }
-
-            set
-            {
-                this.Set(() => this.GravityBarViewModel, ref this.gravityBarViewModel, value);
-            }
-        }
-
-        [DependsUpon(nameof(SelectedPlanet))]
-        public HabitationBarControlViewModel TemperatureBarViewModel
-        {
-            get
-            {
-                return this.temperatureBarViewModel;
-            }
-
-            set
-            {
-                this.Set(() => this.TemperatureBarViewModel, ref this.temperatureBarViewModel, value);
-            }
-        }
-
-        [DependsUpon(nameof(SelectedPlanet))]
-        public HabitationBarControlViewModel RadiationBarViewModel
-        {
-            get
-            {
-                return this.radiationBarViewModel;
-            }
-
-            set
-            {
-                this.Set(() => this.RadiationBarViewModel, ref this.radiationBarViewModel, value);
-            }
-        }
-
-        #endregion
-
-        #region Private properties
-
         public PlanetWrapper SelectedPlanet
         {
             get
@@ -145,41 +83,9 @@
 
         #region Private methods
 
-        private void OnGameStateLoaded(GameStateLoadedMessage message)
-        {
-            this.GravityBarViewModel = new HabitationBarControlViewModel()
-            {
-                ParameterType = HabitationParameterType.Gravity,
-                Range = message.GameState.CurrentPlayerRace.GravityTolerance,
-                MaxTerraformTech = message.GameState.CurrentPlayerRace.GetMaxTerraformTech(HabitationParameterType.Gravity)
-            };
-            this.TemperatureBarViewModel = new HabitationBarControlViewModel()
-            {
-                ParameterType = HabitationParameterType.Temperature,
-                Range = message.GameState.CurrentPlayerRace.TemperatureTolerance,
-                MaxTerraformTech = message.GameState.CurrentPlayerRace.GetMaxTerraformTech(HabitationParameterType.Temperature)
-            };
-            this.RadiationBarViewModel = new HabitationBarControlViewModel()
-            {
-                ParameterType = HabitationParameterType.Radiation,
-                Range = message.GameState.CurrentPlayerRace.RadiationTolerance,
-                MaxTerraformTech = message.GameState.CurrentPlayerRace.GetMaxTerraformTech(HabitationParameterType.Radiation)
-            };
-        }
-
         private void PlanetSelected(PlanetSelectedMessage message)
         {
             this.SelectedPlanet = message.Planet;
-            if (message.Planet != null)
-            {
-                this.GravityBarViewModel.CurrentValue = message.Planet.Gravity.Model;
-                this.TemperatureBarViewModel.CurrentValue = message.Planet.Temperature.Model;
-                this.RadiationBarViewModel.CurrentValue = message.Planet.Radiation.Model;
-
-                this.GravityBarViewModel.OriginalValue = message.Planet.OriginalGravity.Model;
-                this.TemperatureBarViewModel.OriginalValue = message.Planet.OriginalTemperature.Model;
-                this.RadiationBarViewModel.OriginalValue = message.Planet.OriginalRadiation.Model;
-            }
         }
 
         #endregion

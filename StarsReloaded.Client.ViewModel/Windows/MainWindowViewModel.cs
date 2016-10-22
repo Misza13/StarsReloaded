@@ -2,23 +2,14 @@
 {
     using GalaSoft.MvvmLight.Messaging;
 
-    using StarsReloaded.Client.ViewModel.Attributes;
-    using StarsReloaded.Client.ViewModel.Controls;
-    using StarsReloaded.Client.ViewModel.Fragments;
     using StarsReloaded.Client.ViewModel.Messages;
+    using StarsReloaded.Client.ViewModel.ModelWrappers;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
 
     public sealed class MainWindowViewModel : BaseViewModel
     {
-        #region Private fields
-
-        private MapPanelControlViewModel mapPanelControlViewModel;
-        private SummaryPanelControlViewModel summaryPanelControlViewModel;
-
-        #endregion
-
         #region Constructors
 
         public MainWindowViewModel(IGalaxyGeneratorService galaxyGeneratorService)
@@ -35,10 +26,12 @@
                     };
 
                 this.GameState = new GameState { Galaxy = galaxy, CurrentPlayerNum = 0, PlayerRaces = new[] { race } };
-            }
 
-            this.MapPanelControlViewModel = ViewModelLocator.MapPanelControl;
-            this.SummaryPanelControlViewModel = ViewModelLocator.SummaryPanelControl;
+                Messenger.Default.Send(new GameStateLoadedMessage(this.GameState));
+
+                var selectedPlanet = galaxy.Planets.Find(p => p.X <= 200 && p.Y <= 200);
+                Messenger.Default.Send(new PlanetSelectedMessage(new PlanetWrapper(selectedPlanet)));
+            }
         }
 
         #endregion
@@ -46,32 +39,6 @@
         #region Public properties
 
         public GameState GameState { get; set; }
-
-        public MapPanelControlViewModel MapPanelControlViewModel
-        {
-            get
-            {
-                return this.mapPanelControlViewModel;
-            }
-
-            private set
-            {
-                this.Set(() => this.MapPanelControlViewModel, ref this.mapPanelControlViewModel, value);
-            }
-        }
-
-        public SummaryPanelControlViewModel SummaryPanelControlViewModel
-        {
-            get
-            {
-                return this.summaryPanelControlViewModel;
-            }
-
-            private set
-            {
-                this.Set(() => this.SummaryPanelControlViewModel, ref this.summaryPanelControlViewModel, value);
-            }
-        }
 
         #endregion
     }
