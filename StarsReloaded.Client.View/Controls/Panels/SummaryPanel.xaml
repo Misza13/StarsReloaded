@@ -54,15 +54,24 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Gravity"/>
-            <fragments:HabitationBarControl Grid.Row="0" Grid.Column="2" HabitationParameterType="Gravity"/>
+            <fragments:HabitationBarControl
+                Grid.Row="0" Grid.Column="2"
+                HabitationParameterType="Gravity"
+                DataContext="{Binding GravityBar, Mode=TwoWay}"/>
             <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding GravityDisplayValue}"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Temperature"/>
-            <fragments:HabitationBarControl Grid.Row="2" Grid.Column="2" HabitationParameterType="Temperature"/>
+            <fragments:HabitationBarControl
+                Grid.Row="2" Grid.Column="2"
+                HabitationParameterType="Temperature"
+                DataContext="{Binding TemperatureBar, Mode=TwoWay}"/>
             <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding TemperatureDisplayValue}"/>
 
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Radiation"/>
-            <fragments:HabitationBarControl Grid.Row="4" Grid.Column="2" HabitationParameterType="Radiation"/>
+            <fragments:HabitationBarControl
+                Grid.Row="4" Grid.Column="2"
+                HabitationParameterType="Radiation"
+                DataContext="{Binding RadiationBar, Mode=TwoWay}"/>
             <TextBlock Grid.Row="4" Grid.Column="4" Text="{Binding RadiationDisplayValue}"/>
         </Grid>
     </Grid>

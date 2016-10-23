@@ -20,7 +20,7 @@
         {
             this.InitializeComponent();
 
-            var bindingViewMode = new Binding(nameof(HabitationBarControlViewModel.ParameterType)) { Mode = BindingMode.TwoWay };
+            var bindingViewMode = new Binding(nameof(HabitationBarControlViewModel.ParameterType)) { Mode = BindingMode.OneWay };
             this.SetBinding(HabitationParameterTypeProperty, bindingViewMode);
         }
 

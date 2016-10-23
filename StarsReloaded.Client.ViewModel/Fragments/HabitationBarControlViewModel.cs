@@ -27,9 +27,6 @@
 
         public HabitationBarControlViewModel()
         {
-            Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
-            Messenger.Default.Register<PlanetSelectedMessage>(this, this.OnPlanetSelected);
-
             if (this.IsInDesignMode)
             {
                 this.ParameterType = HabitationParameterType.Radiation;
@@ -237,60 +234,6 @@
         private void OnSizeChanged(Size newSize)
         {
             this.BarWidth = newSize.Width;
-        }
-
-        private void OnGameStateLoaded(GameStateLoadedMessage message)
-        {
-            if (message.GameState == null)
-            {
-                return;
-            }
-
-            var race = message.GameState.CurrentPlayerRace;
-
-            switch (this.ParameterType)
-            {
-                case HabitationParameterType.Gravity:
-                    this.Range = race.GravityTolerance;
-                    this.MaxTerraformTech = race.GetMaxTerraformTech(HabitationParameterType.Gravity);
-                    break;
-                case HabitationParameterType.Temperature:
-                    this.Range = race.TemperatureTolerance;
-                    this.MaxTerraformTech = race.GetMaxTerraformTech(HabitationParameterType.Temperature);
-                    break;
-                case HabitationParameterType.Radiation:
-                    this.Range = race.RadiationTolerance;
-                    this.MaxTerraformTech = race.GetMaxTerraformTech(HabitationParameterType.Radiation);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private void OnPlanetSelected(PlanetSelectedMessage message)
-        {
-            if (message.Planet == null)
-            {
-                return;
-            }
-
-            switch (this.ParameterType)
-            {
-                case HabitationParameterType.Gravity:
-                    this.CurrentValue = message.Planet.Gravity.Model;
-                    this.OriginalValue = message.Planet.OriginalGravity.Model;
-                    break;
-                case HabitationParameterType.Temperature:
-                    this.CurrentValue = message.Planet.Temperature.Model;
-                    this.OriginalValue = message.Planet.OriginalTemperature.Model;
-                    break;
-                case HabitationParameterType.Radiation:
-                    this.CurrentValue = message.Planet.Radiation.Model;
-                    this.OriginalValue = message.Planet.OriginalRadiation.Model;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
 
         #endregion
