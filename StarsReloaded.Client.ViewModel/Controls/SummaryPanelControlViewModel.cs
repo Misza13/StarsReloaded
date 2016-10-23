@@ -51,10 +51,10 @@
                                 Name = Guid.NewGuid().ToString(),
                                 Gravity = new HabitationParameter(27),
                                 Temperature = new HabitationParameter(46),
-                                Radiation = new HabitationParameter(95),
+                                Radiation = new HabitationParameter(25),
                                 OriginalGravity = new HabitationParameter(35),
                                 OriginalTemperature = new HabitationParameter(12),
-                                OriginalRadiation = new HabitationParameter(70)
+                                OriginalRadiation = new HabitationParameter(0)
                             });
             }
         }
@@ -85,7 +85,7 @@
                 return this.selectedPlanet;
             }
 
-            set
+            private set
             {
                 this.Set(() => this.SelectedPlanet, ref this.selectedPlanet, value);
                 this.UpdatePlanetValues();
