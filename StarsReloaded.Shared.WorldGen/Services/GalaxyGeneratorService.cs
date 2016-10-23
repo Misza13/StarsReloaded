@@ -31,7 +31,7 @@
 
             Galaxy galaxy;
 
-            // TODO: Many of these can randomly fail, even though the chance is low There should be a global catch/retry mechanism.
+            // TODO: Many of these can randomly fail, even though the chance is low. There should be a global catch/retry mechanism.
             switch (planetDistribution)
             {
                 case PlanetDistribution.Uniform:
@@ -44,9 +44,7 @@
                     galaxy = this.GenerateUniformClumpingInternal(edge, edge, num);
                     break;
                 default:
-                    // We really shouldn't get here // TODO: maybe throw an exception?
-                    galaxy = new Galaxy(edge, edge);
-                    break;
+                    throw new ArgumentOutOfRangeException(nameof(planetDistribution), planetDistribution, null);
             }
 
             foreach (var planet in galaxy.Planets)
