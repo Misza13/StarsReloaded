@@ -235,12 +235,14 @@
         {
             planet.Name = Guid.NewGuid().ToString();
 
-            planet.Gravity = new HabitationParameter(this.rngService.HabitiationParameter());
-            planet.Temperature = new HabitationParameter(this.rngService.HabitiationParameter());
-            planet.Radiation = new HabitationParameter(this.rngService.HabitiationParameter());
             planet.OriginalGravity = new HabitationParameter(this.rngService.HabitiationParameter());
             planet.OriginalTemperature = new HabitationParameter(this.rngService.HabitiationParameter());
             planet.OriginalRadiation = new HabitationParameter(this.rngService.HabitiationParameter());
+
+            ////TODO: set to original
+            planet.Gravity = new HabitationParameter(this.rngService.HabitiationParameter());
+            planet.Temperature = new HabitationParameter(this.rngService.HabitiationParameter());
+            planet.Radiation = new HabitationParameter(this.rngService.HabitiationParameter());
 
             var extremeHabs =
                 (planet.Gravity.IsExtreme ? 1 : 0) +
@@ -250,6 +252,11 @@
             planet.IroniumConcentration = new MineralConcentration(this.rngService.MineralConcentration(extremeHabs));
             planet.BoraniumConcentration = new MineralConcentration(this.rngService.MineralConcentration(extremeHabs));
             planet.GermaniumConcentration = new MineralConcentration(this.rngService.MineralConcentration(extremeHabs));
+
+            ////TODO: set to 0
+            planet.SurfaceIronium = this.rngService.Next(2000);
+            planet.SurfaceBoranium = this.rngService.Next(2000);
+            planet.SurfaceGermanium = this.rngService.Next(2000);
         }
     }
 }

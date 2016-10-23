@@ -1,5 +1,7 @@
 ﻿namespace StarsReloaded.Shared.Model
 {
+    using System;
+
     public class Planet
     {
         public Planet(int x, int y)
@@ -31,5 +33,26 @@
         public MineralConcentration BoraniumConcentration { get; set; }
 
         public MineralConcentration GermaniumConcentration { get; set; }
+
+        public int SurfaceIronium { get; set; }
+
+        public int SurfaceBoranium { get; set; }
+
+        public int SurfaceGermanium { get; set; }
+
+        public int GetSurfaceMinerals(MineralType mineralType)
+        {
+            switch (mineralType)
+            {
+                case MineralType.Ironium:
+                    return this.SurfaceIronium;
+                case MineralType.Boranium:
+                    return this.SurfaceBoranium;
+                case MineralType.Germanium:
+                    return this.SurfaceGermanium;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(mineralType), mineralType, null);
+            }
+        }
     }
 }
