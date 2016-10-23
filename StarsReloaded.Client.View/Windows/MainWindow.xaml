@@ -42,17 +42,17 @@
                          Height="32" Width="32"
                          Margin="2"
                          Background="{x:Static SystemColors.AppWorkspaceBrush}"
-                         GroupName="PlanetView">S</RadioButton>
+                         GroupName="PlanetView"><Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_surface_mins.png"/></RadioButton>
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
                          Height="32" Width="32"
                          Margin="2"
                          Background="{x:Static SystemColors.AppWorkspaceBrush}"
-                         GroupName="PlanetView">C</RadioButton>
+                         GroupName="PlanetView"><Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_min_conc.png"/></RadioButton>
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
                          Height="32" Width="32"
                          Margin="2"
                          Background="{x:Static SystemColors.AppWorkspaceBrush}"
-                         GroupName="PlanetView">%</RadioButton>
+                         GroupName="PlanetView"><Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_value.png"/></RadioButton>
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
                          Height="32" Width="32"
                          Margin="2"
