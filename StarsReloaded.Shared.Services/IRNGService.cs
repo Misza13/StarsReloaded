@@ -1,5 +1,7 @@
 ﻿namespace StarsReloaded.Shared.Services
 {
+    using StarsReloaded.Shared.Model;
+
     /// <summary>
     /// Random Number Generator service is a wrapper around the RNG library.
     /// </summary>
@@ -11,7 +13,7 @@
 
         double NextDouble();
 
-        int HabitiationParameter();
+        int HabitiationParameter(HabitationParameterType habitationParameterType);
 
         int MineralConcentration(int highConcBias = 0);
     }

@@ -48,13 +48,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRNGService.cs" />
+    <Compile Include="Distributions\TrapezoidalDistribution.cs" />
+    <Compile Include="IRngService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RngService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StarsReloaded.Shared.Model\StarsReloaded.Shared.Model.csproj">
+      <Project>{0FF69D23-8A50-4382-8153-82F01447964B}</Project>
+      <Name>StarsReloaded.Shared.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

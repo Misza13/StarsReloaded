@@ -233,14 +233,14 @@
         {
             planet.Name = Guid.NewGuid().ToString();
 
-            planet.OriginalGravity = new HabitationParameter(this.rngService.HabitiationParameter());
-            planet.OriginalTemperature = new HabitationParameter(this.rngService.HabitiationParameter());
-            planet.OriginalRadiation = new HabitationParameter(this.rngService.HabitiationParameter());
+            planet.OriginalGravity = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Gravity));
+            planet.OriginalTemperature = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Temperature));
+            planet.OriginalRadiation = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Radiation));
 
             ////TODO: set to original
-            planet.Gravity = new HabitationParameter(this.rngService.HabitiationParameter());
-            planet.Temperature = new HabitationParameter(this.rngService.HabitiationParameter());
-            planet.Radiation = new HabitationParameter(this.rngService.HabitiationParameter());
+            planet.Gravity = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Gravity));
+            planet.Temperature = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Temperature));
+            planet.Radiation = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Radiation));
 
             var extremeHabs =
                 (planet.Gravity.IsExtreme ? 1 : 0) +

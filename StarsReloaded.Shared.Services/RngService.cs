@@ -2,8 +2,12 @@
 {
     using System;
 
+    using StarsReloaded.Shared.Model;
+    using StarsReloaded.Shared.Services.Distributions;
+
     using Troschuetz.Random;
     using Troschuetz.Random.Distributions.Continuous;
+    using Troschuetz.Random.Generators;
 
     public class RngService : IRngService
     {
@@ -11,7 +15,7 @@
 
         public RngService()
         {
-            this.rng = new TRandom();
+            this.rng = new MT19937Generator();
         }
 
         public int Next(int maxValue)
@@ -29,9 +33,18 @@
             return this.rng.NextDouble();
         }
 
-        public int HabitiationParameter()
+        public int HabitiationParameter(HabitationParameterType habitationParameterType)
         {
-            return this.rng.Next(-50, 51);
+            switch (habitationParameterType)
+            {
+                case HabitationParameterType.Gravity:
+                case HabitationParameterType.Temperature:
+                    return (int)Math.Round(TrapezoidalDistribution.Sample(this.rng, -49.5, 49.5, -40, 40));
+                case HabitationParameterType.Radiation:
+                    return (int)Math.Round(ContinuousUniformDistribution.Sample(this.rng, -49.5, 49.5));
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(habitationParameterType), habitationParameterType, null);
+            }
         }
 
         public int MineralConcentration(int highConcBias = 0)
