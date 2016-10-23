@@ -37,51 +37,45 @@
                          Height="32" Width="32"
                          Margin="2"
                          Background="{x:Static SystemColors.AppWorkspaceBrush}"
-                         GroupName="PlanetView">O</RadioButton>
+                         GroupName="PlanetView">
+                <Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_orbit.png"/>
+            </RadioButton>
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
                          Height="32" Width="32"
                          Margin="2"
                          Background="{x:Static SystemColors.AppWorkspaceBrush}"
-                         GroupName="PlanetView"><Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_surface_mins.png"/></RadioButton>
+                         GroupName="PlanetView">
+                <Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_surface_mins.png"/>
+            </RadioButton>
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
                          Height="32" Width="32"
                          Margin="2"
                          Background="{x:Static SystemColors.AppWorkspaceBrush}"
-                         GroupName="PlanetView"><Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_min_conc.png"/></RadioButton>
+                         GroupName="PlanetView">
+                <Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_min_conc.png"/>
+            </RadioButton>
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
                          Height="32" Width="32"
                          Margin="2"
                          Background="{x:Static SystemColors.AppWorkspaceBrush}"
-                         GroupName="PlanetView"><Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_value.png"/></RadioButton>
+                         GroupName="PlanetView">
+                <Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_value.png"/>
+            </RadioButton>
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
                          Height="32" Width="32"
                          Margin="2"
                          Background="{x:Static SystemColors.AppWorkspaceBrush}"
-                         GroupName="PlanetView">|||</RadioButton>
+                         GroupName="PlanetView">
+                <Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_pop.png"/>
+            </RadioButton>
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}"
                          Height="32" Width="32"
                          Margin="2"
                          Background="{x:Static SystemColors.AppWorkspaceBrush}"
-                         GroupName="PlanetView">X</RadioButton>
+                         GroupName="PlanetView">
+                <Image Width="24" Height="24" Source="../Resources/Buttons/menu_planet_none.png"/>
+            </RadioButton>
         </StackPanel>
-        
-        <!--<ToolBarTray
-            Grid.Row="1"
-            IsLocked="True"
-            Background="{x:Static SystemColors.AppWorkspaceBrush}">
-            <ToolBar
-                x:Name="Planets"
-                OverflowMode="Never"
-                IsOverflowOpen="False"
-                Background="{x:Static SystemColors.AppWorkspaceBrush}">
-                <Button Height="32" Width="32">O</Button>
-                <Button Height="32" Width="32">S</Button>
-                <Button Height="32" Width="32">C</Button>
-                <Button Height="32" Width="32">%</Button>
-                <Button Height="32" Width="32">|||</Button>
-                <Button Height="32" Width="32">X</Button>
-            </ToolBar>
-        </ToolBarTray>-->
         
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
