@@ -1,6 +1,8 @@
 ﻿namespace StarsReloaded.Client.ViewModel.Controls
 {
     using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows;
 
     using GalaSoft.MvvmLight.Messaging;
@@ -9,23 +11,36 @@
     using StarsReloaded.Client.ViewModel.Fragments;
     using StarsReloaded.Client.ViewModel.Messages;
     using StarsReloaded.Client.ViewModel.ModelWrappers;
+    using StarsReloaded.Shared.Guts.Services;
     using StarsReloaded.Shared.Model;
 
     public class SummaryPanelControlViewModel : BaseViewModel
     {
+        #region Private constants
+
+        private const int MaxSurfaceMinerals = 5000;
+        private const int MaxMineralConcentration = 120;
+
+        #endregion
+
         #region Private fields
 
+        private readonly IPlanetSimulationService planetSimulationService;
         private PlanetWrapper selectedPlanet;
         private HabitationBarControlViewModel gravityBar;
         private HabitationBarControlViewModel temperatureBar;
         private HabitationBarControlViewModel radiationBar;
 
+        private double mineralChartWidth;
+
         #endregion
 
         #region Constructors
 
-        public SummaryPanelControlViewModel()
+        public SummaryPanelControlViewModel(IPlanetSimulationService planetSimulationService)
         {
+            this.planetSimulationService = planetSimulationService;
+
             Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
             Messenger.Default.Register<PlanetSelectedMessage>(this, this.OnPlanetSelected);
 
@@ -54,8 +69,13 @@
                                 Radiation = new HabitationParameter(25),
                                 OriginalGravity = new HabitationParameter(35),
                                 OriginalTemperature = new HabitationParameter(12),
-                                OriginalRadiation = new HabitationParameter(0)
+                                OriginalRadiation = new HabitationParameter(0),
+                                SurfaceIronium = 750,
+                                SurfaceBoranium = 2700,
+                                SurfaceGermanium = 1250
                             });
+
+                this.MineralChartWidth = 350;
             }
         }
 
@@ -134,6 +154,87 @@
             }
         }
 
+        public double MineralChartWidth
+        {
+            get
+            {
+                return this.mineralChartWidth;
+            }
+            set
+            {
+                this.Set(() => this.MineralChartWidth, ref this.mineralChartWidth, value);
+            }
+        }
+
+        [DependsUpon(nameof(MineralChartWidth))]
+        public ObservableCollection<ChartLineElement> ChartLines => this.GetChartLines();
+
+        [DependsUpon(nameof(MineralChartWidth))]
+        [DependsUpon(nameof(SelectedPlanet))]
+        public double IroniumBarPos
+            => this.MineralChartWidth * this.SelectedPlanet?.Model.SurfaceIronium / MaxSurfaceMinerals ?? 0;
+
+        [DependsUpon(nameof(MineralChartWidth))]
+        [DependsUpon(nameof(SelectedPlanet))]
+        public double BoraniumBarPos
+            => this.MineralChartWidth * this.SelectedPlanet?.Model.SurfaceBoranium / MaxSurfaceMinerals ?? 0;
+
+        [DependsUpon(nameof(MineralChartWidth))]
+        [DependsUpon(nameof(SelectedPlanet))]
+        public double GermaniumBarPos
+            => this.MineralChartWidth * this.SelectedPlanet?.Model.SurfaceGermanium / MaxSurfaceMinerals ?? 0;
+
+        [DependsUpon(nameof(MineralChartWidth))]
+        [DependsUpon(nameof(SelectedPlanet))]
+        public double MinedIroniumBarPos
+            =>
+            this.SelectedPlanet == null
+                ? 0
+                : this.MineralChartWidth
+                  * this.planetSimulationService.GetMiningRate(this.SelectedPlanet.Model, MineralType.Ironium)
+                  / MaxSurfaceMinerals;
+
+        [DependsUpon(nameof(MineralChartWidth))]
+        [DependsUpon(nameof(SelectedPlanet))]
+        public double MinedBoraniumBarPos
+            =>
+            this.SelectedPlanet == null
+                ? 0
+                : this.MineralChartWidth
+                  * this.planetSimulationService.GetMiningRate(this.SelectedPlanet.Model, MineralType.Boranium)
+                  / MaxSurfaceMinerals;
+
+        [DependsUpon(nameof(MineralChartWidth))]
+        [DependsUpon(nameof(SelectedPlanet))]
+        public double MinedGermaniumBarPos
+            =>
+            this.SelectedPlanet == null
+                ? 0
+                : this.MineralChartWidth
+                  * this.planetSimulationService.GetMiningRate(this.SelectedPlanet.Model, MineralType.Germanium)
+                  / MaxSurfaceMinerals;
+
+        [DependsUpon(nameof(MineralChartWidth))]
+        [DependsUpon(nameof(SelectedPlanet))]
+        public double IroniumConcPos
+            =>
+            this.MineralChartWidth * this.SelectedPlanet?.Model.IroniumConcentration.Concentration
+            / MaxMineralConcentration ?? 0;
+
+        [DependsUpon(nameof(MineralChartWidth))]
+        [DependsUpon(nameof(SelectedPlanet))]
+        public double BoraniumConcPos
+            =>
+            this.MineralChartWidth * this.SelectedPlanet?.Model.BoraniumConcentration.Concentration
+            / MaxMineralConcentration ?? 0;
+
+        [DependsUpon(nameof(MineralChartWidth))]
+        [DependsUpon(nameof(SelectedPlanet))]
+        public double GermaniumConcPos
+            =>
+            this.MineralChartWidth * this.SelectedPlanet?.Model.GermaniumConcentration.Concentration
+            / MaxMineralConcentration ?? 0;
+
         #endregion
 
         #region Private methods
@@ -150,11 +251,6 @@
 
         private void UpdateHabRanges(PlayerRace race)
         {
-            /*if (this.GravityBar == null)
-            {
-                return;
-            }*/
-
             this.GravityBar.Range = race.GravityTolerance;
             this.TemperatureBar.Range = race.TemperatureTolerance;
             this.RadiationBar.Range = race.RadiationTolerance;
@@ -166,11 +262,6 @@
 
         private void UpdatePlanetValues()
         {
-            /*if (this.GravityBar == null)
-            {
-                return;
-            }*/
-
             this.GravityBar.CurrentValue = this.SelectedPlanet?.Gravity.Model;
             this.TemperatureBar.CurrentValue = this.SelectedPlanet?.Temperature.Model;
             this.RadiationBar.CurrentValue = this.SelectedPlanet?.Radiation.Model;
@@ -178,6 +269,36 @@
             this.GravityBar.OriginalValue = this.SelectedPlanet?.OriginalGravity.Model;
             this.TemperatureBar.OriginalValue = this.SelectedPlanet?.OriginalTemperature.Model;
             this.RadiationBar.OriginalValue = this.SelectedPlanet?.OriginalRadiation.Model;
+        }
+
+        private ObservableCollection<ChartLineElement> GetChartLines()
+        {
+            return
+                new ObservableCollection<ChartLineElement>(
+                    Enumerable.Range(0, 11).Select(i => new ChartLineElement(i * 500, 5000, this.MineralChartWidth)));
+        }
+
+        #endregion
+
+        #region Public classes
+
+        public class ChartLineElement
+        {
+            private int max;
+            private double width;
+
+            public ChartLineElement(int mark, int max, double width)
+            {
+                this.Mark = mark;
+                this.max = max;
+                this.width = width;
+            }
+
+            public int Mark { get; }
+
+            public double Position => this.width * this.Mark / this.max;
+
+            public double LabelPosition => this.Position - 12;
         }
 
         #endregion

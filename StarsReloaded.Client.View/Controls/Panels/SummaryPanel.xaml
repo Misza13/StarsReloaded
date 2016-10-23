@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fragments="clr-namespace:StarsReloaded.View.Controls.Fragments"
+             xmlns:controls="clr-namespace:StarsReloaded.Client.ViewModel.Controls;assembly=StarsReloaded.Client.ViewModel"
              DataContext="{Binding Source={StaticResource Locator}, Path=SummaryPanelControl}"
              mc:Ignorable="d"
              Background="{x:Static SystemColors.AppWorkspaceBrush}"
@@ -39,7 +40,7 @@
         <Grid Grid.Row="3"
               Margin="4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="70"/>
                 <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="4"/>
@@ -53,26 +54,155 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Gravity"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Gravity" TextAlignment="Right"/>
             <fragments:HabitationBarControl
                 Grid.Row="0" Grid.Column="2"
                 HabitationParameterType="Gravity"
                 DataContext="{Binding GravityBar, Mode=TwoWay}"/>
             <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding GravityDisplayValue}"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Temperature"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Temperature" TextAlignment="Right"/>
             <fragments:HabitationBarControl
                 Grid.Row="2" Grid.Column="2"
                 HabitationParameterType="Temperature"
                 DataContext="{Binding TemperatureBar, Mode=TwoWay}"/>
             <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding TemperatureDisplayValue}"/>
 
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="Radiation"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Radiation" TextAlignment="Right"/>
             <fragments:HabitationBarControl
                 Grid.Row="4" Grid.Column="2"
                 HabitationParameterType="Radiation"
                 DataContext="{Binding RadiationBar, Mode=TwoWay}"/>
             <TextBlock Grid.Row="4" Grid.Column="4" Text="{Binding RadiationDisplayValue}"/>
+        </Grid>
+        
+        <!--Minerals-->
+        <Grid Grid.Row="4"
+              Margin="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="4"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0" Text="Ironium" TextAlignment="Right" VerticalAlignment="Center" Foreground="Blue"/>
+                <TextBlock Grid.Row="1" Text="Boranium" TextAlignment="Right" VerticalAlignment="Center" Foreground="Green"/>
+                <TextBlock Grid.Row="2" Text="Germanium" TextAlignment="Right" VerticalAlignment="Center" Foreground="Yellow"/>
+            </Grid>
+            
+            <Canvas Grid.Row="0" Grid.Column="2"
+                    Height="60" Width="Auto"
+                    Background="Black"
+                    ClipToBounds="True"
+                    SizeChanged="Canvas_OnSizeChanged">
+                
+                <ItemsControl ItemsSource="{Binding ChartLines}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type controls:SummaryPanelControlViewModel+ChartLineElement}">
+                            <Line Stroke="White"
+                                  StrokeThickness="1.5"
+                                  X1="{Binding Position}" Y1="0"
+                                  X2="{Binding Position}" Y2="60"/>
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                </ItemsControl>
+                
+                <Rectangle Width="{Binding IroniumBarPos}" Height="12" Fill="Blue">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform Y="4"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Width="{Binding MinedIroniumBarPos}" Height="12" Fill="DarkBlue">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform X="{Binding IroniumBarPos}" Y="4"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Width="{Binding BoraniumBarPos}" Height="12" Fill="Lime">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform Y="24"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Width="{Binding MinedBoraniumBarPos}" Height="12" Fill="Green">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform X="{Binding BoraniumBarPos}" Y="24"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Width="{Binding GermaniumBarPos}" Height="12" Fill="Yellow">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform Y="44"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Width="{Binding MinedGermaniumBarPos}" Height="12" Fill="Olive">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform X="{Binding GermaniumBarPos}" Y="44"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                
+                <Polygon Points="0,-6 6,0 0,6 -6,0" Stroke="DarkBlue" StrokeThickness="2" Fill="Blue">
+                    <Polygon.RenderTransform>
+                        <TranslateTransform X="{Binding IroniumConcPos}" Y="10"/>
+                    </Polygon.RenderTransform>
+                </Polygon>
+                <Polygon Points="0,-6 6,0 0,6 -6,0" Stroke="DarkGreen" StrokeThickness="2" Fill="Lime">
+                    <Polygon.RenderTransform>
+                        <TranslateTransform X="{Binding BoraniumConcPos}" Y="30"/>
+                    </Polygon.RenderTransform>
+                </Polygon>
+                <Polygon Points="0,-6 6,0 0,6 -6,0" Stroke="Olive" StrokeThickness="2" Fill="Yellow">
+                    <Polygon.RenderTransform>
+                        <TranslateTransform X="{Binding GermaniumConcPos}" Y="50"/>
+                    </Polygon.RenderTransform>
+                </Polygon>
+            </Canvas>
+            
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                       Text="kT"
+                       TextAlignment="Right"
+                       FontSize="10"
+                       Margin="0,0,4,0"/>
+
+            <ItemsControl Grid.Row="2" Grid.Column="2"
+                          ItemsSource="{Binding ChartLines}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.Resources>
+                    <DataTemplate DataType="{x:Type controls:SummaryPanelControlViewModel+ChartLineElement}">
+                        <TextBlock Text="{Binding Mark}"
+                                   FontSize="10"
+                                   Width="24"
+                                   TextAlignment="Center">
+                            <TextBlock.RenderTransform>
+                                <TranslateTransform X="{Binding LabelPosition}"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.Resources>
+            </ItemsControl>
         </Grid>
     </Grid>
 </UserControl>
