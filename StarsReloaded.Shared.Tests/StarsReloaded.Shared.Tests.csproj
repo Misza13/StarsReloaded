@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Model\HabitationParameterTests.cs" />
     <Compile Include="Model\MineralConcentrationTests.cs" />
+    <Compile Include="Model\PlanetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorldGen\Services\GalaxyGeneratorServiceTests.cs" />
   </ItemGroup>
@@ -60,6 +61,10 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StarsReloaded.Shared.Guts\StarsReloaded.Shared.Guts.csproj">
+      <Project>{82385E19-9BE1-44E1-9208-6573841C498D}</Project>
+      <Name>StarsReloaded.Shared.Guts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StarsReloaded.Shared.Model\StarsReloaded.Shared.Model.csproj">
       <Project>{0FF69D23-8A50-4382-8153-82F01447964B}</Project>
       <Name>StarsReloaded.Shared.Model</Name>
@@ -72,6 +77,9 @@
       <Project>{a4760afb-98a7-4d4a-9083-3fbec3e0d7dc}</Project>
       <Name>StarsReloaded.Shared.WorldGen</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Guts\Services\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
