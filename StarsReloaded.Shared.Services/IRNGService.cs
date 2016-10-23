@@ -10,5 +10,9 @@
         int Next(int minValue, int maxValue);
 
         double NextDouble();
+
+        int HabitiationParameter();
+
+        int MineralConcentration(int highConcBias = 0);
     }
 }

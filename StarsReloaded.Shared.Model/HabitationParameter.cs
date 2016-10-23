@@ -15,5 +15,7 @@
         }
 
         public int Clicks { get; private set; }
+
+        public bool IsExtreme => this.Clicks < -40 || this.Clicks > +40;
     }
 }
