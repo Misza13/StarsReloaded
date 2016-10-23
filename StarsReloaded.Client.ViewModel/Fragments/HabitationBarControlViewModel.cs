@@ -4,10 +4,8 @@
     using System.Windows;
 
     using GalaSoft.MvvmLight.Command;
-    using GalaSoft.MvvmLight.Messaging;
 
     using StarsReloaded.Client.ViewModel.Attributes;
-    using StarsReloaded.Client.ViewModel.Messages;
     using StarsReloaded.Shared.Model;
 
     public class HabitationBarControlViewModel : BaseViewModel
@@ -36,10 +34,8 @@
                 this.CurrentValue = new HabitationParameter(+25);
                 this.OriginalValue = new HabitationParameter(+40);
             }
-            else
-            {
-                this.SizeChangedCommand = new RelayCommand<Size>(this.OnSizeChanged);
-            }
+
+            this.SizeChangedCommand = new RelayCommand<Size>(this.OnSizeChanged);
         }
 
         #endregion
