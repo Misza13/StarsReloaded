@@ -38,6 +38,7 @@
             Assert.That(galaxy.Width, Is.EqualTo(edge));
             Assert.That(galaxy.Height, Is.EqualTo(edge));
             Assert.That(galaxy.Planets.Count, Is.EqualTo(num));
+
             foreach (var planet in galaxy.Planets)
             {
                 Assert.That(planet.X, Is.InRange(0, edge));
@@ -52,6 +53,10 @@
                 Assert.That(planet.OriginalGravity.Clicks, Is.InRange(-50, 50));
                 Assert.That(planet.OriginalTemperature.Clicks, Is.InRange(-50, 50));
                 Assert.That(planet.OriginalRadiation.Clicks, Is.InRange(-50, 50));
+
+                Assert.That(planet.IroniumConcentration.Concentration, Is.InRange(1, 120));
+                Assert.That(planet.BoraniumConcentration.Concentration, Is.InRange(1, 120));
+                Assert.That(planet.GermaniumConcentration.Concentration, Is.InRange(1, 120));
             }
         }
     }
