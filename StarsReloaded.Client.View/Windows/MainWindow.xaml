@@ -84,8 +84,14 @@
                 <ColumnDefinition Width="8"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <DockPanel Grid.Column="0">
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <fragments:CollapsiblePanel Header="Selected Object">
                             <TextBlock Text="Lorem ipsum"/>
@@ -109,10 +115,11 @@
                         </fragments:CollapsiblePanel>
                     </StackPanel>
                 </StackPanel>
-                <Grid DockPanel.Dock="Bottom">
+                
+                <Border Grid.Row="1" Height="100" BorderThickness="1" BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}">
                     <TextBlock>Messages Panel</TextBlock>
-                </Grid>
-            </DockPanel>
+                </Border>
+            </Grid>
             
             <GridSplitter
                 Grid.Column="1"
