@@ -9,6 +9,14 @@
              mc:Ignorable="d"
              Background="{x:Static SystemColors.AppWorkspaceBrush}"
              d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
     <Grid Visibility="{Binding PlanetSummaryVisibility}"
           Margin="4"
           Width="Auto" Height="Auto">
@@ -40,7 +48,7 @@
         <Grid Grid.Row="3"
               Margin="4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="4"/>
@@ -54,33 +62,45 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Gravity" TextAlignment="Right"/>
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="Gravity"
+                       TextAlignment="Right"
+                       Style="{StaticResource GenericLabel}"/>
             <fragments:HabitationBarControl
                 Grid.Row="0" Grid.Column="2"
                 HabitationParameterType="Gravity"
                 DataContext="{Binding GravityBar, Mode=TwoWay}"/>
-            <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding GravityDisplayValue}"/>
+            <TextBlock Grid.Row="0" Grid.Column="4"
+                       Text="{Binding GravityDisplayValue}"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Temperature" TextAlignment="Right"/>
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                       Text="Temperature"
+                       TextAlignment="Right"
+                       Style="{StaticResource GenericLabel}"/>
             <fragments:HabitationBarControl
                 Grid.Row="2" Grid.Column="2"
                 HabitationParameterType="Temperature"
                 DataContext="{Binding TemperatureBar, Mode=TwoWay}"/>
-            <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding TemperatureDisplayValue}"/>
+            <TextBlock Grid.Row="2" Grid.Column="4"
+                       Text="{Binding TemperatureDisplayValue}"/>
 
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="Radiation" TextAlignment="Right"/>
+            <TextBlock Grid.Row="4" Grid.Column="0"
+                       Text="Radiation"
+                       TextAlignment="Right"
+                       Style="{StaticResource GenericLabel}"/>
             <fragments:HabitationBarControl
                 Grid.Row="4" Grid.Column="2"
                 HabitationParameterType="Radiation"
                 DataContext="{Binding RadiationBar, Mode=TwoWay}"/>
-            <TextBlock Grid.Row="4" Grid.Column="4" Text="{Binding RadiationDisplayValue}"/>
+            <TextBlock Grid.Row="4" Grid.Column="4"
+                       Text="{Binding RadiationDisplayValue}"/>
         </Grid>
         
         <!--Minerals-->
         <Grid Grid.Row="4"
               Margin="4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="4"/>
@@ -99,10 +119,22 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                
-                <TextBlock Grid.Row="0" Text="Ironium" TextAlignment="Right" VerticalAlignment="Center" Foreground="Blue"/>
-                <TextBlock Grid.Row="1" Text="Boranium" TextAlignment="Right" VerticalAlignment="Center" Foreground="Green"/>
-                <TextBlock Grid.Row="2" Text="Germanium" TextAlignment="Right" VerticalAlignment="Center" Foreground="Yellow"/>
+
+                <TextBlock Grid.Row="0"
+                           Text="Ironium"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource IroniumLabel}"/>
+                <TextBlock Grid.Row="1"
+                           Text="Boranium"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource BoraniumLabel}"/>
+                <TextBlock Grid.Row="2"
+                           Text="Germanium"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource GermaniumLabel}"/>
             </Grid>
             
             <Canvas Grid.Row="0" Grid.Column="2"
