@@ -47,6 +47,7 @@ namespace StarsReloaded.Client.ViewModel
             SimpleIoc.Default.Register<SummaryPanelControlViewModel>();
 
             ////Fragments
+            SimpleIoc.Default.Register<CollapsiblePanelViewModel>();
             SimpleIoc.Default.Register<HabitationBarControlViewModel>();
         }
 
@@ -59,5 +60,7 @@ namespace StarsReloaded.Client.ViewModel
         public static SummaryPanelControlViewModel SummaryPanelControl => ServiceLocator.Current.GetInstance<SummaryPanelControlViewModel>();
 
         public static HabitationBarControlViewModel HabitationBarControl => new HabitationBarControlViewModel();
+
+        public static CollapsiblePanelViewModel CollapsiblePanel => new CollapsiblePanelViewModel();
     }
 }

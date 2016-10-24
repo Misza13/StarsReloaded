@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:panels="clr-namespace:StarsReloaded.View.Controls.Panels"
+        xmlns:fragments="clr-namespace:StarsReloaded.View.Controls.Fragments"
         DataContext="{Binding Source={StaticResource Locator}, Path=MainWindow}"
         mc:Ignorable="d"
         Title="Stars! Reloaded"
@@ -86,14 +87,26 @@
             <DockPanel Grid.Column="0">
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock>Selected Object Panel</TextBlock>
-                        <TextBlock>Minerals On Hand Panel</TextBlock>
-                        <TextBlock>Status Panel</TextBlock>
+                        <fragments:CollapsiblePanel Header="Selected Object">
+                            <TextBlock Text="Lorem ipsum"/>
+                        </fragments:CollapsiblePanel>
+                        <fragments:CollapsiblePanel Header="Minerals on Hand">
+                            <TextBlock Text="Lorem ipsum"/>
+                        </fragments:CollapsiblePanel>
+                        <fragments:CollapsiblePanel Header="Status">
+                            <TextBlock Text="Lorem ipsum"/>
+                        </fragments:CollapsiblePanel>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock>Fleets in Orbit Panel</TextBlock>
-                        <TextBlock>Production Panel</TextBlock>
-                        <TextBlock>Starbase Panel</TextBlock>
+                        <fragments:CollapsiblePanel Header="Fleets in Orbit">
+                            <TextBlock Text="Lorem ipsum"/>
+                        </fragments:CollapsiblePanel>
+                        <fragments:CollapsiblePanel Header="Production">
+                            <TextBlock Text="Lorem ipsum"/>
+                        </fragments:CollapsiblePanel>
+                        <fragments:CollapsiblePanel Header="Starbase">
+                            <TextBlock Text="Lorem ipsum"/>
+                        </fragments:CollapsiblePanel>
                     </StackPanel>
                 </StackPanel>
                 <Grid DockPanel.Dock="Bottom">
