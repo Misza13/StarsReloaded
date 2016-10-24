@@ -14,7 +14,7 @@
 
         private void Canvas_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            (this.DataContext as SummaryPanelControlViewModel).MineralChartWidth = e.NewSize.Width;
+            (this.DataContext as SummaryPanelViewModel).MineralChartWidth = e.NewSize.Width;
         }
     }
 }

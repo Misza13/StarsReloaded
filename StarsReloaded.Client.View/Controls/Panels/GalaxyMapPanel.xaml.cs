@@ -6,9 +6,9 @@
 
     using StarsReloaded.Client.ViewModel.Controls;
 
-    public partial class MapPanelControl : UserControl
+    public partial class GalaxyMapPanel : UserControl
     {
-        public MapPanelControl()
+        public GalaxyMapPanel()
         {
             this.InitializeComponent();
         }
@@ -16,7 +16,7 @@
         private void Canvas_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             var p = Mouse.GetPosition(sender as IInputElement);
-            (this.DataContext as MapPanelControlViewModel)?.MapClickCommand.Execute(p);
+            (this.DataContext as GalaxyMapPanelViewModel)?.MapClickCommand.Execute(p);
         }
     }
 }

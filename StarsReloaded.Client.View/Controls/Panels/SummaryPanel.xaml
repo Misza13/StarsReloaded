@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fragments="clr-namespace:StarsReloaded.View.Controls.Fragments"
              xmlns:controls="clr-namespace:StarsReloaded.Client.ViewModel.Controls;assembly=StarsReloaded.Client.ViewModel"
-             DataContext="{Binding Source={StaticResource Locator}, Path=SummaryPanelControl}"
+             DataContext="{Binding Source={StaticResource Locator}, Path=SummaryPanel}"
              mc:Ignorable="d"
              Background="{x:Static SystemColors.AppWorkspaceBrush}"
              d:DesignWidth="500">
@@ -151,7 +151,7 @@
                     </ItemsControl.ItemsPanel>
 
                     <ItemsControl.Resources>
-                        <DataTemplate DataType="{x:Type controls:SummaryPanelControlViewModel+ChartLineElement}">
+                        <DataTemplate DataType="{x:Type controls:SummaryPanelViewModel+ChartLineElement}">
                             <Line Stroke="White"
                                   StrokeThickness="1.5"
                                   X1="{Binding Position}" Y1="0"
@@ -223,7 +223,7 @@
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.Resources>
-                    <DataTemplate DataType="{x:Type controls:SummaryPanelControlViewModel+ChartLineElement}">
+                    <DataTemplate DataType="{x:Type controls:SummaryPanelViewModel+ChartLineElement}">
                         <TextBlock Text="{Binding Mark}"
                                    FontSize="10"
                                    Width="24"

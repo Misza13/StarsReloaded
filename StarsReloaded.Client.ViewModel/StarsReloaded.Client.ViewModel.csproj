@@ -65,8 +65,8 @@
   <ItemGroup>
     <Compile Include="Attributes\DependsUponAttribute.cs" />
     <Compile Include="BaseViewModel.cs" />
-    <Compile Include="Controls\MapPanelControlViewModel.cs" />
-    <Compile Include="Controls\SummaryPanelControlViewModel.cs" />
+    <Compile Include="Controls\GalaxyMapPanelViewModel.cs" />
+    <Compile Include="Controls\SummaryPanelViewModel.cs" />
     <Compile Include="Fragments\CollapsiblePanelViewModel.cs" />
     <Compile Include="Fragments\HabitationBarControlViewModel.cs" />
     <Compile Include="Messages\GameStateLoadedMessage.cs" />

@@ -43,8 +43,8 @@ namespace StarsReloaded.Client.ViewModel
             SimpleIoc.Default.Register<StartupWindowViewModel>();
 
             ////Controls
-            SimpleIoc.Default.Register<MapPanelControlViewModel>();
-            SimpleIoc.Default.Register<SummaryPanelControlViewModel>();
+            SimpleIoc.Default.Register<GalaxyMapPanelViewModel>();
+            SimpleIoc.Default.Register<SummaryPanelViewModel>();
 
             ////Fragments
             SimpleIoc.Default.Register<CollapsiblePanelViewModel>();
@@ -55,9 +55,9 @@ namespace StarsReloaded.Client.ViewModel
 
         public static StartupWindowViewModel StartupWindow => ServiceLocator.Current.GetInstance<StartupWindowViewModel>();
 
-        public static MapPanelControlViewModel MapPanelControl => ServiceLocator.Current.GetInstance<MapPanelControlViewModel>();
+        public static GalaxyMapPanelViewModel GalaxyMapPanel => ServiceLocator.Current.GetInstance<GalaxyMapPanelViewModel>();
 
-        public static SummaryPanelControlViewModel SummaryPanelControl => ServiceLocator.Current.GetInstance<SummaryPanelControlViewModel>();
+        public static SummaryPanelViewModel SummaryPanel => ServiceLocator.Current.GetInstance<SummaryPanelViewModel>();
 
         public static HabitationBarControlViewModel HabitationBarControl => new HabitationBarControlViewModel();
 

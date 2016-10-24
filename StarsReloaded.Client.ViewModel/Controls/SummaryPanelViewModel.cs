@@ -14,7 +14,7 @@
     using StarsReloaded.Shared.Guts.Services;
     using StarsReloaded.Shared.Model;
 
-    public class SummaryPanelControlViewModel : BaseViewModel
+    public class SummaryPanelViewModel : BaseViewModel
     {
         #region Private constants
 
@@ -37,7 +37,7 @@
 
         #region Constructors
 
-        public SummaryPanelControlViewModel(IPlanetSimulationService planetSimulationService)
+        public SummaryPanelViewModel(IPlanetSimulationService planetSimulationService)
         {
             this.planetSimulationService = planetSimulationService;
 

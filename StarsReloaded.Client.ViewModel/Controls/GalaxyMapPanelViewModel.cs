@@ -15,7 +15,7 @@
     using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;
 
-    public class MapPanelControlViewModel : BaseViewModel
+    public class GalaxyMapPanelViewModel : BaseViewModel
     {
         #region Private fields
 
@@ -26,7 +26,7 @@
 
         #region Constructors
 
-        public MapPanelControlViewModel(IGalaxyGeneratorService galaxyGeneratorService)
+        public GalaxyMapPanelViewModel(IGalaxyGeneratorService galaxyGeneratorService)
         {
             Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
 

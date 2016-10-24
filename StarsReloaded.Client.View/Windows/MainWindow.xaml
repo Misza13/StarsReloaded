@@ -8,8 +8,7 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=MainWindow}"
         mc:Ignorable="d"
         Title="Stars! Reloaded"
-        Height="600"
-        Width="800"
+        Width="1024" Height="768"
         WindowState="Normal"
         Background="{x:Static SystemColors.AppWorkspaceBrush}">
     <Window.Resources>
@@ -118,7 +117,10 @@
                     </StackPanel>
                 </StackPanel>
                 
-                <Border Grid.Row="1" Height="100" BorderThickness="1" BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}">
+                <Border Grid.Row="1" Height="100"
+                        BorderThickness="1"
+                        BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
+                        Margin="2">
                     <TextBlock>Messages Panel</TextBlock>
                 </Border>
             </Grid>
@@ -134,7 +136,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <panels:MapPanelControl Grid.Row="0" />
+                <panels:GalaxyMapPanel Grid.Row="0" />
                 <panels:SummaryPanel Grid.Row="1"/>
             </Grid>
         </Grid>

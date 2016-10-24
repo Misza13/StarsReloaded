@@ -105,7 +105,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Panels\MapPanelControl.xaml">
+    <Page Include="Controls\Panels\GalaxyMapPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,8 +137,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\Panels\MapPanelControl.xaml.cs">
-      <DependentUpon>MapPanelControl.xaml</DependentUpon>
+    <Compile Include="Controls\Panels\GalaxyMapPanel.xaml.cs">
+      <DependentUpon>GalaxyMapPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
