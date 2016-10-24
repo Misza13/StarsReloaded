@@ -4,7 +4,6 @@ namespace StarsReloaded.View.Controls.Fragments
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
-    using System.Windows.Input;
 
     using StarsReloaded.Client.ViewModel.Fragments;
 
@@ -35,16 +34,6 @@ namespace StarsReloaded.View.Controls.Fragments
             {
                 this.SetValue(HeaderProperty, value);
             }
-        }
-
-        private void CollapseButton_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            (this.DataContext as CollapsiblePanelViewModel).CollapseCommand.Execute(null);
-        }
-
-        private void ExpandButton_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            (this.DataContext as CollapsiblePanelViewModel).ExpandCommand.Execute(null);
         }
     }
 }

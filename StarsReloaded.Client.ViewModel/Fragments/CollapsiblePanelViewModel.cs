@@ -14,8 +14,7 @@
 
         public CollapsiblePanelViewModel()
         {
-            this.CollapseCommand = new RelayCommand(this.Collapse);
-            this.ExpandCommand = new RelayCommand(this.Expand);
+            this.ToggleExpansionCommand = new RelayCommand(this.ToggleExpansion);
 
             this.IsExpanded = true; ////TODO: save/read from user's settings
 
@@ -52,26 +51,19 @@
         }
 
         [DependsUpon(nameof(IsExpanded))]
-        public Visibility ExpandButtonVisibility => this.IsExpanded ? Visibility.Hidden : Visibility.Visible;
-
-        [DependsUpon(nameof(IsExpanded))]
-        public Visibility CollapseButtonVisibility => this.IsExpanded ? Visibility.Visible : Visibility.Hidden;
+        public string ExpandButtonSource
+            => this.IsExpanded
+            ? "../../Resources/Buttons/panel_collapse.png"
+            : "../../Resources/Buttons/panel_expand.png";
 
         [DependsUpon(nameof(IsExpanded))]
         public Visibility ContentVisibility => this.IsExpanded ? Visibility.Visible : Visibility.Collapsed;
 
-        public RelayCommand CollapseCommand { get; private set; }
+        public RelayCommand ToggleExpansionCommand { get; private set; }
 
-        public RelayCommand ExpandCommand { get; private set; }
-
-        private void Collapse()
+        private void ToggleExpansion()
         {
-            this.IsExpanded = false;
-        }
-
-        private void Expand()
-        {
-            this.IsExpanded = true;
+            this.IsExpanded = !this.IsExpanded;
         }
     }
 }
