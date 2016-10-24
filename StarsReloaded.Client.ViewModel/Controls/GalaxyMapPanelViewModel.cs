@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows;
+    using System.Windows.Input;
 
     using GalaSoft.MvvmLight.CommandWpf;
     using GalaSoft.MvvmLight.Messaging;
@@ -36,7 +37,7 @@
                 this.MapClick(new Point() { X = 50, Y = 50 });
             }
 
-            this.MapClickCommand = new RelayCommand<Point>(this.MapClick);
+            this.MapClickCommand = new RelayCommand<MouseButtonEventArgs>(this.MapClick);
         }
 
         #endregion
@@ -102,11 +103,16 @@
 
         #region Commands
 
-        public RelayCommand<Point> MapClickCommand { get; }
+        public RelayCommand<MouseButtonEventArgs> MapClickCommand { get; }
 
         #endregion
 
         #region Private methods
+
+        private void MapClick(MouseButtonEventArgs e)
+        {
+            this.MapClick(e.GetPosition(e.Source as IInputElement));
+        }
 
         private void MapClick(Point p)
         {

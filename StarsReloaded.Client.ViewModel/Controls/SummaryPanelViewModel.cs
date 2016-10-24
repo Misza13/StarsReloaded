@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Windows;
 
+    using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
 
     using StarsReloaded.Client.ViewModel.Attributes;
@@ -40,6 +41,8 @@
         public SummaryPanelViewModel(IPlanetSimulationService planetSimulationService)
         {
             this.planetSimulationService = planetSimulationService;
+
+            this.MineralChartResizedCommand = new RelayCommand<double>(this.OnMineralChartResized);
 
             Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
             Messenger.Default.Register<PlanetSelectedMessage>(this, this.OnPlanetSelected);
@@ -237,6 +240,12 @@
 
         #endregion
 
+        #region Commands
+
+        public RelayCommand<double> MineralChartResizedCommand { get; private set; }
+
+        #endregion
+
         #region Private methods
 
         private void OnGameStateLoaded(GameStateLoadedMessage message)
@@ -247,6 +256,12 @@
         private void OnPlanetSelected(PlanetSelectedMessage message)
         {
             this.SelectedPlanet = message.Planet;
+        }
+
+        private void OnMineralChartResized(double newWidth)
+        {
+            this.MineralChartWidth = newWidth;
+            Console.WriteLine("resized:" + newWidth);
         }
 
         private void UpdateHabRanges(PlayerRace race)

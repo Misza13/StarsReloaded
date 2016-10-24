@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fragments="clr-namespace:StarsReloaded.View.Controls.Fragments"
              xmlns:controls="clr-namespace:StarsReloaded.Client.ViewModel.Controls;assembly=StarsReloaded.Client.ViewModel"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
              DataContext="{Binding Source={StaticResource Locator}, Path=SummaryPanel}"
              mc:Ignorable="d"
              Background="{x:Static SystemColors.AppWorkspaceBrush}"
@@ -16,7 +18,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <Grid Visibility="{Binding PlanetSummaryVisibility}"
           Margin="4"
           Width="Auto" Height="Auto">
@@ -43,7 +45,7 @@
                 </TextBlock>
             </Border>
         </Border>
-        
+
         <!--Habitation-->
         <Grid Grid.Row="3"
               Margin="4">
@@ -95,7 +97,7 @@
             <TextBlock Grid.Row="4" Grid.Column="4"
                        Text="{Binding RadiationDisplayValue}"/>
         </Grid>
-        
+
         <!--Minerals-->
         <Grid Grid.Row="4"
               Margin="4">
@@ -112,7 +114,7 @@
                 <RowDefinition Height="4"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
+
             <Grid Grid.Row="0" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -136,13 +138,20 @@
                            VerticalAlignment="Center"
                            Style="{StaticResource GermaniumLabel}"/>
             </Grid>
-            
-            <Canvas Grid.Row="0" Grid.Column="2"
+
+            <Canvas Name="MineralChart" Grid.Row="0" Grid.Column="2"
                     Height="60" Width="Auto"
                     Background="Black"
-                    ClipToBounds="True"
-                    SizeChanged="Canvas_OnSizeChanged">
-                
+                    ClipToBounds="True">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SizeChanged">
+                        <command:EventToCommand Command="{Binding MineralChartResizedCommand}" CommandParameter="{Binding ActualWidth, ElementName=MineralChart, Mode=OneWay}"/>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="Loaded">
+                        <command:EventToCommand Command="{Binding MineralChartResizedCommand}" CommandParameter="{Binding ActualWidth, ElementName=MineralChart, Mode=OneWay}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
                 <ItemsControl ItemsSource="{Binding ChartLines}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -159,7 +168,7 @@
                         </DataTemplate>
                     </ItemsControl.Resources>
                 </ItemsControl>
-                
+
                 <Rectangle Width="{Binding IroniumBarPos}" Height="12" Fill="Blue">
                     <Rectangle.RenderTransform>
                         <TranslateTransform Y="4"/>
@@ -190,7 +199,7 @@
                         <TranslateTransform X="{Binding GermaniumBarPos}" Y="44"/>
                     </Rectangle.RenderTransform>
                 </Rectangle>
-                
+
                 <Polygon Points="0,-6 6,0 0,6 -6,0" Stroke="DarkBlue" StrokeThickness="2" Fill="Blue">
                     <Polygon.RenderTransform>
                         <TranslateTransform X="{Binding IroniumConcPos}" Y="10"/>
@@ -207,7 +216,7 @@
                     </Polygon.RenderTransform>
                 </Polygon>
             </Canvas>
-            
+
             <TextBlock Grid.Row="2" Grid.Column="0"
                        Text="kT"
                        TextAlignment="Right"

@@ -4,6 +4,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:modelWrappers="clr-namespace:StarsReloaded.Client.ViewModel.ModelWrappers;assembly=StarsReloaded.Client.ViewModel"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:command="http://www.galasoft.ch/mvvmlight"
     x:Class="StarsReloaded.View.Controls.Panels.GalaxyMapPanel"
     DataContext="{Binding Source={StaticResource Locator}, Path=GalaxyMapPanel}"
     x:Name="MapPanel"
@@ -21,8 +23,13 @@
             <Canvas
                 Width="{Binding GalaxyWidth}"
                 Height="{Binding GalaxyHeight}"
-                Background="Black"
-                MouseDown="Canvas_OnMouseDown">
+                Background="Black">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDown">
+                        <command:EventToCommand Command="{Binding MapClickCommand}" PassEventArgsToCommand="True"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                
                 <Polygon
                     Visibility="{Binding SelectionArrowVisibility}"
                     Fill="Yellow"
