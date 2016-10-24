@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.Services;
     using StarsReloaded.Shared.WorldGen.Helpers;
@@ -11,9 +12,13 @@
     public class GalaxyGeneratorService : IGalaxyGeneratorService
     {
         private const int GalaxyMargin = 8;
+
         private const int PlanetMinDistance = 9;
+
         private const int MaxClusterSize = 5;
+
         private const int MaxFailedFitsUniform = 10;
+
         private const int MaxFailedFitsClump = 20;
 
         private readonly IRngService rngService;
@@ -29,22 +34,18 @@
             var num = density.GetAttributeOfType<BasePlanetCountAttribute>().Num;
             num = num * edge * edge / 160000;
 
-            Galaxy galaxy;
+            Galaxy galaxy = null;
 
-            // TODO: Many of these can randomly fail, even though the chance is low. There should be a global catch/retry mechanism.
-            switch (planetDistribution)
+            while (galaxy == null)
             {
-                case PlanetDistribution.Uniform:
-                    galaxy = this.GenerateUniformInternal(edge, edge, num);
-                    break;
-                case PlanetDistribution.FreeClumping:
-                    galaxy = this.GenerateFreeClumpingInternal(edge, edge, num);
-                    break;
-                case PlanetDistribution.UniformClumping:
-                    galaxy = this.GenerateUniformClumpingInternal(edge, edge, num);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(planetDistribution), planetDistribution, null);
+                try
+                {
+                    galaxy = this.GenerateGalaxyWithDistribution(planetDistribution, edge, num);
+                }
+                catch (PlanetPlacementException)
+                {
+                    ////Retry
+                }
             }
 
             foreach (var planet in galaxy.Planets)
@@ -70,6 +71,28 @@
                     p =>
                         Math.Pow(x - p.X, 2) + Math.Pow(y - p.Y, 2)
                         >= minDistance * minDistance);
+        }
+
+        private Galaxy GenerateGalaxyWithDistribution(PlanetDistribution planetDistribution, int edge, int num)
+        {
+            Galaxy galaxy;
+
+            switch (planetDistribution)
+            {
+                case PlanetDistribution.Uniform:
+                    galaxy = this.GenerateUniformInternal(edge, edge, num);
+                    break;
+                case PlanetDistribution.FreeClumping:
+                    galaxy = this.GenerateFreeClumpingInternal(edge, edge, num);
+                    break;
+                case PlanetDistribution.UniformClumping:
+                    galaxy = this.GenerateUniformClumpingInternal(edge, edge, num);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(planetDistribution), planetDistribution, null);
+            }
+
+            return galaxy;
         }
 
         private Galaxy GenerateUniformInternal(int width, int height, int numPlanets)
@@ -146,7 +169,7 @@
                             galaxy.Planets.Add(generated);
                         }
                     }
-                    catch (Exception)
+                    catch (PlanetPlacementException)
                     {
                         // Close current cluster and continue
                     }
@@ -178,7 +201,7 @@
                 failedFits++;
             }
 
-            throw new Exception("Too many failed attempts at fitting a planet.");
+            throw new PlanetPlacementException();
         }
 
         private Planet GeneratePlanetClumped(Galaxy galaxy, List<Planet> neighbours = null)
@@ -206,7 +229,7 @@
                 failedFits++;
             }
 
-            throw new Exception("Too many failed attempts at fitting a planet.");
+            throw new PlanetPlacementException();
         }
 
         private Planet GeneratePlanetFillSpace(Galaxy galaxy)
@@ -226,7 +249,7 @@
                 failedFits++;
             }
 
-            throw new Exception("Too many failed attempts at fitting a planet.");
+            throw new PlanetPlacementException();
         }
 
         private void GeneratePlanetStats(Planet planet)
