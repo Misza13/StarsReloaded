@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="StarsReloaded.View.Controls.Panels.SelectedObjectPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fragments="clr-namespace:StarsReloaded.View.Controls.Fragments"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <fragments:CollapsiblePanel Width="200" Header="Walla Walla">
+        <Grid Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Ellipse Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"
+                     Width="64" Height="64"
+                     Fill="Aqua"/>
+            
+            <Button Grid.Row="0" Grid.Column="2"
+                    Width="60" Margin="1">
+                <TextBlock Text="Prev" Style="{StaticResource GenericLabel}"/>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="2"
+                    Width="60" Margin="1">
+                <TextBlock Text="Next" Style="{StaticResource GenericLabel}"/>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="2"
+                    Width="60" Margin="1">
+                <TextBlock Text="Rename" Style="{StaticResource GenericLabel}"/>
+            </Button>
+        </Grid>
+    </fragments:CollapsiblePanel>
+</UserControl>

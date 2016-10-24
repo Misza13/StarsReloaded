@@ -101,15 +101,9 @@
                 
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <fragments:CollapsiblePanel Header="Selected Object">
-                            <TextBlock Text="Lorem ipsum"/>
-                        </fragments:CollapsiblePanel>
-                        <fragments:CollapsiblePanel Header="Minerals on Hand">
-                            <TextBlock Text="Lorem ipsum"/>
-                        </fragments:CollapsiblePanel>
-                        <fragments:CollapsiblePanel Header="Status">
-                            <TextBlock Text="Lorem ipsum"/>
-                        </fragments:CollapsiblePanel>
+                        <panels:SelectedObjectPanel/>
+                        <panels:MineralsOnHandPanel/>
+                        <panels:StatusPanel/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <fragments:CollapsiblePanel Header="Fleets in Orbit">

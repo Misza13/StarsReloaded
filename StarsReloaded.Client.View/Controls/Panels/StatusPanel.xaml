@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="StarsReloaded.View.Controls.Panels.StatusPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fragments="clr-namespace:StarsReloaded.View.Controls.Fragments"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <fragments:CollapsiblePanel Width="200" Header="Status">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="Population"
+                       Style="{StaticResource GenericLabel}"/>
+            <TextBlock Grid.Row="0" Grid.Column="1"
+                       Text="59,700"
+                       TextAlignment="Right"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                       Text="Resource/Year"
+                       Style="{StaticResource GenericLabel}"/>
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                       Text="87 of 87"
+                       TextAlignment="Right"/>
+
+            <Separator Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                       Background="{x:Static SystemColors.ControlLightBrush}"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0"
+                       Text="Scanner Type"
+                       Style="{StaticResource GenericLabel}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1"
+                       Text="Scoper 150"
+                       TextAlignment="Right"/>
+
+            <TextBlock Grid.Row="4" Grid.Column="0"
+                       Text="Scanner Range"
+                       Style="{StaticResource GenericLabel}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1"
+                       Text="150 l.y."
+                       TextAlignment="Right"/>
+
+            <Separator Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                       Background="{x:Static SystemColors.ControlLightBrush}"/>
+
+            <TextBlock Grid.Row="6" Grid.Column="0"
+                       Text="Defenses"
+                       Style="{StaticResource GenericLabel}"/>
+            <TextBlock Grid.Row="6" Grid.Column="1"
+                       Text="10 of 22"
+                       TextAlignment="Right"/>
+
+            <TextBlock Grid.Row="7" Grid.Column="0"
+                       Text="Defense Type"
+                       Style="{StaticResource GenericLabel}"/>
+            <TextBlock Grid.Row="7" Grid.Column="1"
+                       Text="SDI"
+                       TextAlignment="Right"/>
+
+            <TextBlock Grid.Row="8" Grid.Column="0"
+                       Text="Def Coverage"
+                       Style="{StaticResource GenericLabel}"/>
+            <TextBlock Grid.Row="8" Grid.Column="1"
+                       Text="9.56%"
+                       TextAlignment="Right"/>
+        </Grid>
+    </fragments:CollapsiblePanel>
+</UserControl>

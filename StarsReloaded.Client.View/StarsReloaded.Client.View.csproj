@@ -82,6 +82,15 @@
     <Compile Include="Controls\Fragments\HabitationBarControl.xaml.cs">
       <DependentUpon>HabitationBarControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Panels\MineralsOnHandPanel.xaml.cs">
+      <DependentUpon>MineralsOnHandPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Panels\SelectedObjectPanel.xaml.cs">
+      <DependentUpon>SelectedObjectPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Panels\StatusPanel.xaml.cs">
+      <DependentUpon>StatusPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Panels\SummaryPanel.xaml.cs">
       <DependentUpon>SummaryPanel.xaml</DependentUpon>
     </Compile>
@@ -97,6 +106,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Panels\MapPanelControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Panels\MineralsOnHandPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Panels\SelectedObjectPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Panels\StatusPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
