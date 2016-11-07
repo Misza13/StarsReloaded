@@ -21,8 +21,7 @@
 
         [Test]
         [Combinatorial]
-        [Repeat(10)]
-        public void GenerateFromEnumsShouldCreateCorrectGalaxy(
+        public void GenerateShouldCreateCorrectGalaxy(
             [Values(GalaxySize.Tiny, GalaxySize.Small, GalaxySize.Medium, GalaxySize.Large, GalaxySize.Huge)] GalaxySize size,
             [Values(GalaxyDensity.Sparse, GalaxyDensity.Normal, GalaxyDensity.Dense, GalaxyDensity.Packed)] GalaxyDensity density,
             [Values(PlanetDistribution.Uniform, PlanetDistribution.FreeClumping, PlanetDistribution.UniformClumping)] PlanetDistribution distribution)
