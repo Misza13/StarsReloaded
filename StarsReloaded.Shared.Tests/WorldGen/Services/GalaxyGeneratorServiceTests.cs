@@ -2,6 +2,7 @@
 {
     using Moq;
     using NUnit.Framework;
+    using Shouldly;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.Services;
     using StarsReloaded.Shared.WorldGen.Helpers;
@@ -41,14 +42,14 @@
             var galaxy = this.galaxyGeneratorService.Generate(size, density, distribution);
 
             ////Assert
-            Assert.That(galaxy.Width, Is.EqualTo(edge));
-            Assert.That(galaxy.Height, Is.EqualTo(edge));
-            Assert.That(galaxy.Planets.Count, Is.EqualTo(num));
+            galaxy.Width.ShouldBe(edge);
+            galaxy.Height.ShouldBe(edge);
+            galaxy.Planets.Count.ShouldBe(num);
 
             foreach (var planet in galaxy.Planets)
             {
-                Assert.That(planet.X, Is.InRange(0, edge));
-                Assert.That(planet.Y, Is.InRange(0, edge));
+                planet.X.ShouldBeInRange(0, edge);
+                planet.Y.ShouldBeInRange(0, edge);
             }
         }
     }

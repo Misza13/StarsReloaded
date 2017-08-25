@@ -1,6 +1,7 @@
 ﻿namespace StarsReloaded.Shared.Tests.WorldGen.Services
 {
     using NUnit.Framework;
+    using Shouldly;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.Services;
     using StarsReloaded.Shared.WorldGen.Services;
@@ -17,6 +18,7 @@
         }
 
         [Test]
+        [Repeat(1000)]
         public void PlanetStatsShouldFitConstraints()
         {
             ////Arrange
@@ -26,20 +28,20 @@
             this.planetGeneratorService.PopulatePlanetStats(planet);
 
             ////Assert
-            Assert.That(planet.Name, Is.Not.Empty);
+            planet.Name.ShouldNotBeEmpty();
 
-            Assert.That(planet.Gravity.Clicks, Is.InRange(-50, 50));
-            Assert.That(planet.Temperature.Clicks, Is.InRange(-50, 50));
-            Assert.That(planet.Radiation.Clicks, Is.InRange(-50, 50));
+            planet.Gravity.Clicks.ShouldBeInRange(-50, 50);
+            planet.Temperature.Clicks.ShouldBeInRange(-50, 50);
+            planet.Radiation.Clicks.ShouldBeInRange(-50, 50);
 
             ////TODO: Original = Current
-            Assert.That(planet.OriginalGravity.Clicks, Is.InRange(-50, 50));
-            Assert.That(planet.OriginalTemperature.Clicks, Is.InRange(-50, 50));
-            Assert.That(planet.OriginalRadiation.Clicks, Is.InRange(-50, 50));
+            planet.OriginalGravity.Clicks.ShouldBeInRange(-50, 50);
+            planet.OriginalTemperature.Clicks.ShouldBeInRange(-50, 50);
+            planet.OriginalRadiation.Clicks.ShouldBeInRange(-50, 50);
 
-            Assert.That(planet.IroniumConcentration.Concentration, Is.InRange(1, 120));
-            Assert.That(planet.BoraniumConcentration.Concentration, Is.InRange(1, 120));
-            Assert.That(planet.GermaniumConcentration.Concentration, Is.InRange(1, 120));
+            planet.IroniumConcentration.Concentration.ShouldBeInRange(1, 120);
+            planet.BoraniumConcentration.Concentration.ShouldBeInRange(1, 120);
+            planet.GermaniumConcentration.Concentration.ShouldBeInRange(1, 120);
 
             ////TODO: Surface minerals = 0
         }
