@@ -1,6 +1,5 @@
 ﻿namespace StarsReloaded.Shared.Tests.WorldGen.Services
 {
-    using Moq;
     using NUnit.Framework;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.Services;
