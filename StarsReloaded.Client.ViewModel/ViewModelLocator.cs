@@ -36,6 +36,7 @@ namespace StarsReloaded.Client.ViewModel
             ////Services
             SimpleIoc.Default.Register<IRngService, RngService>();
             SimpleIoc.Default.Register<IGalaxyGeneratorService, GalaxyGeneratorService>();
+            SimpleIoc.Default.Register<IPlanetGeneratorService, PlanetGeneratorService>();
             SimpleIoc.Default.Register<IPlanetSimulationService, PlanetSimulationService>();
 
             ////Windows
