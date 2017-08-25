@@ -1,7 +1,8 @@
 ﻿namespace StarsReloaded.Shared.Tests.WorldGen.Services
 {
+    using Moq;
     using NUnit.Framework;
-
+    using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.Services;
     using StarsReloaded.Shared.WorldGen.Helpers;
     using StarsReloaded.Shared.WorldGen.Meta;
@@ -13,10 +14,16 @@
         ////System Under Test
         private IGalaxyGeneratorService galaxyGeneratorService;
 
+        ////Dependencies
+        private Mock<IPlanetGeneratorService> planetGeneratorService;
+
         [SetUp]
         public void Setup()
         {
-            this.galaxyGeneratorService = new GalaxyGeneratorService(new RngService());
+            this.planetGeneratorService = new Mock<IPlanetGeneratorService>();
+            this.planetGeneratorService.Setup(s => s.PopulatePlanetStats(It.IsAny<Planet>()));
+
+            this.galaxyGeneratorService = new GalaxyGeneratorService(new RngService(), planetGeneratorService.Object);
         }
 
         [Test]
@@ -42,20 +49,6 @@
             {
                 Assert.That(planet.X, Is.InRange(0, edge));
                 Assert.That(planet.Y, Is.InRange(0, edge));
-
-                Assert.That(planet.Name, Is.Not.Empty);
-
-                Assert.That(planet.Gravity.Clicks, Is.InRange(-50, 50));
-                Assert.That(planet.Temperature.Clicks, Is.InRange(-50, 50));
-                Assert.That(planet.Radiation.Clicks, Is.InRange(-50, 50));
-
-                Assert.That(planet.OriginalGravity.Clicks, Is.InRange(-50, 50));
-                Assert.That(planet.OriginalTemperature.Clicks, Is.InRange(-50, 50));
-                Assert.That(planet.OriginalRadiation.Clicks, Is.InRange(-50, 50));
-
-                Assert.That(planet.IroniumConcentration.Concentration, Is.InRange(1, 120));
-                Assert.That(planet.BoraniumConcentration.Concentration, Is.InRange(1, 120));
-                Assert.That(planet.GermaniumConcentration.Concentration, Is.InRange(1, 120));
             }
         }
     }

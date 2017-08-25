@@ -22,10 +22,12 @@
         private const int MaxFailedFitsClump = 20;
 
         private readonly IRngService rngService;
+        private readonly IPlanetGeneratorService planetGeneratorService;
 
-        public GalaxyGeneratorService(IRngService rngService)
+        public GalaxyGeneratorService(IRngService rngService, IPlanetGeneratorService planetGeneratorService)
         {
             this.rngService = rngService;
+            this.planetGeneratorService = planetGeneratorService;
         }
 
         public Galaxy Generate(GalaxySize size, GalaxyDensity density, PlanetDistribution planetDistribution)
@@ -50,7 +52,7 @@
 
             foreach (var planet in galaxy.Planets)
             {
-                this.GeneratePlanetStats(planet);
+                this.planetGeneratorService.PopulatePlanetStats(planet);
             }
 
             return galaxy;
@@ -250,34 +252,6 @@
             }
 
             throw new PlanetPlacementException();
-        }
-
-        private void GeneratePlanetStats(Planet planet)
-        {
-            planet.Name = Guid.NewGuid().ToString();
-
-            planet.OriginalGravity = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Gravity));
-            planet.OriginalTemperature = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Temperature));
-            planet.OriginalRadiation = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Radiation));
-
-            ////TODO: set to original
-            planet.Gravity = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Gravity));
-            planet.Temperature = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Temperature));
-            planet.Radiation = new HabitationParameter(this.rngService.HabitiationParameter(HabitationParameterType.Radiation));
-
-            var extremeHabs =
-                (planet.Gravity.IsExtreme ? 1 : 0) +
-                (planet.Temperature.IsExtreme ? 1 : 0) +
-                (planet.Radiation.IsExtreme ? 1 : 0);
-
-            planet.IroniumConcentration = new MineralConcentration(this.rngService.MineralConcentration(extremeHabs));
-            planet.BoraniumConcentration = new MineralConcentration(this.rngService.MineralConcentration(extremeHabs));
-            planet.GermaniumConcentration = new MineralConcentration(this.rngService.MineralConcentration(extremeHabs));
-
-            ////TODO: set to 0
-            planet.SurfaceIronium = this.rngService.Next(2000);
-            planet.SurfaceBoranium = this.rngService.Next(2000);
-            planet.SurfaceGermanium = this.rngService.Next(2000);
         }
     }
 }
