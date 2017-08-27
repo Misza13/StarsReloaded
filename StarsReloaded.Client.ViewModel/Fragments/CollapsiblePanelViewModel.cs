@@ -50,6 +50,7 @@
             }
         }
 
+        ////TODO: Do it with styling
         [DependsUpon(nameof(IsExpanded))]
         public string ExpandButtonSource
             => this.IsExpanded
