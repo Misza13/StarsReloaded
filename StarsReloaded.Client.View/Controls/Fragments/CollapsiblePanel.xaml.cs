@@ -27,8 +27,8 @@ namespace StarsReloaded.View.Controls.Fragments
 
         public string Header
         {
-            get => (string)this.GetValue(HeaderProperty);
-            set => this.SetValue(HeaderProperty, value);
+            get { return (string) this.GetValue(HeaderProperty); }
+            set { this.SetValue(HeaderProperty, value); }
         }
     }
 }
