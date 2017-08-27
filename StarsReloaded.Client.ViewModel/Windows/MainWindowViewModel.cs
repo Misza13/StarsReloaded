@@ -1,8 +1,7 @@
 ﻿namespace StarsReloaded.Client.ViewModel.Windows
 {
     using GalaSoft.MvvmLight.Messaging;
-
-    using StarsReloaded.Client.ViewModel.Messages;
+    using StarsReloaded.Client.Mediation.Messages;
     using StarsReloaded.Client.ViewModel.ModelWrappers;
     using StarsReloaded.Shared.Model;
 
@@ -18,7 +17,7 @@
                 Messenger.Default.Send(new GameStateLoadedMessage(this.GameState));
 
                 var selectedPlanet = this.GameState.Galaxy.Planets.Find(p => p.X <= 200 && p.Y <= 200);
-                Messenger.Default.Send(new PlanetSelectedMessage(new PlanetWrapper(selectedPlanet)));
+                Messenger.Default.Send(new PlanetSelectedMessage(selectedPlanet));
             }
         }
 

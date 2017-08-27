@@ -1,15 +1,9 @@
-﻿namespace StarsReloaded.Client.ViewModel
+﻿namespace StarsReloaded.Client.Mediation
 {
     using GalaSoft.MvvmLight.Messaging;
-    using StarsReloaded.Client.ViewModel.Messages;
+    using StarsReloaded.Client.Mediation.Messages;
+    using StarsReloaded.Client.Mediation.Windows;
     using StarsReloaded.Shared.Model;
-
-    public interface IWindowManager
-    {
-        void ShowStartupWindow();
-
-        void ShowMainWindow(GameState gameState);
-    }
 
     public class WindowManager : IWindowManager
     {
@@ -25,18 +19,5 @@
             Messenger.Default.Send(new GameStateLoadedMessage(gameState));
             window.Show();
         }
-    }
-
-    public interface IWindow
-    {
-        void Show();
-    }
-
-    public interface IMainWindow : IWindow
-    {
-    }
-
-    public interface IStartupWindow : IWindow
-    {
     }
 }

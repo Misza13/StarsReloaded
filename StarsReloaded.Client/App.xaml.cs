@@ -3,6 +3,8 @@
     using System.Windows;
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
+    using StarsReloaded.Client.Mediation;
+    using StarsReloaded.Client.Mediation.Windows;
     using StarsReloaded.Client.ViewModel;
     using StarsReloaded.Shared.Guts.Services;
     using StarsReloaded.Shared.Services;

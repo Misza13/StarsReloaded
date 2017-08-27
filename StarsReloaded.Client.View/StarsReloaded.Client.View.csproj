@@ -181,6 +181,10 @@
       <Project>{99d75acd-d661-4c74-9a24-5aafd0b2fcb2}</Project>
       <Name>StarsReloaded.Client.ViewModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StarsReloaded.Client.Mediation\StarsReloaded.Client.Mediation.csproj">
+      <Project>{0E19E145-88D5-48EE-A782-80A875B5FE90}</Project>
+      <Name>StarsReloaded.Client.Mediation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StarsReloaded.Shared.Model\StarsReloaded.Shared.Model.csproj">
       <Project>{0FF69D23-8A50-4382-8153-82F01447964B}</Project>
       <Name>StarsReloaded.Shared.Model</Name>

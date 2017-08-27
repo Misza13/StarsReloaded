@@ -4,7 +4,7 @@
     using System.Windows.Threading;
     using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
-    using StarsReloaded.Client.ViewModel.Messages;
+    using StarsReloaded.Client.Mediation;
     using StarsReloaded.Shared.Model;
     using StarsReloaded.Shared.WorldGen.Meta;
     using StarsReloaded.Shared.WorldGen.Services;

@@ -7,10 +7,9 @@
 
     using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
-
+    using StarsReloaded.Client.Mediation.Messages;
     using StarsReloaded.Client.ViewModel.Attributes;
     using StarsReloaded.Client.ViewModel.Fragments;
-    using StarsReloaded.Client.ViewModel.Messages;
     using StarsReloaded.Client.ViewModel.ModelWrappers;
     using StarsReloaded.Shared.Guts.Services;
     using StarsReloaded.Shared.Model;
@@ -253,7 +252,7 @@
 
         private void OnPlanetSelected(PlanetSelectedMessage message)
         {
-            this.SelectedPlanet = message.Planet;
+            this.SelectedPlanet = message.Planet != null ? new PlanetWrapper(message.Planet) : null;
         }
 
         private void OnMineralChartResized(double newWidth)

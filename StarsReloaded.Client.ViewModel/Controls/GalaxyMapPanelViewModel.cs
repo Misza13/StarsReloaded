@@ -8,9 +8,8 @@
 
     using GalaSoft.MvvmLight.CommandWpf;
     using GalaSoft.MvvmLight.Messaging;
-
+    using StarsReloaded.Client.Mediation.Messages;
     using StarsReloaded.Client.ViewModel.Attributes;
-    using StarsReloaded.Client.ViewModel.Messages;
     using StarsReloaded.Client.ViewModel.ModelWrappers;
     using StarsReloaded.Shared.Model;
 
@@ -75,7 +74,7 @@
             set
             {
                 this.Set(() => this.SelectedPlanet, ref this.selectedPlanet, value);
-                Messenger.Default.Send(new PlanetSelectedMessage(value));
+                Messenger.Default.Send(new PlanetSelectedMessage(value?.Model));
             }
         }
 

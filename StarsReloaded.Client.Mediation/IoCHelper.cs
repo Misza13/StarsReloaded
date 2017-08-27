@@ -1,4 +1,4 @@
-﻿namespace StarsReloaded.Client.ViewModel
+﻿namespace StarsReloaded.Client.Mediation
 {
     using Castle.Windsor;
 

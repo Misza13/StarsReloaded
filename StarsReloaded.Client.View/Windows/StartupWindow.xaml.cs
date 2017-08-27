@@ -1,6 +1,8 @@
 ﻿namespace StarsReloaded.View.Windows
 {
     using System.Windows;
+    using StarsReloaded.Client.Mediation;
+    using StarsReloaded.Client.Mediation.Windows;
     using StarsReloaded.Client.ViewModel;
     using StarsReloaded.Client.ViewModel.Windows;
 

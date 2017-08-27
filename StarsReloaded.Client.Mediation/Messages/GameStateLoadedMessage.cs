@@ -1,4 +1,4 @@
-﻿namespace StarsReloaded.Client.ViewModel.Messages
+﻿namespace StarsReloaded.Client.Mediation.Messages
 {
     using StarsReloaded.Shared.Model;
 

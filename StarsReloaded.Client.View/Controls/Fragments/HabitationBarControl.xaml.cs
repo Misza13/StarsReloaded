@@ -3,6 +3,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
+    using StarsReloaded.Client.Mediation;
     using StarsReloaded.Client.ViewModel;
     using StarsReloaded.Client.ViewModel.Fragments;
     using StarsReloaded.Shared.Model;

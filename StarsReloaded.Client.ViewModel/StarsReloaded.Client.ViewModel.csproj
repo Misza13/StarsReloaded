@@ -77,17 +77,12 @@
     <Compile Include="DemoData.cs" />
     <Compile Include="Fragments\CollapsiblePanelViewModel.cs" />
     <Compile Include="Fragments\HabitationBarControlViewModel.cs" />
-    <Compile Include="IoCHelper.cs" />
-    <Compile Include="Messages\GameStateLoadedMessage.cs" />
-    <Compile Include="Messages\PlanetSelectedMessage.cs" />
-    <Compile Include="Messages\ShowMainWindowMessage.cs" />
     <Compile Include="ModelWrappers\BaseWrapper.cs" />
     <Compile Include="ModelWrappers\GravityWrapper.cs" />
     <Compile Include="ModelWrappers\HabitationParameterWrapper.cs" />
     <Compile Include="ModelWrappers\PlanetWrapper.cs" />
     <Compile Include="ModelWrappers\RadiationWrapper.cs" />
     <Compile Include="ModelWrappers\TemperatureWrapper.cs" />
-    <Compile Include="IWindowManager.cs" />
     <Compile Include="Windows\MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windows\StartupWindowViewModel.cs" />
@@ -97,6 +92,10 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StarsReloaded.Client.Mediation\StarsReloaded.Client.Mediation.csproj">
+      <Project>{0E19E145-88D5-48EE-A782-80A875B5FE90}</Project>
+      <Name>StarsReloaded.Client.Mediation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StarsReloaded.Shared.Guts\StarsReloaded.Shared.Guts.csproj">
       <Project>{82385E19-9BE1-44E1-9208-6573841C498D}</Project>
       <Name>StarsReloaded.Shared.Guts</Name>
