@@ -44,14 +44,9 @@
             Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
             Messenger.Default.Register<PlanetSelectedMessage>(this, this.OnPlanetSelected);
 
-            this.GravityBar = ViewModelLocator.HabitationBarControl;
-            this.GravityBar.ParameterType = HabitationParameterType.Gravity;
-
-            this.TemperatureBar = ViewModelLocator.HabitationBarControl;
-            this.TemperatureBar.ParameterType = HabitationParameterType.Temperature;
-
-            this.RadiationBar = ViewModelLocator.HabitationBarControl;
-            this.RadiationBar.ParameterType = HabitationParameterType.Radiation;
+            this.GravityBar = new HabitationBarControlViewModel { ParameterType = HabitationParameterType.Gravity };
+            this.TemperatureBar = new HabitationBarControlViewModel { ParameterType = HabitationParameterType.Temperature };
+            this.RadiationBar = new HabitationBarControlViewModel { ParameterType = HabitationParameterType.Radiation };
 
             if (this.IsInDesignMode)
             {
