@@ -26,7 +26,6 @@
 
         #region Private fields
 
-        private readonly IPlanetSimulationService planetSimulationService;
         private PlanetWrapper selectedPlanet;
         private HabitationBarControlViewModel gravityBar;
         private HabitationBarControlViewModel temperatureBar;
@@ -38,10 +37,8 @@
 
         #region Constructors
 
-        public SummaryPanelViewModel(IPlanetSimulationService planetSimulationService)
+        public SummaryPanelViewModel()
         {
-            this.planetSimulationService = planetSimulationService;
-
             this.MineralChartResizedCommand = new RelayCommand<double>(this.OnMineralChartResized);
 
             Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
@@ -81,6 +78,12 @@
                 this.MineralChartWidth = 350;
             }
         }
+
+        #endregion
+
+        #region Dependencies
+
+        public IPlanetSimulationService PlanetSimulationService { get; set; }
 
         #endregion
 
@@ -194,7 +197,7 @@
             this.SelectedPlanet == null
                 ? 0
                 : this.MineralChartWidth
-                  * this.planetSimulationService.GetMiningRate(this.SelectedPlanet.Model, MineralType.Ironium)
+                  * this.PlanetSimulationService.GetMiningRate(this.SelectedPlanet.Model, MineralType.Ironium)
                   / MaxSurfaceMinerals;
 
         [DependsUpon(nameof(MineralChartWidth))]
@@ -204,7 +207,7 @@
             this.SelectedPlanet == null
                 ? 0
                 : this.MineralChartWidth
-                  * this.planetSimulationService.GetMiningRate(this.SelectedPlanet.Model, MineralType.Boranium)
+                  * this.PlanetSimulationService.GetMiningRate(this.SelectedPlanet.Model, MineralType.Boranium)
                   / MaxSurfaceMinerals;
 
         [DependsUpon(nameof(MineralChartWidth))]
@@ -214,7 +217,7 @@
             this.SelectedPlanet == null
                 ? 0
                 : this.MineralChartWidth
-                  * this.planetSimulationService.GetMiningRate(this.SelectedPlanet.Model, MineralType.Germanium)
+                  * this.PlanetSimulationService.GetMiningRate(this.SelectedPlanet.Model, MineralType.Germanium)
                   / MaxSurfaceMinerals;
 
         [DependsUpon(nameof(MineralChartWidth))]

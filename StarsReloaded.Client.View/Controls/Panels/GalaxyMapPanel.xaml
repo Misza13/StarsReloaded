@@ -6,11 +6,12 @@
     xmlns:modelWrappers="clr-namespace:StarsReloaded.Client.ViewModel.ModelWrappers;assembly=StarsReloaded.Client.ViewModel"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:command="http://www.galasoft.ch/mvvmlight"
+    xmlns:controls="clr-namespace:StarsReloaded.Client.ViewModel.Controls;assembly=StarsReloaded.Client.ViewModel"
     x:Class="StarsReloaded.View.Controls.Panels.GalaxyMapPanel"
-    DataContext="{Binding Source={StaticResource Locator}, Path=GalaxyMapPanel}"
     x:Name="MapPanel"
-    mc:Ignorable="d"
     Background="{x:Static SystemColors.AppWorkspaceBrush}"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type={x:Type controls:GalaxyMapPanelViewModel}, IsDesignTimeCreatable=True}"
     d:DesignHeight="400" d:DesignWidth="400">
     <Grid>
         <Grid.RowDefinitions>

@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:fragments="clr-namespace:StarsReloaded.Client.ViewModel.Fragments;assembly=StarsReloaded.Client.ViewModel"
              mc:Ignorable="d"
-             d:DesignHeight="24" d:DesignWidth="400"
-             DataContext="{Binding Source={StaticResource Locator}, Path=HabitationBarControl}">
+             d:DataContext="{d:DesignInstance Type={x:Type fragments:HabitationBarControlViewModel}, IsDesignTimeCreatable=True}"
+             d:DesignHeight="24" d:DesignWidth="400">
     <Canvas x:Name="BarCanvas"
         Height="24"
         Width="Auto"

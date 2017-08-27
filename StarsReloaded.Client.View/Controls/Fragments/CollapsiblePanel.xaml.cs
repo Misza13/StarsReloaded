@@ -4,7 +4,7 @@ namespace StarsReloaded.View.Controls.Fragments
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
-
+    using StarsReloaded.Client.ViewModel;
     using StarsReloaded.Client.ViewModel.Fragments;
 
     public partial class CollapsiblePanel : UserControl
@@ -18,6 +18,7 @@ namespace StarsReloaded.View.Controls.Fragments
         public CollapsiblePanel()
         {
             this.InitializeComponent();
+            this.DataContext = IoCHelper.Resolve<CollapsiblePanelViewModel>();
 
             var bindingViewMode = new Binding(nameof(CollapsiblePanelViewModel.Header)) { Mode = BindingMode.TwoWay };
             this.SetBinding(HeaderProperty, bindingViewMode);
@@ -25,15 +26,8 @@ namespace StarsReloaded.View.Controls.Fragments
 
         public string Header
         {
-            get
-            {
-                return (string)this.GetValue(HeaderProperty);
-            }
-
-            set
-            {
-                this.SetValue(HeaderProperty, value);
-            }
+            get => (string)this.GetValue(HeaderProperty);
+            set => this.SetValue(HeaderProperty, value);
         }
     }
 }

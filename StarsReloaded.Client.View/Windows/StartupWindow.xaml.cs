@@ -1,22 +1,16 @@
 ﻿namespace StarsReloaded.View.Windows
 {
     using System.Windows;
+    using StarsReloaded.Client.ViewModel;
     using StarsReloaded.Client.ViewModel.Windows;
 
-    public partial class StartupWindow : Window
+    public partial class StartupWindow : Window, IStartupWindow
     {
         public StartupWindow()
         {
             this.InitializeComponent();
-        }
-
-        private void StartupWindow_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            var vm = this.DataContext as StartupWindowViewModel;
-            if (vm != null)
-            {
-                vm.CloseAction = this.Close;
-            }
+            this.DataContext = IoCHelper.Resolve<StartupWindowViewModel>();
+            (this.DataContext as StartupWindowViewModel).CloseAction = this.Close;
         }
     }
 }

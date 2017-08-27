@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
-             DataContext="{Binding Source={StaticResource Locator}, Path=CollapsiblePanel}"
+             xmlns:fragments="clr-namespace:StarsReloaded.Client.ViewModel.Fragments;assembly=StarsReloaded.Client.ViewModel"
              mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type={x:Type fragments:CollapsiblePanelViewModel}, IsDesignTimeCreatable=True}"
              Width="150">
     <UserControl.Resources>
         <ResourceDictionary>

@@ -3,7 +3,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
-
+    using StarsReloaded.Client.ViewModel;
     using StarsReloaded.Client.ViewModel.Fragments;
     using StarsReloaded.Shared.Model;
 
@@ -19,6 +19,7 @@
         public HabitationBarControl()
         {
             this.InitializeComponent();
+            this.DataContext = IoCHelper.Resolve<HabitationBarControlViewModel>();
 
             var bindingViewMode = new Binding(nameof(HabitationBarControlViewModel.ParameterType)) { Mode = BindingMode.OneWay };
             this.SetBinding(HabitationParameterTypeProperty, bindingViewMode);

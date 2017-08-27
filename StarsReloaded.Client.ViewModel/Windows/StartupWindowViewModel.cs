@@ -1,6 +1,7 @@
 ﻿namespace StarsReloaded.Client.ViewModel.Windows
 {
     using System;
+    using System.Windows.Threading;
     using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
     using StarsReloaded.Client.ViewModel.Messages;
@@ -10,21 +11,22 @@
 
     public class StartupWindowViewModel : BaseViewModel
     {
-        #region Private fields
-
-        private readonly IGalaxyGeneratorService galaxyGeneratorService;
-
-        #endregion
-
         #region Constructors
 
         public StartupWindowViewModel(IGalaxyGeneratorService galaxyGeneratorService)
         {
-            this.galaxyGeneratorService = galaxyGeneratorService;
+            this.GeneratorService = galaxyGeneratorService;
 
             this.NewGameCommand = new RelayCommand(this.NewGame);
             this.ExitCommand = new RelayCommand(this.Exit);
         }
+
+        #endregion
+
+        #region Dependencies
+
+        public IWindowManager WindowManager { get; set; }
+        public IGalaxyGeneratorService GeneratorService { get; set; }
 
         #endregion
 
@@ -51,7 +53,7 @@
         private void NewGame()
         {
             // TODO: Game init logic here
-            var galaxy = this.galaxyGeneratorService.Generate(GalaxySize.Medium, GalaxyDensity.Normal, PlanetDistribution.UniformClumping);
+            var galaxy = this.GeneratorService.Generate(GalaxySize.Medium, GalaxyDensity.Normal, PlanetDistribution.UniformClumping);
 
             var race = new PlayerRace()
                 {
@@ -60,9 +62,9 @@
                     RadiationTolerance = new HabitationRange(-15, +35)
                 };
 
-            var gameState = new GameState() { Galaxy = galaxy, CurrentPlayerNum = 0, PlayerRaces = new[] { race } };
+            var gameState = new GameState { Galaxy = galaxy, CurrentPlayerNum = 0, PlayerRaces = new[] { race } };
 
-            Messenger.Default.Send(new ShowMainWindowMessage(gameState));
+            this.WindowManager.ShowMainWindow(gameState);
             this.CloseAction?.Invoke();
         }
 

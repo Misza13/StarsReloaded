@@ -7,9 +7,9 @@
              xmlns:controls="clr-namespace:StarsReloaded.Client.ViewModel.Controls;assembly=StarsReloaded.Client.ViewModel"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
-             DataContext="{Binding Source={StaticResource Locator}, Path=SummaryPanel}"
-             mc:Ignorable="d"
              Background="{x:Static SystemColors.AppWorkspaceBrush}"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type={x:Type controls:SummaryPanelViewModel}, IsDesignTimeCreatable=True}"
              d:DesignWidth="500">
     <UserControl.Resources>
         <ResourceDictionary>

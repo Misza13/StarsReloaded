@@ -13,8 +13,6 @@
     using StarsReloaded.Client.ViewModel.Messages;
     using StarsReloaded.Client.ViewModel.ModelWrappers;
     using StarsReloaded.Shared.Model;
-    using StarsReloaded.Shared.WorldGen.Meta;
-    using StarsReloaded.Shared.WorldGen.Services;
 
     public class GalaxyMapPanelViewModel : BaseViewModel
     {
@@ -27,17 +25,20 @@
 
         #region Constructors
 
-        public GalaxyMapPanelViewModel(IGalaxyGeneratorService galaxyGeneratorService)
+        public GalaxyMapPanelViewModel()
         {
             Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
+            this.MapClickCommand = new RelayCommand<MouseButtonEventArgs>(this.MapClick);
 
             if (this.IsInDesignMode)
             {
-                this.Galaxy = galaxyGeneratorService.Generate(GalaxySize.Medium, GalaxyDensity.Dense, PlanetDistribution.UniformClumping);
-                this.MapClick(new Point() { X = 50, Y = 50 });
-            }
+                if (this.Galaxy == null)
+                {
+                    this.Galaxy = DemoData.GenerateGameState().Galaxy;
+                }
 
-            this.MapClickCommand = new RelayCommand<MouseButtonEventArgs>(this.MapClick);
+                this.MapClick(new Point { X = 50, Y = 50 });
+            }
         }
 
         #endregion
