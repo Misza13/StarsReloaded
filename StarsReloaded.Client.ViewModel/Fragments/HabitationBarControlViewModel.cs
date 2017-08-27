@@ -199,6 +199,7 @@
 
         private static string GetBarFillColor(HabitationParameterType parameterType)
         {
+            ////TODO: refactor to use converters and styles instead
             switch (parameterType)
             {
                 case HabitationParameterType.Gravity:
@@ -214,6 +215,7 @@
 
         private static string GetGraphStrokeColor(HabitationParameterType parameterType)
         {
+            ////TODO: refactor to use converters and styles instead
             switch (parameterType)
             {
                 case HabitationParameterType.Gravity:
