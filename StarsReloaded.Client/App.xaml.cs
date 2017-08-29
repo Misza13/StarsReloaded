@@ -9,7 +9,9 @@
     using StarsReloaded.Shared.Guts.Services;
     using StarsReloaded.Shared.Services;
     using StarsReloaded.Shared.WorldGen.Services;
-    using StarsReloaded.View.Windows;
+
+    using MainWindow = StarsReloaded.Client.View.Windows.MainWindow;
+    using StartupWindow = StarsReloaded.Client.View.Windows.StartupWindow;
 
     public partial class App : Application
     {

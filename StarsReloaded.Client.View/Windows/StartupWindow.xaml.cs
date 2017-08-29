@@ -1,9 +1,9 @@
-﻿namespace StarsReloaded.View.Windows
+﻿namespace StarsReloaded.Client.View.Windows
 {
     using System.Windows;
+
     using StarsReloaded.Client.Mediation;
     using StarsReloaded.Client.Mediation.Windows;
-    using StarsReloaded.Client.ViewModel;
     using StarsReloaded.Client.ViewModel.Windows;
 
     public partial class StartupWindow : Window, IStartupWindow

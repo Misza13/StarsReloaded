@@ -7,8 +7,8 @@
     <ProjectGuid>{8DA1C96D-A334-4347-9213-84FE426529B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StarsReloaded.View</RootNamespace>
-    <AssemblyName>StarsReloaded</AssemblyName>
+    <RootNamespace>StarsReloaded.Client.View</RootNamespace>
+    <AssemblyName>StarsReloaded.Client.View</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -99,6 +99,8 @@
     <Compile Include="Controls\Panels\SummaryPanel.xaml.cs">
       <DependentUpon>SummaryPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ConditionalVisibilityConverter.cs" />
+    <Compile Include="Converters\NotNullToVisibleConverter.cs" />
     <Compile Include="Utilities\DependencyPropertyBuilder.cs" />
     <Compile Include="Windows\StartupWindow.xaml.cs">
       <DependentUpon>StartupWindow.xaml</DependentUpon>

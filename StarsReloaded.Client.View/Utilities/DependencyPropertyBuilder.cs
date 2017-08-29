@@ -1,4 +1,4 @@
-﻿namespace StarsReloaded.View.Utilities
+﻿namespace StarsReloaded.Client.View.Utilities
 {
     using System;
     using System.Windows;

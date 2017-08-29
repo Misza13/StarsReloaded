@@ -1,5 +1,5 @@
 ﻿
-namespace StarsReloaded.View.Controls.Panels
+namespace StarsReloaded.Client.View.Controls.Panels
 {
     using System.Windows.Controls;
 

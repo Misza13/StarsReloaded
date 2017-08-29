@@ -1,6 +1,7 @@
-﻿namespace StarsReloaded.View.Controls.Panels
+﻿namespace StarsReloaded.Client.View.Controls.Panels
 {
     using System.Windows.Controls;
+
     using StarsReloaded.Client.Mediation;
     using StarsReloaded.Client.ViewModel.Controls;
 

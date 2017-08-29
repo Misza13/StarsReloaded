@@ -1,11 +1,12 @@
-﻿namespace StarsReloaded.View.Controls.Fragments
+﻿namespace StarsReloaded.Client.View.Controls.Fragments
 {
     using System.Windows;
     using System.Windows.Controls;
+
     using StarsReloaded.Client.Mediation;
+    using StarsReloaded.Client.View.Utilities;
     using StarsReloaded.Client.ViewModel.Fragments;
     using StarsReloaded.Shared.Model;
-    using StarsReloaded.View.Utilities;
 
     public partial class HabitationBarControl : UserControl
     {

@@ -1,7 +1,9 @@
-﻿namespace StarsReloaded.View.Windows
+﻿namespace StarsReloaded.Client.View.Windows
 {
     using System.Windows;
+
     using GalaSoft.MvvmLight.Messaging;
+
     using StarsReloaded.Client.Mediation;
     using StarsReloaded.Client.Mediation.Messages;
     using StarsReloaded.Client.Mediation.Windows;

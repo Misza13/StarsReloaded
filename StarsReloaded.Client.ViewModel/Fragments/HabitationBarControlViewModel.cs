@@ -127,7 +127,10 @@
         public int OriginalValueClicks => this.OriginalValue?.Clicks ?? 0;
 
         [DependsUpon(nameof(HabitationRange))]
-        public Visibility HabBarVisibility => (this.HabitationRange?.IsImmune ?? true) ? Visibility.Hidden : Visibility.Visible;
+        public bool IsImmune => (this.HabitationRange?.IsImmune ?? false);
+
+        [DependsUpon(nameof(HabitationRange))]
+        public bool IsNotImmune => !this.IsImmune;
 
         [DependsUpon(nameof(HabitationRange))]
         [DependsUpon(nameof(BarWidth))]
@@ -144,15 +147,9 @@
         [DependsUpon(nameof(ParameterType))]
         public string BarFillColor => GetBarFillColor(this.ParameterType);
 
-        [DependsUpon(nameof(CurrentValue))]
-        public Visibility CurrentValueVisibility => (this.CurrentValue == null) ? Visibility.Hidden : Visibility.Visible;
-
         [DependsUpon(nameof(BarWidth))]
         [DependsUpon(nameof(CurrentValueClicks))]
         public double CurrentValuePos => this.BarWidth * (this.CurrentValueClicks + 50) / 100;
-
-        [DependsUpon(nameof(OriginalValue))]
-        public Visibility OriginalValueVisibility => (this.OriginalValue == null) ? Visibility.Hidden : Visibility.Visible;
 
         [DependsUpon(nameof(BarWidth))]
         [DependsUpon(nameof(OriginalValueClicks))]

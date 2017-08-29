@@ -1,12 +1,17 @@
-﻿<UserControl x:Class="StarsReloaded.View.Controls.Fragments.HabitationBarControl"
+﻿<UserControl x:Class="StarsReloaded.Client.View.Controls.Fragments.HabitationBarControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fragments="clr-namespace:StarsReloaded.Client.ViewModel.Fragments;assembly=StarsReloaded.Client.ViewModel"
+             xmlns:converters="clr-namespace:StarsReloaded.Client.View.Converters"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type fragments:HabitationBarControlViewModel}, IsDesignTimeCreatable=True}"
              d:DesignHeight="24" d:DesignWidth="400">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+        <converters:NotNullToVisibleConverter x:Key="NotNullToVisibleConverter" />
+    </UserControl.Resources>
     <Canvas x:Name="BarCanvas"
         Height="24"
         Width="Auto"
@@ -16,7 +21,7 @@
         
         <!--Hab range bar-->
         <Rectangle
-            Visibility="{Binding HabBarVisibility}"
+            Visibility="{Binding IsNotImmune, Converter={StaticResource NotNullToVisibleConverter}}"
             Height="{Binding ActualHeight, ElementName=BarCanvas, Mode=OneWay}"
             Width="{Binding HabBarWidth, Mode=OneWay}"
             Fill="{Binding BarFillColor}">
@@ -27,7 +32,7 @@
         
         <!--Original value-->
         <Line
-            Visibility="{Binding OriginalValueVisibility}"
+            Visibility="{Binding OriginalValue, Converter={StaticResource NotNullToVisibleConverter}}"
             X1="0" Y1="8"
             X2="0" Y2="16"
             Stroke="{Binding GraphStrokeColor}"
@@ -37,7 +42,7 @@
             </Line.RenderTransform>
         </Line>
         <Line
-            Visibility="{Binding OriginalValueVisibility}"
+            Visibility="{Binding OriginalValue, Converter={StaticResource NotNullToVisibleConverter}}"
             X1="-4" Y1="12"
             X2="4" Y2="12"
             Stroke="{Binding GraphStrokeColor}"
@@ -49,7 +54,7 @@
 
         <!--Terraformability range-->
         <Line
-            Visibility="{Binding OriginalValueVisibility}"
+            Visibility="{Binding OriginalValue, Converter={StaticResource NotNullToVisibleConverter}}"
             X1="{Binding OriginalValuePos}" Y1="12"
             X2="{Binding AfterTerraformPos}" Y2="12"
             Stroke="{Binding GraphStrokeColor}"
@@ -57,7 +62,7 @@
 
         <!--Current value-->
         <Polygon
-            Visibility="{Binding CurrentValueVisibility}"
+            Visibility="{Binding CurrentValue, Converter={StaticResource NotNullToVisibleConverter}}"
             Points="0,6 6,12 0,18 -6,12"
             Stroke="{Binding GraphStrokeColor}">
             <Polygon.RenderTransform>
