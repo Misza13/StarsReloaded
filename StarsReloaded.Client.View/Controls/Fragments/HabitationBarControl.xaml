@@ -18,10 +18,10 @@
         <Rectangle
             Visibility="{Binding HabBarVisibility}"
             Height="{Binding ActualHeight, ElementName=BarCanvas, Mode=OneWay}"
-            Width="{Binding HabBarWidth}"
+            Width="{Binding HabBarWidth, Mode=OneWay}"
             Fill="{Binding BarFillColor}">
             <Rectangle.RenderTransform>
-                <TranslateTransform X="{Binding HabBarLeft}" Y="0"/>
+                <TranslateTransform X="{Binding HabBarLeft, Mode=OneWay}" Y="0"/>
             </Rectangle.RenderTransform>
         </Rectangle>
         

@@ -1,8 +1,8 @@
 ﻿namespace StarsReloaded.View.Controls.Panels
 {
+    using System.Windows;
     using System.Windows.Controls;
     using StarsReloaded.Client.Mediation;
-    using StarsReloaded.Client.ViewModel;
     using StarsReloaded.Client.ViewModel.Controls;
 
     public partial class SummaryPanel : UserControl

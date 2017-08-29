@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="StarsReloaded.View.Controls.Panels.SummaryPanel"
+﻿<UserControl x:Name="_SummaryPanel"
+             x:Class="StarsReloaded.View.Controls.Panels.SummaryPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -71,7 +72,10 @@
             <fragments:HabitationBarControl
                 Grid.Row="0" Grid.Column="2"
                 HabitationParameterType="Gravity"
-                DataContext="{Binding GravityBar, Mode=TwoWay}"/>
+                HabitationRange="{Binding ElementName=_SummaryPanel, Path=DataContext.GravityRange, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                OriginalValue="{Binding ElementName=_SummaryPanel, Path=DataContext.SelectedPlanet.OriginalGravity.Model, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                CurrentValue="{Binding ElementName=_SummaryPanel, Path=DataContext.SelectedPlanet.Gravity.Model, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                MaxTerraformTech="{Binding ElementName=_SummaryPanel, Path=DataContext.MaxGravityTerraform, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Grid.Row="0" Grid.Column="4"
                        Text="{Binding GravityDisplayValue}"/>
 
@@ -82,7 +86,10 @@
             <fragments:HabitationBarControl
                 Grid.Row="2" Grid.Column="2"
                 HabitationParameterType="Temperature"
-                DataContext="{Binding TemperatureBar, Mode=TwoWay}"/>
+                HabitationRange="{Binding ElementName=_SummaryPanel, Path=DataContext.TemperatureRange, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                OriginalValue="{Binding ElementName=_SummaryPanel, Path=DataContext.SelectedPlanet.OriginalTemperature.Model, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                CurrentValue="{Binding ElementName=_SummaryPanel, Path=DataContext.SelectedPlanet.Temperature.Model, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                MaxTerraformTech="{Binding ElementName=_SummaryPanel, Path=DataContext.MaxTemperatureTerraform, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Grid.Row="2" Grid.Column="4"
                        Text="{Binding TemperatureDisplayValue}"/>
 
@@ -93,7 +100,10 @@
             <fragments:HabitationBarControl
                 Grid.Row="4" Grid.Column="2"
                 HabitationParameterType="Radiation"
-                DataContext="{Binding RadiationBar, Mode=TwoWay}"/>
+                HabitationRange="{Binding ElementName=_SummaryPanel, Path=DataContext.RadiationRange, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                OriginalValue="{Binding ElementName=_SummaryPanel, Path=DataContext.SelectedPlanet.OriginalRadiation.Model, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                CurrentValue="{Binding ElementName=_SummaryPanel, Path=DataContext.SelectedPlanet.Radiation.Model, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                MaxTerraformTech="{Binding ElementName=_SummaryPanel, Path=DataContext.MaxRadiationTerraform, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Grid.Row="4" Grid.Column="4"
                        Text="{Binding RadiationDisplayValue}"/>
         </Grid>

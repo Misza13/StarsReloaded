@@ -99,6 +99,7 @@
     <Compile Include="Controls\Panels\SummaryPanel.xaml.cs">
       <DependentUpon>SummaryPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\DependencyPropertyBuilder.cs" />
     <Compile Include="Windows\StartupWindow.xaml.cs">
       <DependentUpon>StartupWindow.xaml</DependentUpon>
     </Compile>

@@ -9,7 +9,6 @@
     using GalaSoft.MvvmLight.Messaging;
     using StarsReloaded.Client.Mediation.Messages;
     using StarsReloaded.Client.ViewModel.Attributes;
-    using StarsReloaded.Client.ViewModel.Fragments;
     using StarsReloaded.Client.ViewModel.ModelWrappers;
     using StarsReloaded.Shared.Guts.Services;
     using StarsReloaded.Shared.Model;
@@ -25,12 +24,17 @@
 
         #region Private fields
 
-        private PlanetWrapper selectedPlanet;
-        private HabitationBarControlViewModel gravityBar;
-        private HabitationBarControlViewModel temperatureBar;
-        private HabitationBarControlViewModel radiationBar;
-
         private double mineralChartWidth;
+
+        private PlanetWrapper selectedPlanet;
+
+        private HabitationRange gravityRange;
+        private HabitationRange temperatureRange;
+        private HabitationRange radiationRange;
+
+        private int maxGravityTerraform;
+        private int maxTemperatureTerraform;
+        private int maxRadiationTerraform;
 
         #endregion
 
@@ -43,15 +47,11 @@
             Messenger.Default.Register<GameStateLoadedMessage>(this, this.OnGameStateLoaded);
             Messenger.Default.Register<PlanetSelectedMessage>(this, this.OnPlanetSelected);
 
-            this.GravityBar = new HabitationBarControlViewModel { ParameterType = HabitationParameterType.Gravity };
-            this.TemperatureBar = new HabitationBarControlViewModel { ParameterType = HabitationParameterType.Temperature };
-            this.RadiationBar = new HabitationBarControlViewModel { ParameterType = HabitationParameterType.Radiation };
-
             if (this.IsInDesignMode)
             {
-                this.GravityBar.Range = HabitationRange.Immunity;
-                this.TemperatureBar.Range = new HabitationRange(-35, +5);
-                this.RadiationBar.Range = new HabitationRange(-20, +30);
+                this.GravityRange = HabitationRange.Immunity;
+                this.TemperatureRange = new HabitationRange(-35, +5);
+                this.RadiationRange = new HabitationRange(-20, +30);
 
                 this.SelectedPlanet =
                     new PlanetWrapper(
@@ -64,6 +64,9 @@
                                 OriginalGravity = new HabitationParameter(35),
                                 OriginalTemperature = new HabitationParameter(12),
                                 OriginalRadiation = new HabitationParameter(0),
+                                IroniumConcentration = new MineralConcentration(35),
+                                BoraniumConcentration = new MineralConcentration(55),
+                                GermaniumConcentration = new MineralConcentration(15),
                                 SurfaceIronium = 750,
                                 SurfaceBoranium = 2700,
                                 SurfaceGermanium = 1250
@@ -108,49 +111,84 @@
             private set
             {
                 this.Set(() => this.SelectedPlanet, ref this.selectedPlanet, value);
-                this.UpdatePlanetValues();
             }
         }
 
-        [DependsUpon(nameof(SelectedPlanet))]
-        public HabitationBarControlViewModel GravityBar
+        public HabitationRange GravityRange
         {
             get
             {
-                return this.gravityBar;
+                return this.gravityRange;
             }
 
             set
             {
-                this.Set(() => this.GravityBar, ref this.gravityBar, value);
+                this.Set(() => this.GravityRange, ref this.gravityRange, value);
             }
         }
 
-        [DependsUpon(nameof(SelectedPlanet))]
-        public HabitationBarControlViewModel TemperatureBar
+        public HabitationRange TemperatureRange
         {
             get
             {
-                return this.temperatureBar;
+                return this.temperatureRange;
             }
 
             set
             {
-                this.Set(() => this.TemperatureBar, ref this.temperatureBar, value);
+                this.Set(() => this.TemperatureRange, ref this.temperatureRange, value);
             }
         }
 
-        [DependsUpon(nameof(SelectedPlanet))]
-        public HabitationBarControlViewModel RadiationBar
+        public HabitationRange RadiationRange
         {
             get
             {
-                return this.radiationBar;
+                return this.radiationRange;
             }
 
             set
             {
-                this.Set(() => this.RadiationBar, ref this.radiationBar, value);
+                this.Set(() => this.RadiationRange, ref this.radiationRange, value);
+            }
+        }
+
+        public int MaxGravityTerraform
+        {
+            get
+            {
+                return this.maxGravityTerraform;
+            }
+
+            set
+            {
+                this.Set(() => this.MaxGravityTerraform, ref this.maxGravityTerraform, value);
+            }
+        }
+
+        public int MaxTemperatureTerraform
+        {
+            get
+            {
+                return this.maxTemperatureTerraform;
+            }
+
+            set
+            {
+                this.Set(() => this.MaxTemperatureTerraform, ref this.maxTemperatureTerraform, value);
+            }
+        }
+
+        public int MaxRadiationTerraform
+        {
+            get
+            {
+                return this.maxRadiationTerraform;
+            }
+
+            set
+            {
+                this.Set(() => this.MaxRadiationTerraform, ref this.maxRadiationTerraform, value);
             }
         }
 
@@ -160,6 +198,7 @@
             {
                 return this.mineralChartWidth;
             }
+
             set
             {
                 this.Set(() => this.MineralChartWidth, ref this.mineralChartWidth, value);
@@ -168,6 +207,24 @@
 
         [DependsUpon(nameof(MineralChartWidth))]
         public ObservableCollection<ChartLineElement> ChartLines => this.GetChartLines();
+
+        [DependsUpon(nameof(SelectedPlanet))]
+        public int GravityCurrentValue => this.SelectedPlanet?.Model.Gravity.Clicks ?? 0;
+
+        [DependsUpon(nameof(SelectedPlanet))]
+        public int TemperatureCurrentValue => this.SelectedPlanet?.Model.Temperature.Clicks ?? 0;
+
+        [DependsUpon(nameof(SelectedPlanet))]
+        public int RadiationCurrentValue => this.SelectedPlanet?.Model.Radiation.Clicks ?? 0;
+
+        [DependsUpon(nameof(SelectedPlanet))]
+        public int GravityOriginalValue => this.SelectedPlanet?.Model.OriginalGravity.Clicks ?? 0;
+
+        [DependsUpon(nameof(SelectedPlanet))]
+        public int TemperatureOriginalValue => this.SelectedPlanet?.Model.OriginalTemperature.Clicks ?? 0;
+
+        [DependsUpon(nameof(SelectedPlanet))]
+        public int RadiationOriginalValue => this.SelectedPlanet?.Model.OriginalRadiation.Clicks ?? 0;
 
         [DependsUpon(nameof(MineralChartWidth))]
         [DependsUpon(nameof(SelectedPlanet))]
@@ -263,24 +320,13 @@
 
         private void UpdateHabRanges(PlayerRace race)
         {
-            this.GravityBar.Range = race.GravityTolerance;
-            this.TemperatureBar.Range = race.TemperatureTolerance;
-            this.RadiationBar.Range = race.RadiationTolerance;
+            this.GravityRange = race.GravityTolerance;
+            this.TemperatureRange = race.TemperatureTolerance;
+            this.RadiationRange = race.RadiationTolerance;
 
-            this.GravityBar.MaxTerraformTech = race.GetMaxTerraformTech(HabitationParameterType.Gravity);
-            this.TemperatureBar.MaxTerraformTech = race.GetMaxTerraformTech(HabitationParameterType.Temperature);
-            this.RadiationBar.MaxTerraformTech = race.GetMaxTerraformTech(HabitationParameterType.Radiation);
-        }
-
-        private void UpdatePlanetValues()
-        {
-            this.GravityBar.CurrentValue = this.SelectedPlanet?.Gravity.Model;
-            this.TemperatureBar.CurrentValue = this.SelectedPlanet?.Temperature.Model;
-            this.RadiationBar.CurrentValue = this.SelectedPlanet?.Radiation.Model;
-
-            this.GravityBar.OriginalValue = this.SelectedPlanet?.OriginalGravity.Model;
-            this.TemperatureBar.OriginalValue = this.SelectedPlanet?.OriginalTemperature.Model;
-            this.RadiationBar.OriginalValue = this.SelectedPlanet?.OriginalRadiation.Model;
+            this.MaxGravityTerraform = race.GetMaxTerraformTech(HabitationParameterType.Gravity);
+            this.MaxTemperatureTerraform = race.GetMaxTerraformTech(HabitationParameterType.Temperature);
+            this.MaxRadiationTerraform = race.GetMaxTerraformTech(HabitationParameterType.Radiation);
         }
 
         private ObservableCollection<ChartLineElement> GetChartLines()

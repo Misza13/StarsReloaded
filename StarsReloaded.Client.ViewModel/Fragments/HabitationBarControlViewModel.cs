@@ -13,7 +13,7 @@
         #region Private fields
 
         private HabitationParameterType parameterType;
-        private HabitationRange range;
+        private HabitationRange habitationRange;
         private int maxTerraformTech;
         private HabitationParameter currentValue;
         private HabitationParameter originalValue;
@@ -29,7 +29,7 @@
             {
                 this.ParameterType = HabitationParameterType.Radiation;
                 this.BarWidth = 400;
-                this.Range = new HabitationRange(-20, +30);
+                this.HabitationRange = new HabitationRange(-20, +30);
                 this.MaxTerraformTech = 20;
                 this.CurrentValue = new HabitationParameter(+25);
                 this.OriginalValue = new HabitationParameter(+40);
@@ -55,16 +55,16 @@
             }
         }
 
-        public HabitationRange Range
+        public HabitationRange HabitationRange
         {
             private get
             {
-                return this.range;
+                return this.habitationRange;
             }
 
             set
             {
-                this.Set(() => this.Range, ref this.range, value);
+                this.Set(() => this.HabitationRange, ref this.habitationRange, value);
             }
         }
 
@@ -126,20 +126,20 @@
         [DependsUpon(nameof(OriginalValue))]
         public int OriginalValueClicks => this.OriginalValue?.Clicks ?? 0;
 
-        [DependsUpon(nameof(Range))]
-        public Visibility HabBarVisibility => (this.Range?.IsImmune ?? true) ? Visibility.Hidden : Visibility.Visible;
+        [DependsUpon(nameof(HabitationRange))]
+        public Visibility HabBarVisibility => (this.HabitationRange?.IsImmune ?? true) ? Visibility.Hidden : Visibility.Visible;
 
-        [DependsUpon(nameof(Range))]
+        [DependsUpon(nameof(HabitationRange))]
         [DependsUpon(nameof(BarWidth))]
-        public double HabBarLeft => (this.Range?.IsImmune ?? true)
+        public double HabBarLeft => (this.HabitationRange?.IsImmune ?? true)
             ? 0
-            : this.BarWidth * (this.Range.MinValue.Clicks + 50) / 100;
+            : this.BarWidth * (this.HabitationRange.MinValue.Clicks + 50) / 100;
 
-        [DependsUpon(nameof(Range))]
+        [DependsUpon(nameof(HabitationRange))]
         [DependsUpon(nameof(BarWidth))]
-        public double HabBarWidth => (this.Range?.IsImmune ?? true)
+        public double HabBarWidth => (this.HabitationRange?.IsImmune ?? true)
             ? 0
-            : this.BarWidth * (this.Range.MaxValue.Clicks - this.Range.MinValue.Clicks) / 100;
+            : this.BarWidth * (this.HabitationRange.MaxValue.Clicks - this.HabitationRange.MinValue.Clicks) / 100;
 
         [DependsUpon(nameof(ParameterType))]
         public string BarFillColor => GetBarFillColor(this.ParameterType);
@@ -159,12 +159,12 @@
         public double OriginalValuePos => this.BarWidth * (this.OriginalValueClicks + 50) / 100;
 
         [DependsUpon(nameof(BarWidth))]
-        [DependsUpon(nameof(Range))]
+        [DependsUpon(nameof(HabitationRange))]
         [DependsUpon(nameof(OriginalValueClicks))]
         [DependsUpon(nameof(MaxTerraformTech))]
         public double AfterTerraformPos
             =>
-            this.BarWidth * (GetBestTerraformClicks(this.Range, this.OriginalValueClicks, this.MaxTerraformTech) + 50) / 100;
+            this.BarWidth * (GetBestTerraformClicks(this.HabitationRange, this.OriginalValueClicks, this.MaxTerraformTech) + 50) / 100;
 
         [DependsUpon(nameof(ParameterType))]
         public string GraphStrokeColor => GetGraphStrokeColor(this.ParameterType);
