@@ -9,7 +9,6 @@
              d:DataContext="{d:DesignInstance Type={x:Type fragments:HabitationBarControlViewModel}, IsDesignTimeCreatable=True}"
              d:DesignHeight="24" d:DesignWidth="400">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
         <converters:NotNullToVisibleConverter x:Key="NotNullToVisibleConverter" />
     </UserControl.Resources>
     <Canvas x:Name="BarCanvas"

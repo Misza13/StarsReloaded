@@ -3,7 +3,6 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Windows;
 
     using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
@@ -85,9 +84,6 @@
         #endregion
 
         #region Public properties
-
-        [DependsUpon(nameof(SelectedPlanet))]
-        public Visibility PlanetSummaryVisibility => this.SelectedPlanet != null ? Visibility.Visible : Visibility.Hidden;
 
         [DependsUpon(nameof(SelectedPlanet))]
         public string PlanetName => this.SelectedPlanet?.Name ?? string.Empty;

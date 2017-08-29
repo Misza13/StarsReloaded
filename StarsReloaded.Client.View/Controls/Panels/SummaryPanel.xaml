@@ -8,6 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
              xmlns:fragments="clr-namespace:StarsReloaded.Client.View.Controls.Fragments"
+             xmlns:converters="clr-namespace:StarsReloaded.Client.View.Converters"
              Background="{x:Static SystemColors.AppWorkspaceBrush}"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type controls:SummaryPanelViewModel}, IsDesignTimeCreatable=True}"
@@ -16,11 +17,14 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Resources/Styles.xaml"/>
+                <ResourceDictionary>
+                    <converters:NotNullToVisibleConverter x:Key="NotNullToVisibleConverter" />
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Visibility="{Binding PlanetSummaryVisibility}"
+    <Grid Visibility="{Binding SelectedPlanet, Converter={StaticResource NotNullToVisibleConverter}}"
           Margin="4"
           Width="Auto" Height="Auto">
         <Grid.RowDefinitions>
