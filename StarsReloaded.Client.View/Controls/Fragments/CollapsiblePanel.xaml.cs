@@ -3,31 +3,26 @@ namespace StarsReloaded.View.Controls.Fragments
 {
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using StarsReloaded.Client.Mediation;
-    using StarsReloaded.Client.ViewModel;
     using StarsReloaded.Client.ViewModel.Fragments;
+    using StarsReloaded.View.Utilities;
 
     public partial class CollapsiblePanel : UserControl
     {
-        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
-            "Header",
-            typeof(string),
-            typeof(CollapsiblePanel),
-            new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty HeaderProperty =
+            new DependencyPropertyBuilder<CollapsiblePanel, string>("Header")
+                .PropagateToViewModel<CollapsiblePanelViewModel>((vm, v) => vm.Header = v)
+                .Build();
 
         public CollapsiblePanel()
         {
             this.InitializeComponent();
             this.DataContext = IoCHelper.Resolve<CollapsiblePanelViewModel>();
-
-            var bindingViewMode = new Binding(nameof(CollapsiblePanelViewModel.Header)) { Mode = BindingMode.TwoWay };
-            this.SetBinding(HeaderProperty, bindingViewMode);
         }
 
         public string Header
         {
-            get { return (string) this.GetValue(HeaderProperty); }
+            get { return (string)this.GetValue(HeaderProperty); }
             set { this.SetValue(HeaderProperty, value); }
         }
     }

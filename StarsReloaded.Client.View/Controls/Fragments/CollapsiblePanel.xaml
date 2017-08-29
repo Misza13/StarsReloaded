@@ -13,6 +13,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Resources/Styles.xaml"/>
+                <ResourceDictionary>
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -43,7 +46,17 @@
                                 BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}">
                             <Grid>
                                 <Image Width="15"
-                                       Source="{Binding ExpandButtonSource}">
+                                       Visibility="{Binding IsCollapsed, Converter={StaticResource BooleanToVisibility}}"
+                                       Source="../../Resources/Buttons/panel_expand.png">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <command:EventToCommand Command="{Binding ToggleExpansionCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Image>
+                                <Image Width="15"
+                                       Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibility}}"
+                                       Source="../../Resources/Buttons/panel_collapse.png">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseLeftButtonDown">
                                             <command:EventToCommand Command="{Binding ToggleExpansionCommand}"/>
@@ -54,10 +67,10 @@
                         </Border>
 
                         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                                Visibility="{Binding ContentVisibility}"
+                                Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibility}}"
                                 BorderThickness="0,1,0,0" BorderBrush="{x:Static SystemColors.ControlDarkDarkBrush}"
                                 Padding="4">
-                            <ContentPresenter Visibility="{Binding ContentVisibility}"/>
+                            <ContentPresenter Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibility}}"/>
                         </Border>
                     </Grid>
                 </Border>

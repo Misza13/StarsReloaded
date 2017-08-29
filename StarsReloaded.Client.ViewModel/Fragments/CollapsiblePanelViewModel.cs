@@ -1,7 +1,5 @@
 ﻿namespace StarsReloaded.Client.ViewModel.Fragments
 {
-    using System.Windows;
-
     using GalaSoft.MvvmLight.Command;
 
     using StarsReloaded.Client.ViewModel.Attributes;
@@ -26,39 +24,18 @@
 
         public string Header
         {
-            get
-            {
-                return this.header;
-            }
-
-            set
-            {
-                this.Set(() => this.Header, ref this.header, value);
-            }
+            get { return this.header; }
+            set { this.Set(() => this.Header, ref this.header, value); }
         }
 
         public bool IsExpanded
         {
-            get
-            {
-                return this.isExpanded;
-            }
-
-            set
-            {
-                this.Set(() => this.IsExpanded, ref this.isExpanded, value);
-            }
+            get { return this.isExpanded; }
+            set { this.Set(() => this.IsExpanded, ref this.isExpanded, value); }
         }
 
-        ////TODO: Do it with styling
         [DependsUpon(nameof(IsExpanded))]
-        public string ExpandButtonSource
-            => this.IsExpanded
-            ? "../../Resources/Buttons/panel_collapse.png"
-            : "../../Resources/Buttons/panel_expand.png";
-
-        [DependsUpon(nameof(IsExpanded))]
-        public Visibility ContentVisibility => this.IsExpanded ? Visibility.Visible : Visibility.Collapsed;
+        public bool IsCollapsed => !this.IsExpanded;
 
         public RelayCommand ToggleExpansionCommand { get; private set; }
 
