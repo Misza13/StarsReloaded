@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/rhuu29udrhjxkax4?svg=true)](https://ci.appveyor.com/project/Misza13/starsreloaded)
+
 # Stars! Reloaded
 **Stars! Reloaded** is a modern reedition of the legendary 4X game Stars!
 
