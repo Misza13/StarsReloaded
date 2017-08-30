@@ -1,4 +1,4 @@
-﻿namespace StarsReloaded.Client.View.Tests.Converters
+﻿namespace StarsReloaded.Client.Tests.Converters
 {
     using System.Globalization;
     using System.Windows;
@@ -8,7 +8,6 @@
     using Shouldly;
 
     using StarsReloaded.Client.View.Converters;
-    using StarsReloaded.Shared.Model;
 
     [TestFixture]
     public class NotNullToVisibleConverterTests
