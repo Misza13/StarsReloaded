@@ -1,4 +1,4 @@
-﻿namespace StarsReloaded.Client.Tests.Converters
+﻿namespace StarsReloaded.Client.Tests.View.Converters
 {
     using System.Globalization;
     using System.Windows;
