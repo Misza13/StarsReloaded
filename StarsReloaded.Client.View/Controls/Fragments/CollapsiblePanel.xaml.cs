@@ -1,5 +1,4 @@
-﻿
-namespace StarsReloaded.Client.View.Controls.Fragments
+﻿namespace StarsReloaded.Client.View.Controls.Fragments
 {
     using System.Windows;
     using System.Windows.Controls;

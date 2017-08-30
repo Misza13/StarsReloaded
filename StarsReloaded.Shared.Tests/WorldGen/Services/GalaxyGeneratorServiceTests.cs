@@ -24,7 +24,7 @@
             this.planetGeneratorService = new Mock<IPlanetGeneratorService>();
             this.planetGeneratorService.Setup(s => s.PopulatePlanetStats(It.IsAny<Planet>()));
 
-            this.galaxyGeneratorService = new GalaxyGeneratorService(new RngService(), planetGeneratorService.Object);
+            this.galaxyGeneratorService = new GalaxyGeneratorService(new RngService(), this.planetGeneratorService.Object);
         }
 
         [Test]

@@ -16,11 +16,11 @@
 
         public DependencyProperty Build()
         {
-            var metadata = new PropertyMetadata(this.defaultValue, this.propertyChangedCallback,
-                (o, value) =>
-                    {
-                        return value;
-                    });
+            var metadata = new PropertyMetadata(
+                this.defaultValue,
+                this.propertyChangedCallback,
+                (o, value) => { return value; });
+
             return DependencyProperty.Register(this.propertyName, typeof(TPropType), typeof(TOwner), metadata);
         }
 

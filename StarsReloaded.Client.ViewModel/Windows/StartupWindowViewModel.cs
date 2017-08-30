@@ -26,6 +26,7 @@
         #region Dependencies
 
         public IWindowManager WindowManager { get; set; }
+
         public IGalaxyGeneratorService GeneratorService { get; set; }
 
         #endregion
