@@ -44,80 +44,38 @@
 
         public HabitationParameterType ParameterType
         {
-            private get
-            {
-                return this.parameterType;
-            }
-
-            set
-            {
-                this.Set(() => this.ParameterType, ref this.parameterType, value);
-            }
+            private get { return this.parameterType; }
+            set { this.Set(() => this.ParameterType, ref this.parameterType, value); }
         }
 
         public HabitationRange HabitationRange
         {
-            private get
-            {
-                return this.habitationRange;
-            }
-
-            set
-            {
-                this.Set(() => this.HabitationRange, ref this.habitationRange, value);
-            }
+            private get { return this.habitationRange; }
+            set { this.Set(() => this.HabitationRange, ref this.habitationRange, value); }
         }
 
         public int MaxTerraformTech
         {
-            private get
-            {
-                return this.maxTerraformTech;
-            }
-
-            set
-            {
-                this.Set(() => this.MaxTerraformTech, ref this.maxTerraformTech, value);
-            }
+            private get { return this.maxTerraformTech; }
+            set { this.Set(() => this.MaxTerraformTech, ref this.maxTerraformTech, value); }
         }
 
         public HabitationParameter CurrentValue
         {
-            get
-            {
-                return this.currentValue;
-            }
-
-            set
-            {
-                this.Set(() => this.CurrentValue, ref this.currentValue, value);
-            }
+            get { return this.currentValue; }
+            set { this.Set(() => this.CurrentValue, ref this.currentValue, value); }
         }
 
         public HabitationParameter OriginalValue
         {
-            get
-            {
-                return this.originalValue;
-            }
-
-            set
-            {
-                this.Set(() => this.OriginalValue, ref this.originalValue, value);
-            }
+            get { return this.originalValue; }
+            set { this.Set(() => this.OriginalValue, ref this.originalValue, value); }
         }
 
         public double BarWidth
         {
-            private get
-            {
-                return this.barWidth;
-            }
-
-            set
-            {
-                this.Set(() => this.BarWidth, ref this.barWidth, value);
-            }
+            private get { return this.barWidth; }
+            set { this.Set(() => this.BarWidth, ref this.barWidth, value); }
         }
 
         [DependsUpon(nameof(CurrentValue))]
