@@ -2,6 +2,7 @@
 {
     using System;
     using System.Globalization;
+    using System.Windows;
     using System.Windows.Data;
 
     public class ConditionalVisibilityConverter<T> : IValueConverter
@@ -15,7 +16,7 @@
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return this.predicate((T)value);
+            return this.predicate((T)value) ? Visibility.Visible : Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarsReloaded.Client", "Sta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarsReloaded.Client.Mediation", "StarsReloaded.Client.Mediation\StarsReloaded.Client.Mediation.csproj", "{0E19E145-88D5-48EE-A782-80A875B5FE90}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F8547FAF-5C8B-4504-901C-85AB0478DD69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarsReloaded.Client.View.Tests", "StarsReloaded.Client.View.Tests\StarsReloaded.Client.View.Tests.csproj", "{DCB91DCA-8F99-4018-BE32-3F73ED226537}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,10 @@ Global
 		{0E19E145-88D5-48EE-A782-80A875B5FE90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E19E145-88D5-48EE-A782-80A875B5FE90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E19E145-88D5-48EE-A782-80A875B5FE90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCB91DCA-8F99-4018-BE32-3F73ED226537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCB91DCA-8F99-4018-BE32-3F73ED226537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCB91DCA-8F99-4018-BE32-3F73ED226537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCB91DCA-8F99-4018-BE32-3F73ED226537}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +97,8 @@ Global
 		{82385E19-9BE1-44E1-9208-6573841C498D} = {62E06C4F-A4A4-4843-8335-F80492900A69}
 		{42B04F8B-7EE3-4203-B486-D9789B35F84D} = {222C1D5E-A413-4712-9C1A-2E45DB3376E7}
 		{0E19E145-88D5-48EE-A782-80A875B5FE90} = {222C1D5E-A413-4712-9C1A-2E45DB3376E7}
+		{F8547FAF-5C8B-4504-901C-85AB0478DD69} = {222C1D5E-A413-4712-9C1A-2E45DB3376E7}
+		{DCB91DCA-8F99-4018-BE32-3F73ED226537} = {F8547FAF-5C8B-4504-901C-85AB0478DD69}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EEDBBB42-9969-4B0D-B0E7-8A8839E88A46}
